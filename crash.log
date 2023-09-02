@@ -1,5 +1,5 @@
 Uncaught Exception:
 ReferenceError: win is not defined
-    at BrowserWindow.<anonymous> (C:\Users\murse\Desktop\MQuel Projects\MQuel\Apps.js:25:40)
+    at BrowserWindow.<anonymous> (C:\Users\murse\Desktop\MQuel Projects\MQuel\Apps.js:28:40)
     at Object.onceWrapper (node:events:628:26)
     at BrowserWindow.emit (node:events:525:35)

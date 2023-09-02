@@ -1,4 +1,6 @@
 // preload.js
+const electron = require('electron');
+const IpcCommand = require('./common/ipcCommand');
 
 window.addEventListener("DOMContentLoaded", () => {
   const replaceText = (selector, text) => {
@@ -6,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (element) element.innerText = text;
   };
 
-  
+ 
 
 
 

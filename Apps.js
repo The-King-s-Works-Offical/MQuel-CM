@@ -6,6 +6,9 @@ const path = require("path");
 
 const url = require("url");
 const IpcCommand = require("./common/ipcCommand");
+const {
+  spawnSync
+} = require("child_process");
 class mainWindow {
   constructor() {
     const mainWindow = new BrowserWindow({
@@ -32,7 +35,7 @@ class mainWindow {
       }),
     );
     try {
-      console.log("%USER%")
+
       mainWindow.webContents.on(
         "did-fail-load",
         (event, errorCode, errorDescription, validatedURL) => {
@@ -51,6 +54,7 @@ class mainWindow {
       );
 
       mainWindow.on("ready-to-show", () => {
+
         mainWindow.webContents.openDevTools();
         ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
           mainWindow.minimize();
@@ -70,33 +74,10 @@ class mainWindow {
           mainWindow.close();
         });
 
-
-
-        console.log(IpcCommand.SET_LOCALSTORAGE)
-        // LocalStorage
-        ipcMain.on(IpcCommand.SET_LOCALSTORAGE, (event, args) => {
-
-          console.log(event);
-          console.log(args)
-          //localStorage.setItem(arg.key, arg.value);
-        })
-        ipcMain.on(IpcCommand.GET_LOCALSTORAGE, (event, arg) => {
-          const res = localStorage.getItem(arg.key);
-          event.reply(res);
-        });
-        ipcMain.on(IpcCommand.REMOVE_LOCALSTORAGE, (event, arg) => {
-          localStorage.removeItem(arg.key);
-        });
-        ipcMain.on(IpcCommand.CLEAR_LOCALSTORAGE, (event, arg) => {
-          localStorage.clear();
+        ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
+          console.log("GetProfilesCount")
         });
 
-
-
-
-
-
-        // Tray
       });
     } catch (error) {
       console.error(error);

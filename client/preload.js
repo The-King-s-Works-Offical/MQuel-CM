@@ -1,3 +1,5 @@
+ipcRenderer.send(IpcCommand.GET_PROFILE_COUNT, true)
+
 const localeFile = path.join(__dirname, '../languages/en.json');
 
 $.getJSON(localeFile, data => {
