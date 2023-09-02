@@ -53,32 +53,31 @@ class mainWindow {
         },
       );
 
-      mainWindow.on("ready-to-show", () => {
 
-        mainWindow.webContents.openDevTools();
-        ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
-          mainWindow.minimize();
-        });
-        ipcMain.on(IpcCommand.WINDOW_MAXIMIZE, (event, arg) => {
-          if (!mainWindow.isMaximized()) {
-            setTimeout(() => {
-              mainWindow.maximize();
-            }, 500);
-          } else {
-            setTimeout(() => {
-              mainWindow.restore();
-            }, 500);
-          }
-        });
-        ipcMain.on(IpcCommand.WINDOW_CLOSE, (event, arg) => {
-          mainWindow.close();
-        });
 
-        ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
-          console.log("GetProfilesCount")
-        });
-
+      mainWindow.webContents.openDevTools();
+      ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
+        mainWindow.minimize();
       });
+      ipcMain.on(IpcCommand.WINDOW_MAXIMIZE, (event, arg) => {
+        if (!mainWindow.isMaximized()) {
+          setTimeout(() => {
+            mainWindow.maximize();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            mainWindow.restore();
+          }, 500);
+        }
+      });
+      ipcMain.on(IpcCommand.WINDOW_CLOSE, (event, arg) => {
+        mainWindow.close();
+      });
+
+      ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
+        console.log("GetProfilesCount")
+      });
+
     } catch (error) {
       console.error(error);
       console.error(error.errorMessage);
