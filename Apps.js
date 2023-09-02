@@ -41,7 +41,7 @@ class mainWindow {
 
             mainWindow.loadURL(
               url.format({
-                pathname: path.join(__dirname, "../public/404.html"),
+                pathname: path.join(__dirname, "/client/404.html"),
                 protocol: "file",
                 slashes: true,
               }),

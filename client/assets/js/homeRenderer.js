@@ -2,6 +2,7 @@
 const {
     ipcRenderer
 } = require("electron");
+const path = require("path");
 const Command = require(__dirname + "/common").IpcCommand;
 const $ = require("jquery");
 

@@ -6,9 +6,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (element) element.innerText = text;
   };
 
-  fetch(__dirname + "/languages/en.json", (e) => {
-    console.log(e)
-  })
+  
 
 
 

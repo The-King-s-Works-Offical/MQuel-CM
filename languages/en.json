@@ -1,7 +1,26 @@
 {
     "home": {
         "title": "Home",
-        "description": "App Main Page"
+        "description": "App Main Page",
+        "detail-label": "Detail",
+        "level-label": "Level",
+        "completed-deliveries-label": "Completed Delivery",
+        "distance-traveled-label": "Distance Traveled",
+        "truck-label": "Truck",
+        "used-mod-label": "Used Mode",
+        "small-garage-label": "Small Garage Count",
+        "big-garage-label": "Large Garage Count",
+        "paths-traveled-label": "Paths Traveled",
+        "trailer-label": "Trailer",
+        "truck-brand-label": "Truck Brand",
+        "screenshot-card-label": "Screenshot",
+        "music-card-label": "Music",
+        "radio-card-label": "Radio",
+        "profile-label": "Profile",
+        "mod-label": "Mod",
+        "music-label": "Music",
+        "radio-label": "Radio",
+        "screenshot-label": "Screenshot"
     },
     "mods": {
         "title": "Mods",

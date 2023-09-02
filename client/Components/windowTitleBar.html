@@ -19,26 +19,29 @@
 </div>
 
 <script>
-    $("#mainWindowTitle").html(document.title);
-    const page = document.location.href.split("/").pop().toString();
-    const goHistoryBackButton = $("#goHistoryBackButton");
-    goHistoryBackButton.click((event) => {
-        console.log("Back clicked")
-        window.history.go(-1);
-    });
-    switch (page) {
-        case "404.html":
-            goHistoryBackButton.hide();
-            break;
-        case "home.html":
-            goHistoryBackButton.hide();
-            break;
-        default:
-            goHistoryBackButton.show();
-            break;
-    }
+    $(() => {
 
-    $("#refreshButton").click((event) => {
-        window.location.reload();
+        $("#mainWindowTitle").html(document.title);
+        const page = document.location.href.split("/").pop().toString();
+        const goHistoryBackButton = $("#goHistoryBackButton");
+        goHistoryBackButton.click((event) => {
+            console.log("Back clicked")
+            window.history.go(-1);
+        });
+        switch (page) {
+            case "404.html":
+                goHistoryBackButton.hide();
+                break;
+            case "home.html":
+                goHistoryBackButton.hide();
+                break;
+            default:
+                goHistoryBackButton.show();
+                break;
+        }
+
+        $("#refreshButton").click((event) => {
+            window.location.reload();
+        });
     });
 </script>
