@@ -1,0 +1,10 @@
+{
+    "home": {
+        "title": "Home",
+        "description": "App Main Page"
+    },
+    "mods": {
+        "title": "Mods",
+        "description": "App Mods Page"
+    }
+}

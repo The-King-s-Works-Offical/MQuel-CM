@@ -6,56 +6,75 @@
             <div class="row justify-content-center align-items-center g-2">
                 <div class="card bg-dark bg-opacity-75 text-white">
                     <div class="card-header p-4">
-                        <h4 class="card-title  ">Profile Name</h4>
-                        <h5 class="card-subtitle mt-2 text-secondary"> Detay </h5>
+                        <h4 class="card-title  " id="profile-name">${profile-name}</h4>
+                        <h5 class="card-subtitle mt-2 text-secondary" id="detail-label">
+                            ${detail-label} </h5>
                     </div>
                     <div class="card-body d-flex flex-wrap">
                         <div class="col">
-                            <table class="-+bg-transparent w-100 table-responsive" style=" border-spacing: 30px;">
+                            <table class="bg-transparent w-100 table-responsive" style=" border-spacing: 30px;">
                                 <tbody>
                                     <tr class="shadow-lg">
                                         <td class="  p-3" colspan="1">
-                                            <label style="font-weight: bolder;"> Seviye : </label> 1000
+                                            <label style="font-weight: bolder;" id="level-label"> ${level-label} :
+                                            </label> <span id="level-value">${level-value}</span>
                                         </td>
                                         <td class="p-3">
-                                            <label style="font-weight: bolder;">Küçük Garaj Sayısı : </label> 0
+                                            <label style="font-weight: bolder;" id="small-garage-label">
+                                                ${small-garage-label} :
+                                            </label>
+                                            <span id="small-garage-value">${small-garage-value}</span>
                                         </td>
                                     </tr>
                                     <tr class="shadow-lg ">
                                         <td class="p-3 ">
-                                            <label style="font-weight: bolder;">
-                                                Tamamlanan Teslimatlar :
+                                            <label style="font-weight: bolder;" id="completed-deliveries-label">
+                                                ${completed-deliveries-label} :
                                             </label>
-                                            6
+                                            <span id="completed-deliveries-value">${completed-deliveries-value}</span>
                                         </td>
                                         <td class="p-3 ">
-                                            <label style="font-weight: bolder;">Büyük Garaj Sayısı : </label> 134
+                                            <label style="font-weight: bolder;"
+                                                id="big-garage-label">${big-garage-label} : </label>
+                                            <span id="big-garage-value">${big-garage-value}</span>
                                         </td>
                                     </tr>
                                     <tr class="shadow-lg ">
                                         <td class="p-3">
-                                            <label style="font-weight: bolder;">
-                                                Katedilen Mesafe :
+                                            <label style="font-weight: bolder;" id="distance-traveled-label">
+                                                ${distance-traveled-label} :
                                             </label>
-                                            347.229 Km
+                                            <span id="distance-traveled-value">
+                                                ${distance-traveled-value}
+                                            </span>
                                         </td>
                                         <td class="p-3">
-                                            <label style="font-weight: bolder;">
-                                                Katedilen Yollar :
+                                            <label style="font-weight: bolder;" id="paths-traveled-label">
+                                                ${paths-traveled-label} :
                                             </label>
-                                            0.25 %
+                                            <span id="paths-traveled-value">${paths-traveled-value}</span>
                                         </td>
                                     </tr>
 
                                     <tr class="shadow-lg">
-                                        <td class="p-3 "> <label style="font-weight: bolder;">Çekiçi Sayısı : </label> 1
+                                        <td class="p-3 "> <label style="font-weight: bolder;"
+                                                id="truck-label">${truck-label} : </label>
+                                            <span id="truck-value">${truck-value}</span>
                                         </td>
-                                        <td class="p-3 "> <label style="font-weight: bolder;">Dorse Sayısı : </label> 0
+                                        <td class="p-3 "> <label style="font-weight: bolder;"
+                                                id="trailer-label">${trailer-label} :
+                                            </label>
+                                            <span id="trailer-value">
+                                                ${trailer-value}
+                                            </span>
                                         </td>
                                     </tr>
                                     <tr class="shadow-lg">
                                         <td class="p-3">
-                                            <label style="font-weight: bolder;">Kullanılan Mod Sayısı : </label> 13
+                                            <label style="font-weight: bolder;" id="used-mod-label">
+                                                ${used-mod-label}
+                                            </label> :
+                                            <span id="used-mod-value">${used-mod-value}</span>
                                         </td>
                                         <td class="p-3">
                                             <label style="font-weight: bolder;">Çekiçi Marka : </label> Man
@@ -65,7 +84,8 @@
                             </table>
                         </div>
                         <div class="col-4">
-                            <img src="../assets/img/man-eqc.png" class=" img-fluid bg-opacity-25 " alt="">
+                            <img src="assets/img/man-eqc.png" class=" img-fluid bg-opacity-25 "
+                                title="${truck-img-value}" alt="truck-img">
                         </div>
 
                     </div>
@@ -76,7 +96,7 @@
                 <div class="col  ">
                     <div class="card bg-dark bg-opacity-75 text-white">
                         <div class="card-header">
-                            <h3>Ekran Görüntüsü</h3>
+                            <h3 id="screenshot-card-label">${screenshot-card-label}</h3>
                         </div>
                         <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                             <ol class="carousel-indicators">
@@ -130,14 +150,15 @@
                 <div class="col">
                     <div class="card bg-dark bg-opacity-75 text-white">
                         <div class="card-header">
-                            <h6>
-                                Müzik
+                            <h6 id="music-card-label">
+                                ${music-card-label}
                             </h6>
                         </div>
                         <div class="card-body  ">
 
                             <div class="mb-3">
-                                <label for="musicPlay" class="mb-2">Single Name </label>
+                                <label for="musicPlay" class="mb-2"
+                                    id="music-single-name-value">${music-single-name-value} </label>
                                 <audio id="musicPlay"
                                     src="C:\Users\murse\Documents\Euro Truck Simulator 2\music\Yücel Arzen - İki Alyans.mp3"
                                     controls class="w-100  "></audio>
@@ -149,13 +170,13 @@
                 <div class="col">
                     <div class="card bg-dark bg-opacity-75 text-white">
                         <div class="card-header">
-                            <h6>
-                                Radyo
+                            <h6 id="radio-card-label">
+                                ${radio-card-label}
                             </h6>
                         </div>
                         <div class="card-body  ">
                             <div class="mb-3">
-                                <label for="" class=" ">Radio Name </label>
+                                <label for="" class=" " id="radio-name-value">${radio-name-value} </label>
                                 <audio id="radioPlay" src="" controls class="w-100  "></audio>
                             </div>
                         </div>
@@ -178,16 +199,3 @@
 
     </div>
 </div>
-
-<script>
-    $(() => {
-        console.log("Home Content Loading")
-        /* const info_content = $("#info-cards-content").html()
-        console.log(info_content.length)
-        if (info_content === "\n\n        ") {
-            info_content.html(`<div class="alert alert-danger"> Bilgi Kartlarına Ulaşılamıyor ! <br> Sayfayı Tekrar Yükleyin .</div>
-            `)
-        } */
-         
-    })
-</script>

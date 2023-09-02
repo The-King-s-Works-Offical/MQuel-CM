@@ -16,6 +16,4 @@ const IpcCommand = {
   CLEAR_LOCALSTORAGE: "clear-local-storage",
 };
 
-module.exports = {
-  IpcCommand: IpcCommand,
-};
+module.exports = IpcCommand;
