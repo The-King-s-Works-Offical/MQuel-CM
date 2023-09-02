@@ -59,38 +59,3 @@
 
 
 </div>
-
-
-<script>
-
-
-
-
-
-
-
-
-    const listFrame =
-        $("#info-card-list");
-
-    $.ajax({
-        url: "http://localhost:3000/",
-        success: function (result) {
-            console.log("Ajax success ", result)
-            const profileCount = result.data.profile.count;
-
-            $("#profile-count").text(profileCount)
-            const modCount = result.data.mods.count;
-
-            $("#mod-count").text(modCount)
-            const musicCount = result.data.music.count;
-
-            $("#music-count").text(musicCount);
-            const radioCount = result.data.radio.count;
-
-            $("#radio-count").text(radioCount);
-        }
-
-    }
-    );
-</script>

@@ -15,6 +15,7 @@ const IpcCommand = {
   GET_MUSIC_COUNT : "get-musics-count",
   GET_RADIO_COUNT : "get-radios-count",
   GET_SCREENSHOT_COUNT : "get-screenshot-count",
+  GET_LANG : "get-language"
 };
 
 module.exports = IpcCommand;

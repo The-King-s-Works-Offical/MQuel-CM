@@ -1,7 +1,6 @@
-const localeFile = path.join(__dirname, '../languages/en.json');
-console.log(localeFile);
-$.getJSON(localeFile, data => {
-  const pageName = window.location.href.split("/").pop().split(".")[0];
+
+/* $.getJSON(localeFile, data => {
+  
   const Locale = data[pageName];
   console.log(Locale);
 
@@ -14,7 +13,6 @@ $.getJSON(localeFile, data => {
       $("meta[name='description']").attr("content", Locale.description);
     } else {
       $(`#${key}`).html(Locale[key]);
-      log.info($(`#${key}`))
     }
   }
-});
+}); */

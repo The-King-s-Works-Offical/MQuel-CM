@@ -2,13 +2,13 @@ const {
   BrowserWindow,
   ipcMain
 } = require("electron");
-const path = require("path");
 
+const fs = require("fs");
 const url = require("url");
+const path = require("path");
+const $ = require('jquery');
+
 const IpcCommand = require("./common/ipcCommand");
-const {
-  spawnSync
-} = require("child_process");
 class mainWindow {
   constructor() {
     const mainWindow = new BrowserWindow({
@@ -76,6 +76,16 @@ class mainWindow {
 
       ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
         console.log("GetProfilesCount")
+      });
+
+      ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
+        const localeFile = __dirname + "/languages/en.json";
+        const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
+        const localeFileData = JSON.parse(localeFileReadStream);
+
+        event.reply(IpcCommand.GET_LANG, localeFileData)
+
+        //event.reply
       });
 
     } catch (error) {
