@@ -1,0 +1,18 @@
+<h5 class="p-5 m-5 text-black">
+  Üzgünüz, aradığınız sayfa maalesef bulunamadı. Belirtilen URL'yi
+  kontrol edin veya sayfanın artık var olmadığından emin olun. Eğer
+  bu bir hata olduğunu düşünüyorsanız, lütfen site yöneticisi ile
+  iletişime geçin. Anlayışınız için teşekkür ederiz.
+</h5>
+<hr class="w-50 my-5 mx-auto">
+<h5 class="p-5 m-5 text-white">
+  Menu Kullanarak veya Geri Dön butonunu kullanarak kaldığınız yerden devam edebilirsiniz...
+</h5>
+<button class="btn btn-lg btn-secondary mx-auto" id="goBack">Geri Dön</button>
+
+<script>
+  $('#goBack').click((event) => {
+    console.log("Back clicked")
+    window.history.go(-2);
+  });
+</script>

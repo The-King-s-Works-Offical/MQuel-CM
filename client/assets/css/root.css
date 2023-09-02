@@ -1,0 +1,55 @@
+.appBg {
+  /* Add the blur effect */
+  filter: blur(3px);
+  -webkit-filter: blur(3px);
+  -webkit-filter: brightness(0.29);
+  /* Full height */
+  height: 100vh;
+  /* Full Width */
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: -999;
+  /* Center and scale the image nicely */
+  background-image: url("../assets/img/bg01.png");
+}
+
+body {
+  color: white !important;
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.5px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+#root {
+  background-image: url("../../assets/img/bg01.png");
+  background-repeat: repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+
+
+
+}
+
+:root {
+  font-size: 16px !important;
+  user-select: none;
+}
+ 

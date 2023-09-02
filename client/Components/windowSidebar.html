@@ -1,0 +1,35 @@
+<ul class="nav nav-pills flex-column mb-auto h-100 shadow-lg bg-dark bg-opacity-75" id="navbar-ListMenu">
+</ul>
+
+<script>
+    const menuListData = require('./Components/docs/menu.json');
+    const navbarMenu = $('#navbar-ListMenu');
+    const locationHref = window.location.href.split('/').pop()
+
+    menuListData.forEach(menu => {
+        const type = menu.type.toLowerCase();
+        if (type === 'link') {
+            const aHref = menu.a.href;
+            const aIcon = menu.icon;
+            const aTitle = menu.text;
+
+
+            menuItem = `
+            <li class="nav-item mt-3 shadow shadow-lg">
+                <a class="nav-link link-light ${(locationHref === aHref) ? 'active' : ' '}" href="${aHref}" style="cursor: pointer;"> <i class="${aIcon} pe-2"> </i>\t ${aTitle}</a>
+            </li>
+             
+            `;
+
+            navbarMenu.append(menuItem);
+
+        } else if (type === 'header') {
+            menuHeader = `<li class="nav-item p-2 shadow-lg  d-flex justify-content-center align-items-center">
+                    <img src = "${menu.imageIcon}" width="45px" height="45px">
+                    <label class="text-start mx-1  ">${menu.text.toUpperCase()}</label>
+                    <img src = "${menu.imageIcon}" width="45px" height="45px">
+                    </li>`;
+            navbarMenu.append(menuHeader);
+        }
+    });
+</script>

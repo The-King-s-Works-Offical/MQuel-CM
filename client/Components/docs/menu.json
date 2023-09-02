@@ -1,0 +1,84 @@
+[
+  {
+    "type": "header",
+    "imageIcon" : "../icon.ico",
+    "text": "<i>MQuel <br> The King's Works </i>"
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "home.html"
+    },
+    "icon": "fa-solid fa-home",
+    "text": "Ana Sayfa "
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "profiles.html"
+    },
+    "icon": "fa-solid fa-p",
+    "text": "Profiller"
+  },
+  {
+    "id": "ProfileDropDownMenuCollapse",
+    "type": "dropdown-link",
+    "icon": "fa-solid fa-id-card",
+    "text": "Profil Listesi",
+    "base": {
+      "a": {
+        "href": "profile.html"
+      }
+    },
+    "dropdownLinks": [
+      {
+        "type": "link",
+        "a": {
+          "href": "profile.html?profile=4D52534C"
+        },
+        "icon": "fa-solid fa-id-card",
+        "text": "MRSL"
+      }
+    ]
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "mods.html"
+    },
+    "icon": "fa-solid fa-m",
+    "text": "Modlar"
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "musics.html"
+    },
+    "icon": "fa-solid fa-m",
+    "text": "Müzikler"
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "news.html"
+    },
+    "icon": "fa-solid fa-h",
+    "text": "Haberler"
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "gamesConfig.html"
+    },
+    "icon": "fa-solid fa-o",
+    "text": "Oyun Ayarları"
+  },
+  {
+    "type": "link",
+    "a": {
+      "href": "settings.html"
+    },
+    "icon": "fa-solid fa-g",
+    "text": "Genel Ayarlar"
+  }
+]

@@ -1,0 +1,44 @@
+<div class="container-fluid py-2 shadow bg-dark bg-opacity-75">
+    <div class="row justify-content-start align-items-start">
+        <div class="col col-md-3 col-lg-6">
+            <div class="btn-group">
+                <button class="btn btn-lg bg-transparent" id="goHistoryBackButton">
+                    <span class="fa-regular  fa-circle-arrow-left text-white"
+                        style="line-height: 45px; font-size: 20px;"> </span>
+                </button>
+                <a class="btn btn-lg bg-transparent" href="home.html">
+                    <span class="fa-regular fa-home text-white" style="line-height: 45px; font-size: 20px;"></span>
+                </a>
+                <button class="btn btn-lg bg-transparent" id="refreshButton">
+                    <span class="fa-regular fa-refresh text-white " style="line-height: 45px; font-size: 20px;"></span>
+                </button>
+                <span class=" text-white ms-2" id="mainWindowTitle" style="line-height: 65px; font-size: 20px;"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#mainWindowTitle").html(document.title);
+    const page = document.location.href.split("/").pop().toString();
+    const goHistoryBackButton = $("#goHistoryBackButton");
+    goHistoryBackButton.click((event) => {
+        console.log("Back clicked")
+        window.history.go(-1);
+    });
+    switch (page) {
+        case "404.html":
+            goHistoryBackButton.hide();
+            break;
+        case "home.html":
+            goHistoryBackButton.hide();
+            break;
+        default:
+            goHistoryBackButton.show();
+            break;
+    }
+
+    $("#refreshButton").click((event) => {
+        window.location.reload();
+    });
+</script>

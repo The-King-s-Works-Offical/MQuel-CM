@@ -1,0 +1,22 @@
+/* Sidebar Menu Styles */
+
+.sidebarmenu {
+    background-color: #506367;
+    padding-block: 30px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    list-style-type: none;
+    position: relative;
+}
+
+.sidebarmenu-item {
+    position: absolute;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+    border: 1px solid #0dcaf0;
+}

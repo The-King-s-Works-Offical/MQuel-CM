@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand fixed-top " style="height: 30px">
+    <ul class="nav navbar-nav mx-auto" style="-webkit-app-region: drag; width: 90%">
+        <li class="nav-item mx-auto bg-transparent">&nbsp;</li>
+    </ul>
+    <ul class="nav navbar-nav ms-auto">
+        <li class="nav-item">
+
+            <button class="nav-link hide" id="mainWindowBarCommands">
+                <i class="fa-solid fa-bars text-white"></i>
+            </button>
+
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="mainWindowMinimize">
+                <i class="fa-solid fa-window-minimize text-white"></i>
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="mainWindowRestore">
+                <i class="fa-solid fa-window-restore text-white"></i>
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="mainWindowClose">
+                <i class="fa-solid fa-window-close text-white"></i>
+            </button>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    document.getElementById("mainWindowMinimize").addEventListener("click", (event) => {
+        ipcRenderer.send(IpcCommand.WINDOW_MINIMIZE);
+    });
+    document.getElementById("mainWindowRestore").addEventListener("click", (event) => {
+        ipcRenderer.send(IpcCommand.WINDOW_MAXIMIZE);
+    });
+    document.getElementById("mainWindowClose").addEventListener("click", (event) => {
+        ipcRenderer.send(IpcCommand.WINDOW_CLOSE);
+    });
+</script>
