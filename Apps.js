@@ -55,14 +55,11 @@ class mainWindow {
         },
       );
 
-
-     
-      /* const IpcServer = new IpcServer(mainWindow);
-      IpcServer.toolbar(); */
+      const ipcServer = new IpcServer(mainWindow);
+      ipcServer.toolbar();
+      ipcServer.profile();
       mainWindow.webContents.openDevTools();
-      ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
-        console.log("GetProfilesCount")
-      });
+      
       ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
         const localeFile = __dirname + "/languages/en.json";
         const localeFileReadStream = fs.readFileSync(localeFile, "utf8");

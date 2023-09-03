@@ -5,6 +5,7 @@ const IpcCommand = require("./ipcCommand");
 class IpcServer {
     constructor(window) {
         this.window = window;
+        console.log(this.window);
     }
     toolbar() {
         electron.ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
@@ -27,7 +28,9 @@ class IpcServer {
     }
 
     profile() {
-
+        electron.ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
+            console.log("GetProfilesCount")
+          });
     }
 
 }
