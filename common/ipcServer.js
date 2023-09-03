@@ -13,14 +13,14 @@ class IpcServer {
     constructor(window) {
         this.window = window;
 
-        this.appLanguageLoader();
         this.toolbar();
         this.profile();
         this.mod();
         this.music();
         this.radio();
         this.screenshot();
-        this.save();
+        //this.save();
+        this.appLanguageLoader();
     }
     appLanguageLoader() {
         electron.ipcMain.on(IpcCommand.GET_LANG, (event, request) => {
@@ -54,15 +54,20 @@ class IpcServer {
     profile() {
         const CMD = IpcCommand.PROFILE;
         electron.ipcMain.on(CMD.ALL_PROFILE_COUNT, (event, request) => {
-            //console.log("Request All Profile Count : " + request)
+            console.log("Request All Profile Count : " + request)
             const count = new profileManager().getCount()
             event.reply(CMD.ALL_PROFILE_COUNT, count)
+        });
+        electron.ipcMain.on(CMD.ALL_PROFILE_DATA, (event, request) => {
+            console.log("Request All Profiles : " + request)
+            const profiles = new profileManager().getAll()
+            event.reply(CMD.ALL_PROFILE_DATA, profiles)
         });
     }
     mod() {
         const CMD = IpcCommand.MOD;
         electron.ipcMain.on(CMD.ALL_MOD_COUNT, (event, request) => {
-            //console.log("Request All Mod Count: " + request)
+            console.log("Request All Mod Count: " + request)
             const count = new modManager().getCount();
             event.reply(CMD.ALL_MOD_COUNT, count);
         });
@@ -70,7 +75,7 @@ class IpcServer {
     music() {
         const CMD = IpcCommand.MUSIC;
         electron.ipcMain.on(CMD.ALL_MUSIC_COUNT, (event, request) => {
-            //console.log("Request All Music Count : " + request)
+            console.log("Request All Music Count : " + request)
             const count = new musicManager().getCount();
             event.reply(CMD.ALL_MUSIC_COUNT, count);
         })
@@ -78,7 +83,7 @@ class IpcServer {
     radio() {
         const CMD = IpcCommand.RADIO;
         electron.ipcMain.on(CMD.ALL_RADIO_COUNT, (event, request) => {
-            //console.log("Request All Radio Count : " + request)
+            console.log("Request All Radio Count : " + request)
             const count = new radioManager().getCount();
             event.reply(CMD.ALL_RADIO_COUNT, count);
         });
@@ -86,12 +91,12 @@ class IpcServer {
     screenshot() {
         const CMD = IpcCommand.SCREENSHOT;
         electron.ipcMain.on(CMD.ALL_SCREENSHOT_COUNT, (event, request) => {
-            //console.log("Request All Screenshot Count : " + request);
+            console.log("Request All Screenshot Count : " + request);
             const count = new ScreenShotManager().getCount()
             event.reply(CMD.ALL_SCREENSHOT_COUNT, count);
         })
     }
-    save() { }
+
 
 
 }

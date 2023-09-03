@@ -13,6 +13,7 @@ const IpcCommand = {
   GET_LANG: "get-language",
   PROFILE: {
     ALL_PROFILE_COUNT: "all-profile-count",
+    ALL_PROFILE_DATA: "all-profile"
   },
   MOD: {
     ALL_MOD_COUNT: "all-mod-count",
@@ -29,7 +30,7 @@ const IpcCommand = {
   SAVE: {
     ALL_SAVE_COUNT: "all-save-count",
   }
-  
+
 };
 
 module.exports = IpcCommand;

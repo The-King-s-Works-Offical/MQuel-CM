@@ -14,11 +14,20 @@ class ConfigManager {
 
     const exists = fs.existsSync(this._path);
     if (!exists) {
-
-      fs.writeFileSync(this._path, "config");
+      let data = `{
+        "isSession": false,
+        "auth": "public",
+        "discordRPC": true,
+        "discordClientId": "47953047587390485790",
+        "systemStartReady": false,
+        "gamesPath": "C:/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2/",
+        "documentsPath": "C:/Users/murse/Documents/Euro Truck Simulator 2/"
+      }`;
+      fs.writeFileSync(this._path, data);
     }
     this._data = fs.readFileSync(this._path, "utf8")
     this._config = JSON.parse(this._data);
+
     return this._config;
 
   }

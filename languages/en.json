@@ -25,5 +25,10 @@
     "mods": {
         "title": "Mods",
         "description": "App Mods Page"
+    },
+    "profile": {
+        "title" : "Profiles",
+        "description" : "Profiles Page",
+        "profile-card-label" : "Profile List"
     }
 }
