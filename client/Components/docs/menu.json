@@ -10,15 +10,15 @@
       "href": "home.html"
     },
     "icon": "fa-solid fa-home",
-    "text": "Ana Sayfa "
+    "text": "Home "
   },
   {
     "type": "link",
     "a": {
-      "href": "profiles.html"
+      "href": "profile.html"
     },
-    "icon": "fa-solid fa-p",
-    "text": "Profiller"
+    "icon": "fa-solid fa-truck",
+    "text": "Profiles"
   },
   {
     "id": "ProfileDropDownMenuCollapse",
@@ -46,39 +46,39 @@
     "a": {
       "href": "mods.html"
     },
-    "icon": "fa-solid fa-m",
-    "text": "Modlar"
+    "icon": "fa-solid fa-list",
+    "text": "Mods"
   },
   {
     "type": "link",
     "a": {
       "href": "musics.html"
     },
-    "icon": "fa-solid fa-m",
-    "text": "Müzikler"
+    "icon": "fa-solid fa-music",
+    "text": "Musics"
   },
   {
     "type": "link",
     "a": {
       "href": "news.html"
     },
-    "icon": "fa-solid fa-h",
-    "text": "Haberler"
+    "icon": "fa-solid fa-newspaper",
+    "text": "News"
   },
   {
     "type": "link",
     "a": {
       "href": "gamesConfig.html"
     },
-    "icon": "fa-solid fa-o",
-    "text": "Oyun Ayarları"
+    "icon": "fa-solid fa-cogs",
+    "text": "Game Settings"
   },
   {
     "type": "link",
     "a": {
       "href": "settings.html"
     },
-    "icon": "fa-solid fa-g",
-    "text": "Genel Ayarlar"
+    "icon": "fa-solid fa-cogs",
+    "text": "Main Settings"
   }
 ]

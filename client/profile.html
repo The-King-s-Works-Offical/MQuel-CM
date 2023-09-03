@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type" />
+    <meta content="IE=7" http-equiv="X-UA-Compatible" />
+    <title>${page-title}</title>
+    <meta name="description" content="
+    ">
+
+    <!-- // Project Css -->
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link href="assets/css/input.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" /> <!-- // Bootstrap v5.3.1 -->
+
+    <!--//Public Css-->
+
+
+    <!-- // Browser Deveploment Css -->
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet" />
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" rel="stylesheet" />
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" rel="stylesheet" />
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" rel="stylesheet" />
+
+    <!-- Custom Style Settings -->
+    <style>
+
+    </style>
+</head>
+
+<body id="root" class="figure figure-caption overflow-hidden" data-bs-theme="light">
+    <!-- Windows Toolbar  -->
+    <div id="windowToolbar"></div>
+    <!-- Windows Toolbar End -->
+
+    <!-- Windows Titlebar -->
+    <div id="windowTitleBar"></div>
+    <!-- Windows Titlebar End -->
+
+    <!-- Windows Main Frame -->
+    <div class="container-fluid  border-top ">
+        <div class="row">
+            <!-- Sidebar Menu -->
+            <div class="col-2  p-0" style="height: 100vh; overflow-y: auto" id="windowSidebar"></div>
+            <!-- Sidebar Menu End -->
+            <!-- Content -->
+            <div class="col" id="windowContent">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col py-5" style="height: 95vh; overflow-y: auto">
+
+                            <!-- Last Uploaded Profile -->
+                            <div class="row justify-content-center align-items-center g-2">
+                                <div class="card bg-dark bg-opacity-75 text-white">
+                                    <div class="card-header p-4">
+                                        <h4 class="card-title  " id="profile-name">${profile-name}</h4>
+                                        <h5 class="card-subtitle mt-2 text-secondary" id="detail-label">
+                                            ${detail-label} </h5>
+                                    </div>
+                                    <div class="card-body d-flex flex-wrap">
+                                        <div class="col">
+                                            <table class="bg-transparent w-100 table-responsive"
+                                                style=" border-spacing: 30px;">
+                                                <tbody>
+                                                    <tr class="shadow-lg">
+                                                        <td class="  p-3" colspan="1">
+                                                            <label style="font-weight: bolder;" id="level-label">
+                                                                ${level-label}
+                                                            </label> :
+                                                            <span id="level-value">${level-value}</span>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <label style="font-weight: bolder;" id="small-garage-label">
+                                                                ${small-garage-label} </label> :
+                                                            <span id="small-garage-value">${small-garage-value}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="shadow-lg ">
+                                                        <td class="p-3 ">
+                                                            <label style="font-weight: bolder;"
+                                                                id="completed-deliveries-label">
+                                                                ${completed-deliveries-label} </label> :
+                                                            <span
+                                                                id="completed-deliveries-value">${completed-deliveries-value}</span>
+                                                        </td>
+                                                        <td class="p-3 ">
+                                                            <label style="font-weight: bolder;"
+                                                                id="big-garage-label">${big-garage-label} </label> :
+                                                            <span id="big-garage-value">${big-garage-value}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="shadow-lg ">
+                                                        <td class="p-3">
+                                                            <label style="font-weight: bolder;"
+                                                                id="distance-traveled-label">
+                                                                ${distance-traveled-label} </label> :
+                                                            <span id="distance-traveled-value">
+                                                                ${distance-traveled-value}
+                                                            </span>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <label style="font-weight: bolder;"
+                                                                id="paths-traveled-label">
+                                                                ${paths-traveled-label} </label> :
+                                                            <span
+                                                                id="paths-traveled-value">${paths-traveled-value}</span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="shadow-lg">
+                                                        <td class="p-3 "> <label style="font-weight: bolder;"
+                                                                id="truck-label">${truck-label} </label> :
+                                                            <span id="truck-value">${truck-value}</span>
+                                                        </td>
+                                                        <td class="p-3 "> <label style="font-weight: bolder;"
+                                                                id="trailer-label">${trailer-label} </label> :
+                                                            <span id="trailer-value">
+                                                                ${trailer-value}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="shadow-lg">
+                                                        <td class="p-3">
+                                                            <label style="font-weight: bolder;" id="used-mod-label">
+                                                                ${used-mod-label}
+                                                            </label> :
+                                                            <span id="used-mod-value">${used-mod-value}</span>
+                                                        </td>
+                                                        <td class="p-3">
+                                                            <label style="font-weight: bolder;"
+                                                                id="truck-brand-label">${truck-brand-label}</label> :
+                                                            <span id="truck-brand-value">${truck-brand-value}</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-4">
+                                            <img src="assets/img/man-eqc.png" class=" img-fluid bg-opacity-25 "
+                                                title="${truck-img-value}" alt="truck-img">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Last Uploaded Screenshot -->
+                            <div class="row justify-content-center align-items-center g-2 my-3">
+                                <div class="col  ">
+                                    <div class="card bg-dark bg-opacity-75 text-white">
+                                        <div class="card-header">
+                                            <h5 id="screenshot-card-label">${screenshot-card-label}</h5>
+                                        </div>
+                                        <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                                <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"
+                                                    aria-current="true" aria-label="First slide"></li>
+                                                <li data-bs-target="#carouselId" data-bs-slide-to="1"
+                                                    aria-label="Second slide"></li>
+                                                <li data-bs-target="#carouselId" data-bs-slide-to="2"
+                                                    aria-label="Third slide"></li>
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                <div class="card-body carousel-item active">
+                                                    <img src="assets/img/bg01.png" class="w-100 d-block"
+                                                        alt="First slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title 1</h3>
+                                                        <p>Description</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body carousel-item">
+                                                    <img src="assets/img/bg02.png" class="w-100 d-block"
+                                                        alt="Second slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title 2</h3>
+                                                        <p>Description</p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body carousel-item">
+                                                    <img src="assets/img/bg01.png" class="w-100 d-block"
+                                                        alt="Third slide">
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <h3>Title 3</h3>
+                                                        <p>Description</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="carousel-control-prev" type="button"
+                                                data-bs-target="#carouselId" data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button"
+                                                data-bs-target="#carouselId" data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Last Installed Mod -->
+
+                            <div class="row justify-content-center align-items-center g-2 my-3">
+                                <!-- Recently Uploaded Radio -->
+                                <div class="col">
+                                    <div class="card bg-dark bg-opacity-75 text-white">
+                                        <div class="card-header">
+                                            <h6 id="music-card-label">
+                                                ${music-card-label}
+                                            </h6>
+                                        </div>
+                                        <div class="card-body  ">
+
+                                            <div class="mb-3">
+                                                <label for="musicPlay" class="mb-2"
+                                                    id="music-single-name-value">${music-single-name-value} </label>
+                                                <audio id="musicPlay"
+                                                    src="C:\Users\murse\Documents\Euro Truck Simulator 2\music\Yücel Arzen - İki Alyans.mp3"
+                                                    controls class="w-100  "></audio>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Recently Uploaded Music -->
+                                <div class="col">
+                                    <div class="card bg-dark bg-opacity-75 text-white">
+                                        <div class="card-header">
+                                            <h6 id="radio-card-label">
+                                                ${radio-card-label}
+                                            </h6>
+                                        </div>
+                                        <div class="card-body  ">
+                                            <div class="mb-3">
+                                                <label for="" class=" " id="radio-name-value">${radio-name-value}
+                                                </label>
+                                                <audio id="radioPlay" src="" controls class="w-100  "></audio>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- Latest Published News -->
+
+                        </div>
+
+                        <!-- // Info Card Design -->
+                        <div class="col-3 " id="info-cards-content" style="height: 95vh; overflow-y: auto">
+                            <div class=" d-flex flex-column justify-content-between" id="info-card-list">
+                                <div class="card w-100 my-3 bg-dark bg-opacity-75 text-white">
+                                    <h5 class="card-header" id="profile-label">
+                                        ${profile-label}
+                                    </h5>
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title fa-3x opacity-75" id="profile-icon"><i
+                                                class="fa-solid fa-user"></i></h5>
+                                        <h5 class="card-title " id="profile-count-value">
+                                            ${profile-count-value}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card w-100 my-3 bg-dark bg-opacity-75 text-white">
+                                    <h5 class="card-header" id="mod-label">
+                                        ${mod-label}
+                                    </h5>
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title fa-3x opacity-75">
+                                            <i class="fa-solid fa-bars"></i>
+                                        </h5>
+                                        <h5 class="card-title " id="mod-count-value">
+                                            ${mod-count-value}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card w-100 my-3 bg-dark bg-opacity-75 text-white">
+                                    <h5 class="card-header" id="music-label">
+                                        ${music-label}
+                                    </h5>
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title fa-3x opacity-75"><i class="fa-solid fa-music"></i></h5>
+                                        <h5 class="card-title " id="music-count-value">
+                                            ${music-count-value}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card w-100 my-3 bg-dark bg-opacity-75 text-white">
+                                    <h5 class="card-header" id="radio-label">
+                                        ${radio-label}
+                                    </h5>
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title fa-3x opacity-75"><i class="fa-solid fa-radio"></i></h5>
+                                        <h5 class="card-title " id="radio-count-value">
+                                            ${radio-count-value}
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card w-100 my-3 bg-dark bg-opacity-75 text-white">
+                                    <h5 class="card-header" id="screenshot-label">
+                                        ${screenshot-label}
+                                    </h5>
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title fa-3x opacity-75"><i class="fa-solid fa-camera"></i></h5>
+                                        <h5 class="card-title " id="screenshot-count-value">
+                                            ${screenshot-count-value}
+                                        </h5>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- // Info Card Design End -->
+
+                    </div>
+                </div>
+            </div>
+            <!-- Content End -->
+        </div>
+    </div>
+    <!-- Main Frame End -->
+
+    <!-- Scripts -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/homeRenderer.js"></script>
+    <!-- preload.js -->
+    <script src="./preload.js"></script>
+</body>
+
+</html>
