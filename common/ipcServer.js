@@ -71,6 +71,11 @@ class IpcServer {
             const count = new modManager().getCount();
             event.reply(CMD.ALL_MOD_COUNT, count);
         });
+        electron.ipcMain.on(CMD.ALL_MOD_DATA, (event, request) => {
+            console.log("Request All Mod Data :" + request)
+            const mods = new modManager().getAll();
+            event.reply(CMD.ALL_MOD_DATA, mods)
+        });
     }
     music() {
         const CMD = IpcCommand.MUSIC;

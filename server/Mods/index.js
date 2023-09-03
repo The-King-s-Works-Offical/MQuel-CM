@@ -10,7 +10,11 @@ class ModManager {
         this._mods = []
         const mods = fs.readdirSync(this._path);
         for (const mod of mods) {
-            this._mods.push(mod)
+            this._mods.push({
+                name: mod.split(".")[0],
+                file: mod,
+                path: this._path + "/" + mod
+            })
         }
 
     }
@@ -20,6 +24,9 @@ class ModManager {
     }
     getAll() {
         return this._mods
+    }
+    deleteMod(modName) {
+
     }
 
 

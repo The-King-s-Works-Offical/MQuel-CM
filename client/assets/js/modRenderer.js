@@ -5,9 +5,8 @@ const {
 const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
-const { log } = require("console");
 
-console.table(IpcCommand)
+console.log(IpcCommand)
 
 // Main Components Render
 // Toolbar Rendering
@@ -56,4 +55,29 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         }
     }
 });
-ipcRenderer.send(IpcCommand.MOD.ALL_MOD_DATA)
+ipcRenderer.send(IpcCommand.MOD.ALL_MOD_DATA, true)
+ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
+    response.forEach((element, index) => {
+        $("#mod-table-list").append(`
+    <tr class="pt-5">
+        <td class="text-center"> 
+            <div class="form-check bg-transparent">
+                <input class="form-check-input" type="checkbox" value="${element.name}" id="${element.name}${index}">
+                <label class="form-check-label text-white" for="${element.name}${index}">
+                    ${index}
+                </label>
+            </div>
+        </td>
+        <td> ${element.name} </td>
+        <td> ${element.file} </td>
+        <td> ${element.path} </td>
+        <td  > 
+            <button class="btn form-control border-0 shadow-lg text-white bg-danger">
+                <i class="fa-solid fa-trash"></i>
+            </button> 
+        </td>
+    </tr>
+    `)
+    });
+
+})

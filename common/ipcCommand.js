@@ -17,7 +17,7 @@ const IpcCommand = {
   },
   MOD: {
     ALL_MOD_COUNT: "all-mod-count",
-    ALL_MOD_DATA : "all-mod-data"
+    ALL_MOD_DATA : "all-mod"
   },
   MUSIC: {
     ALL_MUSIC_COUNT: "all-music-count",

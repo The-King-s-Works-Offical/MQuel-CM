@@ -25,7 +25,11 @@
     "mod": {
         "title": "Mods",
         "description": "App Mods Page",
-        "mod-card-label" : "Mods"
+        "mod-card-label" : "Mods",
+        "mod-table-name-label" : "Name",
+        "mod-table-file-label" : "File",
+        "mod-table-filePath-label" : "File Path",
+        "mod-table-actions-label"  : "Actions"
     },
     "profile": {
         "title" : "Profiles",
