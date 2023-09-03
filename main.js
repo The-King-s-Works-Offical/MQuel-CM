@@ -5,7 +5,8 @@ const path = require("path");
 const fs = require("fs");
 const electron = require("electron");
 const {
-  app
+  app,
+  netLog
 } = electron;
 
 // User Modules
@@ -23,6 +24,7 @@ process.on("uncaughtException", (error) => {
 app.on("ready", () => {
   new mainApp();
 });
+
 // When all windows of the application are closed
 app.on("window-all-closed", () => {
   app.quit();

@@ -9,6 +9,8 @@ const path = require("path");
 const $ = require('jquery');
 
 const IpcCommand = require("./common/ipcCommand");
+const IpcServer = require("./common/ipcServer");
+
 class mainWindow {
   constructor() {
     const mainWindow = new BrowserWindow({
@@ -55,25 +57,10 @@ class mainWindow {
 
 
 
+      
+      const IpcServer = new IpcServer(mainWindow);
+      IpcServer.toolbar();
       mainWindow.webContents.openDevTools();
-      ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
-        mainWindow.minimize();
-      });
-      ipcMain.on(IpcCommand.WINDOW_MAXIMIZE, (event, arg) => {
-        if (!mainWindow.isMaximized()) {
-          setTimeout(() => {
-            mainWindow.maximize();
-          }, 500);
-        } else {
-          setTimeout(() => {
-            mainWindow.restore();
-          }, 500);
-        }
-      });
-      ipcMain.on(IpcCommand.WINDOW_CLOSE, (event, arg) => {
-        mainWindow.close();
-      });
-
       ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
         console.log("GetProfilesCount")
       });
@@ -84,7 +71,7 @@ class mainWindow {
         const localeFileData = JSON.parse(localeFileReadStream);
 
         event.reply(IpcCommand.GET_LANG, localeFileData)
-
+        // Cannot access 'IpcServer' before initialization
         //event.reply
       });
 

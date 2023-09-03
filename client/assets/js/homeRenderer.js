@@ -46,16 +46,8 @@ $.ajax({
     }
 });
 // Content Rendering
-$.ajax({
-    url: __dirname + "/Components/pages/home/content.html",
-    success: (data) => {
-        $("#windowContent").html(data);
-    },
-    error: (error) => {
-        console.log(`Not found: \n ${error.responseText}`);
-    }
-});
- 
+
+
 ipcRenderer.send(IpcCommand.GET_LANG);
 
 
@@ -68,8 +60,7 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         } else if (key === "description") {
             $("meta[name='description']").attr("content", locale.description);
         } else {
-            
-            $(`#${key}`).text(locale[key]);
+            document.getElementById(key).innerText = locale[key];
         }
     }
 
