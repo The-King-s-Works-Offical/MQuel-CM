@@ -10,8 +10,6 @@ const cs = require("../../common/").consoleStyle;
 
 class ConfigManager {
   constructor() {
-    console.log("------------------------------------------------")
-    //console.log(cs.constructorLog("Config Manager initialized"));
     this._path = path.join(process.cwd(), "/config.json").replaceAll("\\", "/");
 
     const exists = fs.existsSync(this._path);

@@ -5,12 +5,17 @@ const {
 const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
+const winston = require("winston");
+
+const logger = winston.createLogger({
+    transports: [
+        new winston.transports.Console(),
+    ]
+});
 
 
+logger.log("info",JSON.parse(IpcCommand))
 // Main Components Render
-console.log(IpcCommand)
-
-
 // Toolbar Rendering
 $.ajax({
     url: __dirname + "/Components/windowToolbar.html",
@@ -60,5 +65,8 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
 
 ipcRenderer.send(IpcCommand.PROFILE.ALL_PROFILE_COUNT, true)
 ipcRenderer.on(IpcCommand.PROFILE.ALL_PROFILE_COUNT, (event, response) => {
-    console.log(response)
+    document.getElementById('profile-count-value').innerText = response;
+    document.getElementById('profile-count-value').classList.add('fa-2x');
 });
+
+ipcRenderer.on(IpcCommand.MOD)
