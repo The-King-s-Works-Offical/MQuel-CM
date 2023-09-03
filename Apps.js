@@ -63,7 +63,15 @@ class mainWindow {
       ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
         console.log("GetProfilesCount")
       });
-
+      ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
+        const localeFile = __dirname + "/languages/en.json";
+        const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
+        const localeFileData = JSON.parse(localeFileReadStream);
+    
+        event.reply(IpcCommand.GET_LANG, localeFileData)
+        // Cannot access 'IpcServer' before initialization
+        //event.reply
+      });
 
 
     } catch (error) {
