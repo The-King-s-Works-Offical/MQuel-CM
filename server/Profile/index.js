@@ -1,17 +1,12 @@
 const fs = require("fs");
 const path = require("path");
-const cs = require("../../consoleStyle");
-const {
-  exec
-} = require("child_process");
-const {
-  profile
-} = require("console");
+const cs = require("../../common").consoleStyle;
+
 
 class Profile {
   constructor(id, fileName, pathUrl, logView = false) {
     this.logView = logView;
-    console.log(cs.constructorLog("Profile Created => " + fileName));
+    // console.log(cs.constructorLog("Profile Created => " + fileName));
     this._id = id;
     this._fileName = fileName;
     this._path = pathUrl;

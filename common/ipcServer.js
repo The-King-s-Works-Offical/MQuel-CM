@@ -1,23 +1,21 @@
 const electron = require('electron');
+const fs = require('fs');
+const path = require('path');
 const IpcCommand = require("./ipcCommand");
-
+const profileManager = require('../server/ProfileManager')
 
 class IpcServer {
     constructor(window) {
         this.window = window;
-    }
-    appLanguages() {
         electron.ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
-            
-            const localeFile = __dirname + "/languages/en.json";
+            const localeFile = path.join(__dirname, '../languages/en.json');
             const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
             const localeFileData = JSON.parse(localeFileReadStream);
-        
             event.reply(IpcCommand.GET_LANG, localeFileData)
-            // Cannot access 'IpcServer' before initialization
-            //event.reply
-          });
+
+        });
     }
+
     toolbar() {
         electron.ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
             this.window.minimize();
@@ -39,10 +37,13 @@ class IpcServer {
     }
 
     profile() {
-        electron.ipcMain.on(IpcCommand.PROFILE.ALL_PROFILE_COUNT, (event, arg) => {
-            console.log("GetProfilesCount")
-          });
+        const CMD = IpcCommand.PROFILE;
+        electron.ipcMain.on(CMD.ALL_PROFILE_COUNT, (event, arg) => {
+            const count = new profileManager().getCount()
+            event.reply(CMD.ALL_PROFILE_COUNT, count)
+        });
     }
+
 
 }
 

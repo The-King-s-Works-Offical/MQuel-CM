@@ -58,18 +58,9 @@ class mainWindow {
       const ipcServer = new IpcServer(mainWindow);
       ipcServer.toolbar();
       ipcServer.profile();
-      mainWindow.webContents.openDevTools();
-      
-      ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
-        const localeFile = __dirname + "/languages/en.json";
-        const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
-        const localeFileData = JSON.parse(localeFileReadStream);
-    
-        event.reply(IpcCommand.GET_LANG, localeFileData)
-        // Cannot access 'IpcServer' before initialization
-        //event.reply
-      });
 
+
+      mainWindow.webContents.openDevTools();
 
     } catch (error) {
       console.error(error);

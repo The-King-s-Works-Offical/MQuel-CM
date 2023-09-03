@@ -1,25 +1,14 @@
-const {
-  ipcRenderer,
-  ipcMain
-} = require("electron");
+
 const fs = require("fs");
 const path = require("path");
-const {
-  exec
-} = require("child_process");
+
 
 // User Modules
 const Profile = require("../Profile/index"); // Class
-const cs = require("../../consoleStyle"); // Class
 const ConfigManager = require("../Config/index"); // Class
-const {
-  Console
-} = require("winston/lib/winston/transports");
 
 class ProfileManager {
   constructor(logView) {
-    this.logView = logView || false;
-    this.logView ? console.log(cs.constructorLog("Profiles Manager")) : null;
 
 
     this._config = new ConfigManager()
@@ -29,7 +18,6 @@ class ProfileManager {
 
   }
   profilesLoad() {
-    this.logView ? console.log(cs.methodLog("Profiles Manager => Profiles Loading")) : null;
     const _profileDirs = fs.readdirSync(this.path);
 
     for (const _profile of _profileDirs) {
@@ -43,7 +31,6 @@ class ProfileManager {
   }
 
   getProfile(profileId) {
-    this.logView ? console.log(cs.methodLog("getProfile  contrustor")) : null
     for (const _profile of this.profiles) {
       if (_profile._id === profileId) {
         return _profile;
@@ -51,8 +38,7 @@ class ProfileManager {
     }
   }
 
-  getProfiles() {
-    this.logView ? console.log(cs.methodLog("Profiles Manager => getProfiles()")) : null
+  getAll() {
     return this.profiles;
   }
   getProfilesName() {
@@ -62,11 +48,9 @@ class ProfileManager {
     }
     return list;
   }
-  getProfilesCount() {
-    this.logView ? console.log(cs.methodLog("Profiles Manager => getProfilesCount()")) : null
+  getCount() {
     const files = fs.readdirSync(this.path);
 
-    this.logView ? console.log(cs.methodCommentLog("Profile Count :" + files.length)) : null
 
     return files.length;
   }

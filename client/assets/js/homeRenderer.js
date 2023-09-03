@@ -3,16 +3,12 @@ const {
     ipcRenderer
 } = require("electron");
 const path = require("path");
-const IpcCommand = require(__dirname + "/common").IpcCommand;
+const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
 
 
-ipcRenderer.send(IpcCommand.GET_PROFILE_COUNT, true)
-ipcRenderer.on(IpcCommand.GET_PROFILE_COUNT, () => {
-
-});
-
 // Main Components Render
+console.log(IpcCommand)
 
 
 // Toolbar Rendering
@@ -47,10 +43,7 @@ $.ajax({
 });
 // Content Rendering
 
-
 ipcRenderer.send(IpcCommand.GET_LANG);
-
-
 ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
     const pageName = window.location.href.split('/').pop().split('.')[0];
     const locale = response[pageName]
@@ -63,5 +56,9 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
             document.getElementById(key).innerText = locale[key];
         }
     }
+});
 
+ipcRenderer.send(IpcCommand.PROFILE.ALL_PROFILE_COUNT, true)
+ipcRenderer.on(IpcCommand.PROFILE.ALL_PROFILE_COUNT, (event, response) => {
+    console.log(response)
 });

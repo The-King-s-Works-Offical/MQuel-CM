@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 
 // User Modules
-const cs = require("../../consoleStyle");
+const cs = require("../../common/").consoleStyle;
 
 class ConfigManager {
   constructor() {
@@ -27,6 +27,5 @@ class ConfigManager {
 
 }
 
-//const configManager = new ConfigManager();
 
 module.exports = ConfigManager;

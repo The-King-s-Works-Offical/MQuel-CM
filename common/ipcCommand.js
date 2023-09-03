@@ -10,6 +10,7 @@ const IpcCommand = {
   LOAD_PROFILES: "load-profiles",
   MENU_LOAD_PROFILES: "menu-load-profiles",
   LOAD_PROFILE: "load-profile",
+  GET_LANG: "get-language",
   PROFILE: {
     ALL_PROFILE_COUNT: "all-profile-count",
   },
@@ -27,8 +28,8 @@ const IpcCommand = {
   },
   SAVE: {
     ALL_SAVE_COUNT: "all-save-count",
-  },
-  GET_LANG: "get-language"
+  }
+  
 };
 
 module.exports = IpcCommand;
