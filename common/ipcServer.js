@@ -5,7 +5,18 @@ const IpcCommand = require("./ipcCommand");
 class IpcServer {
     constructor(window) {
         this.window = window;
-        console.log(this.window);
+    }
+    appLanguages() {
+        electron.ipcMain.on(IpcCommand.GET_LANG, (event, arg) => {
+            
+            const localeFile = __dirname + "/languages/en.json";
+            const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
+            const localeFileData = JSON.parse(localeFileReadStream);
+        
+            event.reply(IpcCommand.GET_LANG, localeFileData)
+            // Cannot access 'IpcServer' before initialization
+            //event.reply
+          });
     }
     toolbar() {
         electron.ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, arg) => {
@@ -28,7 +39,7 @@ class IpcServer {
     }
 
     profile() {
-        electron.ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
+        electron.ipcMain.on(IpcCommand.PROFILE.ALL_PROFILE_COUNT, (event, arg) => {
             console.log("GetProfilesCount")
           });
     }

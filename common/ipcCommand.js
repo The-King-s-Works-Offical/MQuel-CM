@@ -10,12 +10,25 @@ const IpcCommand = {
   LOAD_PROFILES: "load-profiles",
   MENU_LOAD_PROFILES: "menu-load-profiles",
   LOAD_PROFILE: "load-profile",
-  GET_PROFILE_COUNT : "get-profiles-count",
-  GET_MOD_COUNT : "get-mods-count",
-  GET_MUSIC_COUNT : "get-musics-count",
-  GET_RADIO_COUNT : "get-radios-count",
-  GET_SCREENSHOT_COUNT : "get-screenshot-count",
-  GET_LANG : "get-language"
+  PROFILE: {
+    ALL_PROFILE_COUNT: "all-profile-count",
+  },
+  MOD: {
+    ALL_MOD_COUNT: "all-mod-count",
+  },
+  MUSIC: {
+    ALL_MUSIC_COUNT: "all-music-count",
+  },
+  RADIO: {
+    ALL_RADIO_COUNT: "all-radio-count",
+  },
+  SCREENSHOT: {
+    ALL_SCREENSHOT_COUNT: "all-screenshot-count",
+  },
+  SAVE: {
+    ALL_SAVE_COUNT: "all-save-count",
+  },
+  GET_LANG: "get-language"
 };
 
 module.exports = IpcCommand;
