@@ -1,20 +1,13 @@
-'use strict';
+//'use strict';
 const {
     ipcRenderer
 } = require("electron");
 const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
-const winston = require("winston");
 
-const logger = winston.createLogger({
-    transports: [
-        new winston.transports.Console(),
-    ]
-});
+console.table(IpcCommand)
 
-
-logger.log("info",JSON.parse(IpcCommand))
 // Main Components Render
 // Toolbar Rendering
 $.ajax({
@@ -62,11 +55,26 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         }
     }
 });
-
+// Profile Count
 ipcRenderer.send(IpcCommand.PROFILE.ALL_PROFILE_COUNT, true)
 ipcRenderer.on(IpcCommand.PROFILE.ALL_PROFILE_COUNT, (event, response) => {
     document.getElementById('profile-count-value').innerText = response;
     document.getElementById('profile-count-value').classList.add('fa-2x');
 });
-
-ipcRenderer.on(IpcCommand.MOD)
+// Mods Count
+ipcRenderer.send(IpcCommand.MOD.ALL_MOD_COUNT, true);
+ipcRenderer.on(IpcCommand.MOD.ALL_MOD_COUNT, (event, response) => {
+    document.getElementById('mod-count-value').innerText = response;
+    document.getElementById('mod-count-value').classList.add('fa-2x');
+});
+// Music Count
+ipcRenderer.send(IpcCommand.MUSIC.ALL_MUSIC_COUNT, true);
+ipcRenderer.on(IpcCommand.MUSIC.ALL_MUSIC_COUNT, (event, response) => {
+    document.getElementById('music-count-value').innerText = response;
+    document.getElementById('music-count-value').classList.add('fa-2x');
+});
+// Radio Count
+ipcRenderer.send(IpcCommand.RADIO.ALL_RADIO_COUNT, true);
+ipcRenderer.on(IpcCommand.RADIO.ALL_RADIO_COUNT, (event, response) => {
+    console.log(response);
+})

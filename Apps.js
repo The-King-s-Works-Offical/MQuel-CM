@@ -56,9 +56,7 @@ class mainWindow {
       );
 
       const ipcServer = new IpcServer(mainWindow);
-      ipcServer.toolbar();
-      ipcServer.profile();
-
+      
 
       mainWindow.webContents.openDevTools();
 

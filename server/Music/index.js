@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const cs = require("../../consoleStyle");
 
 const ConfigManager = require("../Config/index");
 
@@ -8,14 +7,13 @@ const ConfigManager = require("../Config/index");
 class MusicManager {
     constructor() {
         this._config = new ConfigManager();
-        console.log("MusicManager constructor");
         this._path = path.join(this._config.documentsPath, "music").replaceAll("\\", "/");
         this._playList = []
         const musics = fs.readdirSync(this._path);
         for (const music of musics) {
             this._playList.push(music)
         }
-       
+
     }
 
     getCount() {

@@ -1,12 +1,6 @@
-const {
-    ipcRenderer
-} = require('electron');
 const fs = require("fs");
 const path = require("path");
-const cs = require("../../consoleStyle");
-const {
-    IpcCommand
-} = require("../../ipcCommand");
+
 const ConfigManager = require("../Config/index");
 
 
