@@ -82,11 +82,10 @@ ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
 $("#mod-form").on("submit", (event) => {
     event.preventDefault();
     const formData = $("#mod-form").serializeArray()
-    console.log(formData)
-    /* for (let a of d) {
-        const mod = a;
-        //ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, mod)
-    } */
+    for (const data of formData) {
+        console.log(data)
+        ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, data.value)
+    }
     console.log("Form Submitted")
 });
 ipcRenderer.on(IpcCommand.MOD.MOD_DELETE, (event, response) => {

@@ -26,8 +26,12 @@ class ModManager {
     getAll() {
         return this._mods
     }
-    deleteMod(mod) {
-        console.log(mod)
+    deleteMod(modId) {
+        console.log(modId)
+        this._mods.forEach(mod => {
+            console.log(mod)
+        });
+
         /**
          *  fs.unlink(this._path + "/" + mod.value + ".scs", (err) => {
                 if (err) {
