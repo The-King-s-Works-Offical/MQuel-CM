@@ -11,6 +11,7 @@ class ModManager {
         const mods = fs.readdirSync(this._path);
         for (const mod of mods) {
             this._mods.push({
+                id: mod.split(".")[0] + mod.split(".")[0].length,
                 name: mod.split(".")[0],
                 file: mod,
                 path: this._path + "/" + mod
@@ -26,16 +27,17 @@ class ModManager {
         return this._mods
     }
     deleteMod(mod) {
+        console.log(mod)
         /**
-         * fs.unlink('myfile.txt', (err) => {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Dosya başarıyla silindi.');
-            }
+         *  fs.unlink(this._path + "/" + mod.value + ".scs", (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Dosya başarıyla silindi.');
+                }
             });
          */
-        fs.unlink(this._path + "/" + mod.value + ".scs")
+
     }
 
 

@@ -29,7 +29,8 @@
         "mod-table-name-label" : "Name",
         "mod-table-file-label" : "File",
         "mod-table-filePath-label" : "File Path",
-        "mod-table-actions-label"  : "Actions"
+        "mod-table-actions-label"  : "Actions",
+        "mod-table-modDeleteBtn-label" : "Delete"
     },
     "profile": {
         "title" : "Profiles",

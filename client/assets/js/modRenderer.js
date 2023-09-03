@@ -51,7 +51,6 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         } else if (key === "description") {
             $("meta[name='description']").attr("content", locale.description);
         } else {
-            console.log(key)
             $(`#${key}`).html(locale[key]);
         }
     }
@@ -59,19 +58,20 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
 ipcRenderer.send(IpcCommand.MOD.ALL_MOD_DATA, true)
 ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
     response.forEach((mod, index) => {
+        console.log(mod)
         $("#mod-table-list").append(`
     <tr class="pt-5">
         <td class="text-center"> 
             <div class="form-check bg-transparent">
-                <input class="form-check-input" type="checkbox" name="mod" value="${mod.name}" id="${mod.name}${index}">
+                <input class="form-check-input" type="checkbox" name="checkbox" value="${mod.id}"  id="${mod.id}">
                 <label class="form-check-label text-white" for="${mod.name}${index}">
                     ${index}
                 </label>
             </div>
         </td>
-        <td> ${mod.name} </td>
-        <td> ${mod.file} </td>
-        <td> ${mod.path} </td>
+        <td> ${mod.name}  </td>
+        <td> ${mod.file}  </td>
+        <td> ${mod.path}  </td>
         
     </tr>
     `)
@@ -81,12 +81,12 @@ ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
 
 $("#mod-form").on("submit", (event) => {
     event.preventDefault();
-    const d = $("#mod-form").serializeArray()
-
-    for (let a of d) {
+    const formData = $("#mod-form").serializeArray()
+    console.log(formData)
+    /* for (let a of d) {
         const mod = a;
-        ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, mod)
-    }
+        //ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, mod)
+    } */
     console.log("Form Submitted")
 });
 ipcRenderer.on(IpcCommand.MOD.MOD_DELETE, (event, response) => {
