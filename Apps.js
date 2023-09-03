@@ -57,8 +57,8 @@ class mainWindow {
 
 
      
-      const IpcServer = new IpcServer(mainWindow);
-      IpcServer.toolbar();
+      /* const IpcServer = new IpcServer(mainWindow);
+      IpcServer.toolbar(); */
       mainWindow.webContents.openDevTools();
       ipcMain.on(IpcCommand.GET_PROFILE_COUNT, (event, arg) => {
         console.log("GetProfilesCount")
