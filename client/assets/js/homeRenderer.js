@@ -77,4 +77,6 @@ ipcRenderer.on(IpcCommand.MUSIC.ALL_MUSIC_COUNT, (event, response) => {
 ipcRenderer.send(IpcCommand.RADIO.ALL_RADIO_COUNT, true);
 ipcRenderer.on(IpcCommand.RADIO.ALL_RADIO_COUNT, (event, response) => {
     console.log(response);
+    document.getElementById('radio-count-value').innerText = response;
+    document.getElementById('radio-count-value').classList.add('fa-2x');
 })

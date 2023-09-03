@@ -5,6 +5,9 @@ const IpcCommand = require("./ipcCommand");
 const profileManager = require('../server/ProfileManager')
 const modManager = require('../server/Mods');
 const musicManager = require('../server/Music');
+const radioManager = require('../server/Radio');
+const RadioManager = require('../server/Radio');
+
 
 class IpcServer {
     constructor(window) {
@@ -76,7 +79,8 @@ class IpcServer {
         const CMD = IpcCommand.RADIO;
         electron.ipcMain.on(CMD.ALL_RADIO_COUNT, (event,request) => {
             console.log("Request All Radio Count : " + request)
-            const count = 
+            const count = new RadioManager().getCount();
+            event.reply(CMD.ALL_RADIO_COUNT, count);
         });
     }
     screenshot() { }

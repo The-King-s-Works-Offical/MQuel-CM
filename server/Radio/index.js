@@ -21,7 +21,6 @@ class RadioManager {
             })
 
         });
-        console.log(localStorageStreams)
         this._testStreams = localStorageStreams
 
 
