@@ -26,22 +26,32 @@ class ModManager {
     getAll() {
         return this._mods
     }
-    deleteMod(modId) {
+    delete(modId) {
         console.log(modId)
+        let result = "";
         this._mods.forEach(mod => {
-            console.log(mod)
-        });
+            if (mod) {
+                if (mod.id === modId) {
+                    console.log(mod)
 
-        /**
-         *  fs.unlink(this._path + "/" + mod.value + ".scs", (err) => {
-                if (err) {
-                    console.log(err);
+                    fs.unlink(mod.path, (err) => {
+                        if (err) {
+                            console.err(err);
+                            result = { "status": false, "message": err }
+                        } else {
+                            result = { "status": true, "message": "Mod Basariyla Silindi !" }
+                        }
+                    });
                 } else {
-                    console.log('Dosya başarıyla silindi.');
+                    result = { "status": false, "message": "Mod Bulunamadı !" }
                 }
-            });
-         */
-
+            }
+            else {
+                result = { "status": false, "message": "Yüklü Mod Buluanamdı !" }
+            }
+        });
+        console.log(result);
+        return result;
     }
 
 

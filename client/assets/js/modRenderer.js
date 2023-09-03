@@ -58,7 +58,6 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
 ipcRenderer.send(IpcCommand.MOD.ALL_MOD_DATA, true)
 ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
     response.forEach((mod, index) => {
-        console.log(mod)
         $("#mod-table-list").append(`
     <tr class="pt-5">
         <td class="text-center"> 
@@ -83,7 +82,7 @@ $("#mod-form").on("submit", (event) => {
     event.preventDefault();
     const formData = $("#mod-form").serializeArray()
     for (const data of formData) {
-        console.log(data)
+        console.log(data);
         ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, data.value)
     }
     console.log("Form Submitted")
