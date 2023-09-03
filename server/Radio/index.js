@@ -7,7 +7,6 @@ const ConfigManager = require("../Config/index");
 class RadioManager {
     constructor() {
         this._config = new ConfigManager();
-        console.log("RadioManager constructor");
         this._path = this._config.documentsPath.replaceAll("\\", "/");
         this._playList = []
         const live_streams = fs.readFileSync(path.join(this._path, "live_streams.sii"), "utf-8");
