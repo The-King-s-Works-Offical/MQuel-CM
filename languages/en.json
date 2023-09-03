@@ -22,9 +22,10 @@
         "radio-label": "Radio",
         "screenshot-label": "Screenshot"
     },
-    "mods": {
+    "mod": {
         "title": "Mods",
-        "description": "App Mods Page"
+        "description": "App Mods Page",
+        "mod-card-label" : "Mods"
     },
     "profile": {
         "title" : "Profiles",

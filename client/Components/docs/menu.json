@@ -44,7 +44,7 @@
   {
     "type": "link",
     "a": {
-      "href": "mods.html"
+      "href": "mod.html"
     },
     "icon": "fa-solid fa-list",
     "text": "Mods"
