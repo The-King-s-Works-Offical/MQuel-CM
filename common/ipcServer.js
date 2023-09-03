@@ -6,7 +6,7 @@ const profileManager = require('../server/ProfileManager')
 const modManager = require('../server/Mods');
 const musicManager = require('../server/Music');
 const radioManager = require('../server/Radio');
-const RadioManager = require('../server/Radio');
+const ScreenShotManager = require('../server/Screenshot');
 
 
 class IpcServer {
@@ -77,13 +77,20 @@ class IpcServer {
     }
     radio() {
         const CMD = IpcCommand.RADIO;
-        electron.ipcMain.on(CMD.ALL_RADIO_COUNT, (event,request) => {
-            console.log("Request All Radio Count : " + request)
-            const count = new RadioManager().getCount();
+        electron.ipcMain.on(CMD.ALL_RADIO_COUNT, (event, request) => {
+            //console.log("Request All Radio Count : " + request)
+            const count = new radioManager().getCount();
             event.reply(CMD.ALL_RADIO_COUNT, count);
         });
     }
-    screenshot() { }
+    screenshot() {
+        const CMD = IpcCommand.SCREENSHOT;
+        electron.ipcMain.on(CMD.ALL_SCREENSHOT_COUNT, (event, request) => {
+            //console.log("Request All Screenshot Count : " + request);
+            const count = new ScreenShotManager().getCount()
+            event.reply(CMD.ALL_SCREENSHOT_COUNT, count);
+        })
+    }
     save() { }
 
 

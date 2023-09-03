@@ -76,7 +76,12 @@ ipcRenderer.on(IpcCommand.MUSIC.ALL_MUSIC_COUNT, (event, response) => {
 // Radio Count
 ipcRenderer.send(IpcCommand.RADIO.ALL_RADIO_COUNT, true);
 ipcRenderer.on(IpcCommand.RADIO.ALL_RADIO_COUNT, (event, response) => {
-    console.log(response);
     document.getElementById('radio-count-value').innerText = response;
     document.getElementById('radio-count-value').classList.add('fa-2x');
 })
+// ScreenShot Count
+ipcRenderer.send(IpcCommand.SCREENSHOT.ALL_SCREENSHOT_COUNT, true);
+ipcRenderer.on(IpcCommand.SCREENSHOT.ALL_SCREENSHOT_COUNT, (event,response) => {
+    document.getElementById('screenshot-count-value').innerText = response;
+    document.getElementById('screenshot-count-value').classList.add('fa-2x');
+});
