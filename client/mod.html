@@ -57,17 +57,21 @@
                                 <div class="card-header d-flex align-items-baseline flex-wrap border-white">
                                     <i class="fa-solid fa-list me-2"></i>
                                     <h6 id="mod-card-label"> ${mod-card-label}</h6>
+
                                 </div>
                                 <div class="card-body d-flex flex-column " id="mod-card">
                                     <form id="mod-form">
                                         <table class="table table-responsive" id="mod-table-list">
-                                            <tr class="table-dark">
+                                            <tr class="table-dark align-items-baseline">
                                                 <th> # </th>
                                                 <th id="mod-table-name-label">${mod-table-name-label}</th>
                                                 <th id="mod-table-file-label">$>{mod-table-file-label}</th>
                                                 <th id="mod-table-filePath-label">${mod-table-filePath-label}</th>
-                                                <th class="text-center" id="mod-table-actions-label">
-                                                    ${mod-table-actions-label}</th>
+                                                <th>
+                                                    <button type="submit" id="modDelete" class="btn text-white">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </button>
+                                                </th>
                                             </tr>
 
                                         </table>

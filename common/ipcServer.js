@@ -76,6 +76,11 @@ class IpcServer {
             const mods = new modManager().getAll();
             event.reply(CMD.ALL_MOD_DATA, mods)
         });
+        electron.ipcMain.on(CMD.MOD_DELETE, (event, request) => {
+            console.log("Request Delete Mod :" + request)
+            
+            new modManager().deleteMod(request)                
+        })
     }
     music() {
         const CMD = IpcCommand.MUSIC;

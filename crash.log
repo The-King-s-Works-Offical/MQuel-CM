@@ -1,7 +1,5 @@
 Uncaught Exception:
-SyntaxError: Expected ',' or '}' after property value in JSON at position 1011
-    at JSON.parse (<anonymous>)
-    at IpcMainImpl.<anonymous> (C:\Users\murse\Desktop\MQuel Projects\MQuel\common\ipcServer.js:29:41)
-    at IpcMainImpl.emit (node:events:513:28)
-    at WebContents.<anonymous> (node:electron/js2c/browser_init:2:88940)
-    at WebContents.emit (node:events:513:28)
+ReferenceError: win is not defined
+    at BrowserWindow.<anonymous> (C:\Users\murse\Desktop\MQuel Projects\MQuel\Apps.js:30:40)
+    at Object.onceWrapper (node:events:628:26)
+    at BrowserWindow.emit (node:events:525:35)

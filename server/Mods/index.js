@@ -25,8 +25,17 @@ class ModManager {
     getAll() {
         return this._mods
     }
-    deleteMod(modName) {
-
+    deleteMod(mod) {
+        /**
+         * fs.unlink('myfile.txt', (err) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Dosya başarıyla silindi.');
+            }
+            });
+         */
+        fs.unlink(this._path + "/" + mod.value + ".scs")
     }
 
 

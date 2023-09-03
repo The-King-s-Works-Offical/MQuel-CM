@@ -51,33 +51,44 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         } else if (key === "description") {
             $("meta[name='description']").attr("content", locale.description);
         } else {
-            document.getElementById(key).innerText = locale[key];
+            console.log(key)
+            $(`#${key}`).html(locale[key]);
         }
     }
 });
 ipcRenderer.send(IpcCommand.MOD.ALL_MOD_DATA, true)
 ipcRenderer.on(IpcCommand.MOD.ALL_MOD_DATA, (event, response) => {
-    response.forEach((element, index) => {
+    response.forEach((mod, index) => {
         $("#mod-table-list").append(`
     <tr class="pt-5">
         <td class="text-center"> 
             <div class="form-check bg-transparent">
-                <input class="form-check-input" type="checkbox" value="${element.name}" id="${element.name}${index}">
-                <label class="form-check-label text-white" for="${element.name}${index}">
+                <input class="form-check-input" type="checkbox" name="mod" value="${mod.name}" id="${mod.name}${index}">
+                <label class="form-check-label text-white" for="${mod.name}${index}">
                     ${index}
                 </label>
             </div>
         </td>
-        <td> ${element.name} </td>
-        <td> ${element.file} </td>
-        <td> ${element.path} </td>
-        <td  > 
-            <button class="btn form-control border-0 shadow-lg text-white bg-danger">
-                <i class="fa-solid fa-trash"></i>
-            </button> 
-        </td>
+        <td> ${mod.name} </td>
+        <td> ${mod.file} </td>
+        <td> ${mod.path} </td>
+        
     </tr>
     `)
     });
 
-})
+});
+
+$("#mod-form").on("submit", (event) => {
+    event.preventDefault();
+    const d = $("#mod-form").serializeArray()
+
+    for (let a of d) {
+        const mod = a;
+        ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, mod)
+    }
+    console.log("Form Submitted")
+});
+ipcRenderer.on(IpcCommand.MOD.MOD_DELETE, (event, response) => {
+    console.log(response)
+});
