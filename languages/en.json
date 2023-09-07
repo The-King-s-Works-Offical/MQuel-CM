@@ -33,6 +33,17 @@
         "mod-table-modDeleteBtn-label" : "Delete",
         "mod-table-modAddBtn-label" : "Add"
     },
+    "radio": {
+        "title": "Live Streams",
+        "description": "App Live Stream Page",
+        "radio-card-label" : "Live Streams",
+        "radio-table-name-label" : "Name",
+        "radio-table-file-label" : "File",
+        "radio-table-filePath-label" : "File Path",
+        "radio-table-actions-label"  : "Actions",
+        "radio-table-radioDeleteBtn-label" : "Delete",
+        "radio-table-radioAddBtn-label" : "Add"
+    },
     "profile": {
         "title" : "Profiles",
         "description" : "Profiles Page",

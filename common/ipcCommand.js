@@ -17,15 +17,17 @@ const IpcCommand = {
   },
   MOD: {
     ALL_MOD_COUNT: "all-mod-count",
-    ALL_MOD_DATA : "all-mod",
-    DELETE : "delete",
-    ADD : "add"
+    ALL_MOD_DATA: "all-mod",
+    DELETE: "delete",
+    ADD: "add"
   },
   MUSIC: {
     ALL_MUSIC_COUNT: "all-music-count",
   },
   RADIO: {
-    ALL_RADIO_COUNT: "all-radio-count",
+    COUNT: "radio-count",
+    DATA: "radio-data"
+
   },
   SCREENSHOT: {
     ALL_SCREENSHOT_COUNT: "all-screenshot-count",

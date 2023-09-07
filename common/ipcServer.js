@@ -7,6 +7,8 @@ const modManager = require('../server/Mods');
 const musicManager = require('../server/Music');
 const radioManager = require('../server/Radio');
 const ScreenShotManager = require('../server/Screenshot');
+const { event } = require('jquery');
+const { request } = require('http');
 
 
 class IpcServer {
@@ -80,9 +82,9 @@ class IpcServer {
             console.log("Request Delete Mod :" + request)
             const response = new modManager().delete(request)
             console.log(response);
-            event.reply(CMD.DELETE,response)
+            event.reply(CMD.DELETE, response)
         });
-        electron.ipcMain.on(CMD.ADD, (event,request) => {
+        electron.ipcMain.on(CMD.ADD, (event, request) => {
             console.log("Request Add Mod :" + request)
             alert("Add Mod Function");
         });
@@ -96,11 +98,35 @@ class IpcServer {
         })
     }
     radio() {
+
+        // Radio Commands 
+
         const CMD = IpcCommand.RADIO;
-        electron.ipcMain.on(CMD.ALL_RADIO_COUNT, (event, request) => {
+
+        // Radio ALL Count
+        electron.ipcMain.on(CMD.COUNT, (event, request) => {
             console.log("Request All Radio Count : " + request)
             const count = new radioManager().getCount();
-            event.reply(CMD.ALL_RADIO_COUNT, count);
+            event.reply(CMD.COUNT, count);
+        });
+
+        // Radio All Data
+        electron.ipcMain.on(CMD.DATA, (event, request) => {
+            console.log("Request All Radio Data : " + request)
+            const liveStreams = new radioManager().getAll();
+            if (liveStreams) {
+
+                event.reply(CMD.DATA, {
+                    status: 200,
+                    dat: liveStreams
+                })
+            } else {
+                event.reply(CMD.DATA,
+                    {
+                        status: "404",
+                        data: {}
+                    })
+            }
         });
     }
     screenshot() {

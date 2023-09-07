@@ -60,6 +60,14 @@
   {
     "type": "link",
     "a": {
+      "href": "radio.html"
+    },
+    "icon": "fa-solid fa-radio",
+    "text": "Radio"
+  },
+  {
+    "type": "link",
+    "a": {
       "href": "news.html"
     },
     "icon": "fa-solid fa-newspaper",

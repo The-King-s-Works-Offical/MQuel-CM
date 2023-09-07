@@ -6,7 +6,7 @@ const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
 
-console.table(IpcCommand)
+console.log(IpcCommand)
 
 // Main Components Render
 // Toolbar Rendering
@@ -74,8 +74,8 @@ ipcRenderer.on(IpcCommand.MUSIC.ALL_MUSIC_COUNT, (event, response) => {
     document.getElementById('music-count-value').classList.add('fa-2x');
 });
 // Radio Count
-ipcRenderer.send(IpcCommand.RADIO.ALL_RADIO_COUNT, true);
-ipcRenderer.on(IpcCommand.RADIO.ALL_RADIO_COUNT, (event, response) => {
+ipcRenderer.send(IpcCommand.RADIO.COUNT, true);
+ipcRenderer.on(IpcCommand.RADIO.COUNT, (event, response) => {
     document.getElementById('radio-count-value').innerText = response;
     document.getElementById('radio-count-value').classList.add('fa-2x');
 })
