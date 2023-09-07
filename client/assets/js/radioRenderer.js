@@ -1,11 +1,10 @@
 const {
-    ipcRenderer
+    ipcRenderer,
 } = require("electron");
-const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
 
-console.log(IpcCommand)
+//console.log(IpcCommand)
 
 // Main Components Render
 // Toolbar Rendering
@@ -38,7 +37,7 @@ $.ajax({
         console.log(`Not found: \n ${error.responseText}`);
     }
 });
-// Content Rendering
+
 
 ipcRenderer.send(IpcCommand.GET_LANG);
 ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
@@ -55,7 +54,14 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
         }
     }
 });
-ipcRenderer.send(IpcCommand.RADIO.DATA,true)
-ipcRenderer.on(IpcCommand.RADIO.DATA, (event,response) => {
-    console.log(response);
+ipcRenderer.send(IpcCommand.RADIO.DATA, true)
+ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
+    const code = response.status
+    if (code === 404) {
+        console.error(response);
+        console.error(response.message);
+    }
+    if (code === 200) {
+        console.log(response.data)
+    }
 })

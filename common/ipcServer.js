@@ -114,18 +114,21 @@ class IpcServer {
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
             const liveStreams = new radioManager().getAll();
-            if (liveStreams) {
-
-                event.reply(CMD.DATA, {
+            if (liveStreams.length > 0) {
+                const result = {
                     status: 200,
-                    dat: liveStreams
-                })
+                    data: liveStreams
+                }
+                event.reply(CMD.DATA, result)
             } else {
-                event.reply(CMD.DATA,
-                    {
-                        status: "404",
-                        data: {}
-                    })
+                const result = {
+                    status: 404,
+                    message: "No installed live stream stations found!",
+                    data: {}
+                }
+                event.reply(CMD.DATA, result)
+                electron.dialog.showErrorBox("Upload live stream", result.message)
+
             }
         });
     }

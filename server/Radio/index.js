@@ -19,14 +19,26 @@ class RadioManager {
             else if (line.startsWith(" stream_data")) {
                 line = line.split(": ")
                 let data = line[1].split("|")
-                console.log(index + " => ");
-                
-                result = data
-                
-                const url = data[0].replace('"','').trim()
 
-                console.log(result);
+
+                const url = data[0].replace('"', '').trim()
+                const name = data[1].trim()
+                const type = data[2].trim()
+                const lang = data[3].trim()
+                const bit = data[4].trim()
+                const favorite = Number(data[5].replace('"','').trim())
+
+                this._liveStreamList.push({
+                    id: index - 3, index, url, name, type, lang, bit, favorite
+                })
+
+
+
+
             }
+
+
+
 
         })
         /*        
@@ -40,7 +52,7 @@ class RadioManager {
         return this._liveStreamCount;
     }
     getAll() {
-        return this._liveStreams
+        return this._liveStreamList
     }
 }
 
