@@ -62,6 +62,39 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
         console.error(response.message);
     }
     if (code === 200) {
-        console.log(response.data)
+        response.data.forEach(live_stream => {
+            console.log(live_stream);
+            html = `<div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
+                data-bs-target="#flush-collapse${live_stream.index}" aria-expanded="false" aria-controls="flush-collapse${live_stream.index}">
+                <i class="fa-solid fa-radio me-3"></i> ${live_stream.name}
+              </button>
+            </h2>
+            <div id="flush-collapse${live_stream.index}" class="accordion-collapse collapse"
+              data-bs-parent="#radio-list-accordionFlush">
+              <div class="accordion-body">
+                 <table class="table w-50">
+                    <tr>
+                        <th> Name : </th> <td> ${live_stream.name} </td>
+                        <th> Type : </th> <td> ${live_stream.type} </td>
+                    </tr>
+                    <tr>
+                        <th> Name : </th> <td> ${live_stream.name} </td>
+                        
+                    </tr>
+                    <tr>
+                        <th> Name : </th> <td> ${live_stream.name} </td>
+                    </tr>
+                     
+
+                 </table>
+              </div>
+            </div>
+          </div>`;
+            $("#radio-list-accordionFlush").append(html)
+        });
+        // #radio-list-accordionFlush
+
     }
 })
