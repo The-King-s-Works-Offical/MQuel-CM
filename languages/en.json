@@ -30,7 +30,8 @@
         "mod-table-file-label" : "File",
         "mod-table-filePath-label" : "File Path",
         "mod-table-actions-label"  : "Actions",
-        "mod-table-modDeleteBtn-label" : "Delete"
+        "mod-table-modDeleteBtn-label" : "Delete",
+        "mod-table-modAddBtn-label" : "Add"
     },
     "profile": {
         "title" : "Profiles",

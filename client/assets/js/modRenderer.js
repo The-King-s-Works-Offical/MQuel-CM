@@ -83,10 +83,15 @@ $("#mod-form").on("submit", (event) => {
     const formData = $("#mod-form").serializeArray()
     for (const data of formData) {
         console.log(data);
-        ipcRenderer.send(IpcCommand.MOD.MOD_DELETE, data.value)
+        ipcRenderer.send(IpcCommand.MOD.DELETE, data.value)
     }
     console.log("Form Submitted")
 });
-ipcRenderer.on(IpcCommand.MOD.MOD_DELETE, (event, response) => {
+ipcRenderer.on(IpcCommand.MOD.DELETE, (event, response) => {
     console.log(response)
+});
+
+$("#modAdd").on("click",() => {
+ // javascript file update
+ 
 });

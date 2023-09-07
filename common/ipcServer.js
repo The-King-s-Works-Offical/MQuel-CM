@@ -76,11 +76,16 @@ class IpcServer {
             const mods = new modManager().getAll();
             event.reply(CMD.ALL_MOD_DATA, mods)
         });
-        electron.ipcMain.on(CMD.MOD_DELETE, (event, request) => {
+        electron.ipcMain.on(CMD.DELETE, (event, request) => {
             console.log("Request Delete Mod :" + request)
             const response = new modManager().delete(request)
-            event.reply(CMD.MOD_DELETE,response)
-        })
+            console.log(response);
+            event.reply(CMD.DELETE,response)
+        });
+        electron.ipcMain.on(CMD.ADD, (event,request) => {
+            console.log("Request Add Mod :" + request)
+            alert("Add Mod Function");
+        });
     }
     music() {
         const CMD = IpcCommand.MUSIC;
