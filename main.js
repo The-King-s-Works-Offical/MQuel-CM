@@ -11,8 +11,9 @@ const {
 } = electron;
 
 // User Modules
-
 const mainApp = require("./Apps");
+
+
 process.on("loaded", () => {
   console.log("App Loaded");
   new configManager().init();

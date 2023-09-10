@@ -1,15 +1,18 @@
 "use strict";
 /*
-    file : ConfigManager.js
-    version : v1.0.0
+    File : ConfigManager.js
+    version : v1.0.1
 */
 const fs = require("fs");
 const path = require("path");
 
 class ConfigManager {
   constructor() {
+    this.result = "";
+  }
+  load() {
     try {
-      this.result = "";
+
       const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
       this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8");
       this._config = JSON.parse(this._data);
@@ -20,21 +23,14 @@ class ConfigManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log("⚙️ ConfigManager() ")
+        console.log("⚙️ ConfigManager().load() ")
       } else {
-        console.log(`⚙️ ConfigManager() Didn't work`);
+        console.log(`⚙️ ConfigManager().load() Didn't work`);
       }
     }
-
-
-
-
-
   }
   init() {
-
     try {
-      this.result = "";
       const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
       const discord = {
         rpc: true,
@@ -43,8 +39,8 @@ class ConfigManager {
         public_key: "178cfbd71c39f0eb34062749e50fa63125544e88f83a4f3c9414877557e01f47"
       }
       const paths = {
-        games: "C:/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2/",
-        document: `C:/Users/${process.env.username}/Documents/Euro Truck Simulator 2/`,
+        games: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Euro Truck Simulator 2\\",
+        document: `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`,
         application_data: path.join(process.env.APPDATA, JSON.parse(packageData).name),
       }
       const data = {
@@ -63,9 +59,6 @@ class ConfigManager {
         console.log(`⚙️ ConfigManager().init() Didn't work`);
       }
     }
-
-
-
   }
   getConfig() {
     return this._config;
