@@ -1,6 +1,6 @@
 /*
     file : RadioManager.js
-    version : v1.0.1
+    version : v1.0.2
 */
 const fs = require("fs");
 const path = require("path");
@@ -94,12 +94,40 @@ class RadioManager {
                 console.log(`📻 RadioManager().getCount() Didn't work`);
             }
         }
-    } 
+    }
     getAll() {
-        return this._liveStreamList;
+        try {
+            const dataReadStream = fs.readFileSync(__dirname + "/data.json", "utf-8");
+            const data = JSON.parse(dataReadStream).data;
+            this.result = true
+            return data
+        } catch (error) {
+            this.result = false
+            console.error(error);
+        } finally {
+            if (this.result) {
+                console.log("📻 RadioManager().getAll() ")
+            } else {
+                console.log(`📻 RadioManager().getAll() Didn't work`);
+            }
+        }
     }
-    delete(id) { 
-        console.log(this._data)
+    delete(id) {
     }
-} 
+    /*
+        try {
+
+            this.result = true
+        } catch (error) {
+            this.result = false
+            console.error(error);
+        } finally {
+            if (this.result) {
+                console.log("📻 RadioManager().METHOD_NAME() ")
+            } else {
+                console.log(`📻 RadioManager().METHOD_NAME() Didn't work`);
+            }
+        }
+    */
+}
 exports.RadioManager = RadioManager;
