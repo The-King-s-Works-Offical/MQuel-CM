@@ -102,18 +102,26 @@ class IpcServer {
         // Radio Commands 
 
         const CMD = IpcCommand.RADIO;
-
+        // Uploading all Radio information to the application
+        electron.ipcMain.on(CMD.LOAD, (event, request) => {
+            console.log("Request to upload all radio information to the application : " + request)
+            new radioManager().init()
+            
+        });
         // Radio ALL Count
         electron.ipcMain.on(CMD.COUNT, (event, request) => {
             console.log("Request All Radio Count : " + request)
-            const count = new radioManager().getCount();
+            const rM = new radioManager()
+            const count = rM.getCount()
+            //const count = new radioManager().getCount();
             event.reply(CMD.COUNT, count);
         });
 
         // Radio All Data
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
-            const liveStreams = new radioManager().getAll();
+            const rM = new radioManager();
+            const liveStreams = rM.getAll();
             if (liveStreams.length > 0) {
                 const result = {
                     status: 200,

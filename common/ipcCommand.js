@@ -25,6 +25,7 @@ const IpcCommand = {
     ALL_MUSIC_COUNT: "all-music-count",
   },
   RADIO: {
+    LOAD: "radio-load",
     COUNT: "radio-count",
     DATA: "radio-data"
 

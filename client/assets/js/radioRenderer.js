@@ -63,31 +63,33 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
     }
     if (code === 200) {
         response.data.forEach(live_stream => {
-            console.log(live_stream);
             html = `<div class="accordion-item">
-            <h2 class="accordion-header">
+            <h2 class="accordion-header d-flex align-items-center">
+              <div class="form-check form-switch ms-3">
+                <input class="form-check-input bg-dark" name="" id="" type="checkbox" value="checkedValue" aria-label="Text for screen reader">
+              </div>
               <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse"
                 data-bs-target="#flush-collapse${live_stream.index}" aria-expanded="false" aria-controls="flush-collapse${live_stream.index}">
                 <i class="fa-solid fa-radio me-3"></i> ${live_stream.name}
               </button>
+              
             </h2>
             <div id="flush-collapse${live_stream.index}" class="accordion-collapse collapse"
               data-bs-parent="#radio-list-accordionFlush">
               <div class="accordion-body">
-                 <table class="table w-50">
+                 <table class="table w-100">
+                    <tr>
+                        <th> ID : </th> <td> ${live_stream.id} </td>
+                        <th> Index : </th> <td> ${live_stream.index} </td>
+                    </tr>
                     <tr>
                         <th> Name : </th> <td> ${live_stream.name} </td>
                         <th> Type : </th> <td> ${live_stream.type} </td>
                     </tr>
                     <tr>
-                        <th> Name : </th> <td> ${live_stream.name} </td>
-                        
+                        <th> Language : </th> <td> ${live_stream.lang} </td>
+                        <th> Url : </th> <td> <a href="${live_stream.url}" target="_blank" alt="${live_stream.name}" title="${live_stream.name}"> ${live_stream.url}</td>
                     </tr>
-                    <tr>
-                        <th> Name : </th> <td> ${live_stream.name} </td>
-                    </tr>
-                     
-
                  </table>
               </div>
             </div>
@@ -97,4 +99,8 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
         // #radio-list-accordionFlush
 
     }
-})
+});
+
+const radioDeleteFunc = (event) => {
+    console.log(this.target);
+};
