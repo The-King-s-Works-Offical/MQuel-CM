@@ -1,6 +1,6 @@
 /*
     file : RadioManager.js
-    version : v1.0.2
+    version : v1.0.3
 */
 const fs = require("fs");
 const path = require("path");
