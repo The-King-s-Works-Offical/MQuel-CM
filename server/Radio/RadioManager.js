@@ -1,3 +1,7 @@
+/*
+    file : RadioManager.js
+    version : v1.0.0
+*/
 const fs = require("fs");
 const path = require("path");
 const ConfigManager = require("../Config/index");
@@ -6,7 +10,6 @@ class RadioManager {
     constructor() {
         try {
             this.result = "";
-            console.log("📻 RadioManager()")
             this._config = new ConfigManager();
             this._path = this._config.documentsPath.replaceAll("\\", "/");
 
@@ -79,7 +82,9 @@ class RadioManager {
         try {
             const dataReadStream = fs.readFileSync(__dirname + "/data.json", "utf-8");
             console.log(JSON.parse(dataReadStream));
+            const count = JSON.parse(dataReadStream).count;
             this.result = true
+            return count
         } catch (error) {
             this.result = false
             console.error(error);
