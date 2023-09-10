@@ -90,7 +90,7 @@ class RadioManager {
                 console.log(`📻 RadioManager().getCount() Didn't work`);
             }
         }
-    }
+    } 
     getAll() {
         return this._liveStreamList;
     }
