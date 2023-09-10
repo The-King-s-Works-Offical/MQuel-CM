@@ -94,7 +94,7 @@ class RadioManager {
     getAll() {
         return this._liveStreamList;
     }
-    delete(id) {
+    delete(id) { 
         console.log(this._data)
     }
 } 
