@@ -58,7 +58,7 @@ class mainWindow {
       const ipcServer = new IpcServer(mainWindow);
       
 
-      mainWindow.webContents.openDevTools();
+      //mainWindow.webContents.openDevTools();
 
     } catch (error) {
       console.error(error);
