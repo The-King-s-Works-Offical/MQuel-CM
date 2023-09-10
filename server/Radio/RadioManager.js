@@ -1,6 +1,6 @@
 /*
     file : RadioManager.js
-    version : v1.0.0
+    version : v1.0.1
 */
 const fs = require("fs");
 const path = require("path");
@@ -81,7 +81,6 @@ class RadioManager {
     getCount() {
         try {
             const dataReadStream = fs.readFileSync(__dirname + "/data.json", "utf-8");
-            console.log(JSON.parse(dataReadStream));
             const count = JSON.parse(dataReadStream).count;
             this.result = true
             return count
