@@ -14,7 +14,7 @@
     "winston": "^3.10.0"
   },
   "devDependencies": {
-    "electron": "^26.1.0",
+    "electron": "^26.2.0",
     "electron-log": "^4.4.8",
     "prettier": "^3.0.3"
   },
