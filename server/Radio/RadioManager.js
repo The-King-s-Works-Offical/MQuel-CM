@@ -97,5 +97,5 @@ class RadioManager {
     delete(id) {
         console.log(this._data)
     }
-}
+} 
 exports.RadioManager = RadioManager;
