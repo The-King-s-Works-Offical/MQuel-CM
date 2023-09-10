@@ -62,7 +62,7 @@ class RadioManager {
                 data: this._liveStreamList
             }
 
-            this.liveStreamsJsonPath = path.join(__dirname, "data.json");
+            this.liveStreamsJsonPath = path.join(process.env.APPDATA,"live_stream", "data.json");
             fs.writeFileSync(this.liveStreamsJsonPath, JSON.stringify(this._data))
             this.result = true
         } catch (error) {

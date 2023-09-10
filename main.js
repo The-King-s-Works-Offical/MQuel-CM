@@ -12,7 +12,10 @@ const {
 // User Modules
 
 const mainApp = require("./Apps");
-
+process.on("loaded", () => {
+  console.log("App Loaded");
+  console.log(process.env);
+})
 
 // Application keeps Error log
 process.on("uncaughtException", (error) => {

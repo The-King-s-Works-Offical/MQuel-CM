@@ -1,9 +1,9 @@
 {
-  "isSession": false,
-  "auth": "developer",
-  "discordRPC": true,
-  "discordClientId": "47953047587390485790",
-  "systemStartReady": false,
-  "gamesPath": "C:/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2/",
-  "documentsPath": "C:/Users/murse/Documents/Euro Truck Simulator 2/"
-}
+        "isSession": false,
+        "auth": "public",
+        "discordRPC": true,
+        "discordClientId": "47953047587390485790",
+        "systemStartReady": false,
+        "gamesPath": "C:/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2/",
+        "documentsPath": "C:/Users/murse/Documents/Euro Truck Simulator 2/"
+      }
