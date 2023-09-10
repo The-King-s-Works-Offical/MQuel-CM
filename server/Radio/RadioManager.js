@@ -1,6 +1,6 @@
 /*
     file : RadioManager.js
-    version : v1.0.2
+    version : v1.0.3
 */
 const fs = require("fs");
 const path = require("path");
@@ -40,10 +40,11 @@ class RadioManager {
                 }
 
                 else if (line.startsWith(" stream_data")) {
+
+
+                    const base_line = line;
                     line = line.split(": ");
                     let data = line[1].split("|");
-
-
                     const url = data[0].replace('"', '').trim();
                     const name = data[1].trim();
                     const type = data[2].trim();
@@ -52,7 +53,7 @@ class RadioManager {
                     const favorite = Number(data[5].replace('"', '').trim());
 
                     this._liveStreamList.push({
-                        id: index - 4, index, url, name, type, lang, bit, favorite
+                        id: index - 4, index, url, name, type, lang, bit, favorite, base_line
                     });
                 }
             });

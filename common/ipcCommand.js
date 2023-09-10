@@ -28,7 +28,6 @@ const IpcCommand = {
     LOAD: "radio-load",
     COUNT: "radio-count",
     DATA: "radio-data"
-
   },
   SCREENSHOT: {
     ALL_SCREENSHOT_COUNT: "all-screenshot-count",
