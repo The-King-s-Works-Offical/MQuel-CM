@@ -7,8 +7,7 @@ const modManager = require('../server/Mods');
 const musicManager = require('../server/Music');
 const radioManager = require('../server/Radio');
 const ScreenShotManager = require('../server/Screenshot');
-const { event } = require('jquery');
-const { request } = require('http');
+
 
 
 class IpcServer {

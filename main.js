@@ -4,6 +4,7 @@ const url = require("url");
 const path = require("path");
 const fs = require("fs");
 const electron = require("electron");
+const configManager = require("./server/Config")
 const {
   app,
   ipcMain
@@ -14,7 +15,7 @@ const {
 const mainApp = require("./Apps");
 process.on("loaded", () => {
   console.log("App Loaded");
-  console.log(process.env);
+  new configManager().init();
 })
 
 // Application keeps Error log
@@ -26,7 +27,7 @@ process.on("uncaughtException", (error) => {
 // Works when the application is ready
 app.on("ready", () => {
   new mainApp();
-  
+
 
 });
 
