@@ -6,13 +6,15 @@ class ConfigManager {
   constructor() {
 
     this.init()
-    this._data = fs.readFileSync(this._path, "utf8");
+    const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
+    this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8");
     this._config = JSON.parse(this._data);
 
     return this._config;
 
   }
   init() {
+    const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
     const discord = {
       rpc: true,
       application_id: 1132021187858419832,
@@ -21,15 +23,13 @@ class ConfigManager {
     }
     const paths = {
       games: "C:/Program Files (x86)/Steam/steamapps/common/Euro Truck Simulator 2/",
-      document: `C:/Users/${process.env.username}/Documents/Euro Truck Simulator 2/`
+      document: `C:/Users/${process.env.username}/Documents/Euro Truck Simulator 2/`,
+      application_data: path.join(process.env.APPDATA, JSON.parse(packageData).name),
     }
     const data = {
       discord, paths
     }
-
-
-    const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
-    fs.writeFileSync(path.join(process.env.APPDATA,JSON.parse(packageData).name,"config.json"), JSON.stringify(data));
+    fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(data));
 
   }
 

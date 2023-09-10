@@ -16,11 +16,11 @@ class IpcServer {
         this.window = window;
 
         this.toolbar();
-        this.profile();
-        this.mod();
-        this.music();
+        //this.profile();
+        //this.mod();
+        //this.music();
         this.radio();
-        this.screenshot();
+        //this.screenshot();
         //this.save();
         this.appLanguageLoader();
     }

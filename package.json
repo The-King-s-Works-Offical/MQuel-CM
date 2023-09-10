@@ -1,5 +1,5 @@
 {
-  "name": "mquel-content-manager",
+  "name": "mquel-cm",
   "version": "1.0.0",
   "description": "MQuel - ETS 2 - Content Manager",
   "main": "main.js",
