@@ -27,8 +27,6 @@ class mainWindow {
         contextIsolation: false,
       },
     });
-    mainWindow.once("focus", () => win.flashFrame(false));
-    mainWindow.flashFrame(true);
     mainWindow.loadURL(
       url.format({
         pathname: path.join(__dirname, "client/home.html"),

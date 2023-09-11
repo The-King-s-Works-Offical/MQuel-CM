@@ -22,6 +22,7 @@ process.on("loaded", () => {
 // Application keeps Error log
 process.on("uncaughtException", (error) => {
   const errorMessage = `Uncaught Exception:\n${error.stack || error}`;
+  console.error(errorMessage)
   fs.writeFileSync("crash.log", errorMessage, "utf-8");
 });
 

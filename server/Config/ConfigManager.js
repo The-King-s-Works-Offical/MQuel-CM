@@ -1,7 +1,7 @@
 "use strict";
 /*
     File : ConfigManager.js
-    version : v1.0.1
+    version : v1.0.2
 */
 const fs = require("fs");
 const path = require("path");

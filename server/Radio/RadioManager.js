@@ -12,7 +12,7 @@ class RadioManager {
         try {
             this.result = "";
             this._config = new ConfigManager();
-            this._path = this._config.documentsPath.replaceAll("\\", "/");
+            this._path = this._config.paths.document.replaceAll("\\", "/");
 
             this.result = true
         } catch (error) {
