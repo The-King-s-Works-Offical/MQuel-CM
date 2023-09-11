@@ -1,31 +1,32 @@
-"use strict";
+"use strict"
 /*
     File : ConfigManager.js
-    version : v1.0.2
+    version : v1.0.3
 */
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
 class ConfigManager {
   constructor() {
-    this.result = "";
+    this.result = ""
   }
   load() {
     try {
 
       const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
-      this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8");
-      this._config = JSON.parse(this._data);
-
+      this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8")
+      this._config = JSON.parse(this._data)
       this.result = true
+      console.log(this._config)
+      return this._config
     } catch (error) {
       this.result = false
-      console.error(error);
+      console.error(error)
     } finally {
       if (this.result) {
         console.log("⚙️ ConfigManager().load() ")
       } else {
-        console.log(`⚙️ ConfigManager().load() Didn't work`);
+        console.log(`⚙️ ConfigManager().load() Didn't work`)
       }
     }
   }
@@ -46,22 +47,22 @@ class ConfigManager {
       const data = {
         discord, paths
       }
-      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(data));
+      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(data))
 
       this.result = true
     } catch (error) {
       this.result = false
-      console.error(error);
+      console.error(error)
     } finally {
       if (this.result) {
         console.log("⚙️ ConfigManager().init() ")
       } else {
-        console.log(`⚙️ ConfigManager().init() Didn't work`);
+        console.log(`⚙️ ConfigManager().init() Didn't work`)
       }
     }
   }
   getConfig() {
-    return this._config;
+    return this._config
   }
 }
-exports.ConfigManager = ConfigManager;
+exports.ConfigManager = ConfigManager

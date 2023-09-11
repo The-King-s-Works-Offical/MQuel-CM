@@ -11,7 +11,8 @@ class RadioManager {
     constructor() {
         try {
             this.result = "";
-            this._config = new ConfigManager();
+            this._config = new ConfigManager().load();
+           
             this._path = this._config.paths.document.replaceAll("\\", "/");
 
             this.result = true
