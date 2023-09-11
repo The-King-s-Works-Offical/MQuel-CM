@@ -1,33 +1,14 @@
-"use strict";
+"use strict"
 /*
     File : ConfigManager.js
-    version : v1.0.2
+    version : v1.0.3
 */
-const fs = require("fs");
-const path = require("path");
+const fs = require("fs")
+const path = require("path")
 
 class ConfigManager {
   constructor() {
-    this.result = "";
-  }
-  load() {
-    try {
-
-      const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
-      this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8");
-      this._config = JSON.parse(this._data);
-
-      this.result = true
-    } catch (error) {
-      this.result = false
-      console.error(error);
-    } finally {
-      if (this.result) {
-        console.log("⚙️ ConfigManager().load() ")
-      } else {
-        console.log(`⚙️ ConfigManager().load() Didn't work`);
-      }
-    }
+    this.result = ""
   }
   init() {
     try {
@@ -41,27 +22,77 @@ class ConfigManager {
       const paths = {
         games: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Euro Truck Simulator 2\\",
         document: `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`,
-        application_data: path.join(process.env.APPDATA, JSON.parse(packageData).name),
+        application_file: path.join(process.env.APPDATA, JSON.parse(packageData).name),
       }
       const data = {
         discord, paths
       }
-      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(data));
+      this._config = data
+      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(this._config))
 
       this.result = true
     } catch (error) {
       this.result = false
-      console.error(error);
+      console.error(error)
     } finally {
       if (this.result) {
         console.log("⚙️ ConfigManager().init() ")
       } else {
-        console.log(`⚙️ ConfigManager().init() Didn't work`);
+        console.log(`⚙️ ConfigManager().init() Didn't work`)
       }
     }
   }
-  getConfig() {
-    return this._config;
+
+  load() {
+    try {
+
+      const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
+      this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8")
+      this._config = JSON.parse(this._data)
+      this.result = true
+    } catch (error) {
+      this.result = false
+      console.error(error)
+    } finally {
+      if (this.result) {
+        console.log("⚙️ ConfigManager().load() ")
+      } else {
+        console.log(`⚙️ ConfigManager().load() Didn't work`)
+      }
+    }
+  }
+
+  getPaths() {
+    try {
+      this.result = true
+      return this._config.paths
+    } catch (error) {
+      this.result = false
+      console.error(error)
+    } finally {
+      if (this.result) {
+        console.log("⚙️ ConfigManager().getPaths() ")
+      } else {
+        console.log(`⚙️ ConfigManager().getPaths() Didn't work`)
+      }
+    }
+
+  }
+  getDiscord() {
+    try {
+      this.result = true
+      return this._config.discord
+    } catch (error) {
+      this.result = false
+      console.error(error)
+    } finally {
+      if (this.result) {
+        console.log("⚙️ ConfigManager().getDiscord() ")
+      } else {
+        console.log(`⚙️ ConfigManager().getDiscord() Didn't work`)
+      }
+    }
+
   }
 }
-exports.ConfigManager = ConfigManager;
+exports.ConfigManager = ConfigManager
