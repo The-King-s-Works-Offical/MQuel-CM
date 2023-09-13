@@ -1,7 +1,6 @@
 "use strict"
 /*
-    File : ConfigManager.js
-    version : v1.0.3
+    File : ConfigManager.js Version : v1.0.4
 */
 const fs = require("fs")
 const path = require("path")
@@ -27,8 +26,8 @@ class ConfigManager {
       const data = {
         discord, paths
       }
-      this._config = data
-      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(this._config))
+      this.config = data
+      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(this.config))
 
       this.result = true
     } catch (error) {
@@ -46,8 +45,8 @@ class ConfigManager {
   load() {
     try {
 
-      const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
-      this._data = fs.readFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), "utf8")
+
+      this._data = fs.readFileSync(path.join(this.config.paths.application_file, "config.json"), "utf8")
       this._config = JSON.parse(this._data)
       this.result = true
     } catch (error) {
