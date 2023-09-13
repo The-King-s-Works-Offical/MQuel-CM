@@ -1,6 +1,6 @@
 "use strict";
 /*
- * File : Main.js Version : v1.0.1
+ * File : Main.js Version : v1.0.2
  */
 // System Modules
 const url = require("url");
@@ -21,7 +21,6 @@ process.on("loaded", () => {
   console.log("App Loaded");
   const cM = new configManager();
   cM.init();
-  cM.load();
 })
 
 // Application keeps Error log
