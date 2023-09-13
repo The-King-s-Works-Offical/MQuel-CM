@@ -1,7 +1,6 @@
 "use strict";
 /*
-    file : RadioManager.js
-    version : v1.0.4
+    file : RadioManager.js Version : v1.0.5
 */
 const fs = require("fs");
 const path = require("path");
