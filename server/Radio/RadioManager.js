@@ -1,7 +1,7 @@
 "use strict";
 /*
     file : RadioManager.js
-    version : v1.0.3
+    version : v1.0.4
 */
 const fs = require("fs");
 const path = require("path");
@@ -9,11 +9,12 @@ const ConfigManager = require("../Config/index");
 
 class RadioManager {
     constructor() {
+        this.result = "";
+    }
+
+    load() {
         try {
-            this.result = "";
-            this._config = new ConfigManager().load();
-           
-            this._path = this._config.paths.document.replaceAll("\\", "/");
+
 
             this.result = true
         } catch (error) {
@@ -35,13 +36,14 @@ class RadioManager {
         try {
             this._liveStreamList = [];
             this._liveStreamCount = 0;
+            this._paths = new ConfigManager().getPaths();
+            this._path = this._paths.document.replaceAll("\\", "/");
+
             const live_streams_file_data = fs.readFileSync(path.join(this._path, "live_streams.sii"), "utf-8");
             live_streams_file_data.split("\n").forEach((line, index) => {
                 if (index == 3) {
                     this._liveStreamCount = line.split(": ")[1];
-                }
-
-                else if (line.startsWith(" stream_data")) {
+                } else if (line.startsWith(" stream_data")) {
 
 
                     const base_line = line;
@@ -54,7 +56,7 @@ class RadioManager {
                     const bit = data[4].trim();
                     const favorite = Number(data[5].replace('"', '').trim());
 
-                    this._liveStreamList.push({
+                     this._liveStreamList.push({
                         id: index - 4, index, url, name, type, lang, bit, favorite, base_line
                     });
                 }
@@ -63,8 +65,7 @@ class RadioManager {
                 count: this._liveStreamCount,
                 data: this._liveStreamList
             }
-
-            this.liveStreamsJsonPath = path.join(process.env.APPDATA, "live_stream", "data.json");
+            this.liveStreamsJsonPath = path.join(this._paths.application_file, "live_stream", "data.json");
             fs.writeFileSync(this.liveStreamsJsonPath, JSON.stringify(this._data))
             this.result = true
         } catch (error) {
