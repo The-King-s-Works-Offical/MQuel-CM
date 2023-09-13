@@ -1,6 +1,6 @@
 "use strict"
 /*
-    File : ConfigManager.js Version : v1.0.4
+    File : ConfigManager.js Version : v1.0.5
 */
 const fs = require("fs")
 const path = require("path")
@@ -8,9 +8,11 @@ const path = require("path")
 class ConfigManager {
   constructor() {
     this.result = ""
+
   }
   init() {
     try {
+
       const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
       const discord = {
         rpc: true,
@@ -26,35 +28,39 @@ class ConfigManager {
       const data = {
         discord, paths
       }
-      this.config = data
-      fs.writeFileSync(path.join(process.env.APPDATA, JSON.parse(packageData).name, "config.json"), JSON.stringify(this.config))
-
+      const config = data
+      // C:\Users\%user%\AppData\Roaming\mquel-cm/config.json
+      fs.writeFileSync(path.join(this.config.paths.application_file, "config.json"), JSON.stringify(config))
       this.result = true
     } catch (error) {
+
       this.result = false
       console.error(error)
+
     } finally {
+
       if (this.result) {
         console.log("⚙️ ConfigManager().init() ")
       } else {
         console.log(`⚙️ ConfigManager().init() Didn't work`)
       }
+
     }
   }
 
   load() {
     try {
-
-
       this._data = fs.readFileSync(path.join(this.config.paths.application_file, "config.json"), "utf8")
-      this._config = JSON.parse(this._data)
+      const configFileData = JSON.parse(this._data)
       this.result = true
+      this._config = configFileData
     } catch (error) {
       this.result = false
       console.error(error)
     } finally {
       if (this.result) {
         console.log("⚙️ ConfigManager().load() ")
+        console.log("Load => ", this._config)
       } else {
         console.log(`⚙️ ConfigManager().load() Didn't work`)
       }
@@ -64,7 +70,7 @@ class ConfigManager {
   getPaths() {
     try {
       this.result = true
-      return this._config.paths
+      return "a"
     } catch (error) {
       this.result = false
       console.error(error)
