@@ -1,5 +1,9 @@
 Uncaught Exception:
-ReferenceError: win is not defined
-    at BrowserWindow.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\Apps.js:30:40)
-    at Object.onceWrapper (node:events:628:26)
-    at BrowserWindow.emit (node:events:525:35)
+ReferenceError: packageData is not defined
+    at new ConfigManager (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\server\Config\ConfigManager.js:11:67)
+    at new RadioManager (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\server\Radio\RadioManager.js:11:19)
+    at IpcMainImpl.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\common\ipcServer.js:108:13)
+    at IpcMainImpl.emit (node:events:513:28)
+    at WebContents.<anonymous> (node:electron/js2c/browser_init:2:89074)
+    at WebContents.emit (node:events:513:28)
+    at WebContents.callbackTrampoline (node:internal/async_hooks:130:17)
