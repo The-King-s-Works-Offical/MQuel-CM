@@ -1,6 +1,6 @@
 "use strict"
 /*
-    File : ConfigManager.js Version : v1.0.5
+    File : ConfigManager.js Version : v1.0.6
 */
 const fs = require("fs")
 const path = require("path")
@@ -8,12 +8,15 @@ const path = require("path")
 class ConfigManager {
   constructor() {
     this.result = ""
-
+    const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
+    this._baseAppPath = path.join(process.env.APPDATA, JSON.parse(packageData).name)
+    this._baseConfigPath = path.join(this._baseAppPath, "config.json")
+    this._config = ""
   }
   init() {
     try {
 
-      const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
+
       const discord = {
         rpc: true,
         application_id: 1132021187858419832,
@@ -23,14 +26,14 @@ class ConfigManager {
       const paths = {
         games: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Euro Truck Simulator 2\\",
         document: `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`,
-        application_file: path.join(process.env.APPDATA, JSON.parse(packageData).name),
+        application_file: this._baseAppPath,
       }
       const data = {
         discord, paths
       }
       const config = data
       // C:\Users\%user%\AppData\Roaming\mquel-cm/config.json
-      fs.writeFileSync(path.join(this.config.paths.application_file, "config.json"), JSON.stringify(config))
+      fs.writeFileSync(this._baseConfigPath, JSON.stringify(config))
       this.result = true
     } catch (error) {
 
@@ -50,7 +53,7 @@ class ConfigManager {
 
   load() {
     try {
-      this._data = fs.readFileSync(path.join(this.config.paths.application_file, "config.json"), "utf8")
+      this._data = fs.readFileSync(this._baseConfigPath, "utf8")
       const configFileData = JSON.parse(this._data)
       this.result = true
       this._config = configFileData
@@ -60,7 +63,6 @@ class ConfigManager {
     } finally {
       if (this.result) {
         console.log("⚙️ ConfigManager().load() ")
-        console.log("Load => ", this._config)
       } else {
         console.log(`⚙️ ConfigManager().load() Didn't work`)
       }
@@ -70,7 +72,7 @@ class ConfigManager {
   getPaths() {
     try {
       this.result = true
-      return "a"
+      return this._config.paths
     } catch (error) {
       this.result = false
       console.error(error)
