@@ -2,11 +2,12 @@ const electron = require('electron');
 const fs = require('fs');
 const path = require('path');
 const IpcCommand = require("./ipcCommand");
-const profileManager = require('../server/ProfileManager')
-const modManager = require('../server/Mods');
-const musicManager = require('../server/Music');
+//const profileManager = require('../server/ProfileManager')
+//const modManager = require('../server/Mods');
+//const musicManager = require('../server/Music');
 const radioManager = require('../server/Radio');
-const ScreenShotManager = require('../server/Screenshot');
+
+//const ScreenShotManager = require('../server/Screenshot');
 
 
 
