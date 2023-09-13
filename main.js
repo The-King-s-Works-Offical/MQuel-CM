@@ -1,13 +1,13 @@
 "use strict";
 /*
- * File : Main.js Version : v1.0.2
+ * File : Main.js Version : v1.0.3
  */
 // System Modules
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
 const electron = require("electron");
-const configManager = require("./server/Config")
+const processManager = require("./process")
 const {
   app,
   ipcMain
@@ -19,8 +19,8 @@ const mainApp = require("./Apps");
 
 process.on("loaded", () => {
   console.log("App Loaded");
-  const cM = new configManager();
-  cM.init();
+  new processManager().loaded()
+
 })
 
 // Application keeps Error log
