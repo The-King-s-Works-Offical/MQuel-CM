@@ -1,6 +1,6 @@
 "use strict"
 /*
-    file : RadioManager.js Version : v1.0.6
+    File : RadioManager.js Version : v1.0.7
 */
 const fs = require("fs")
 const path = require("path")
@@ -9,7 +9,7 @@ const ConfigManager = require("../Config/index")
 class RadioManager {
     constructor() {
         this.cM = new ConfigManager()
-
+        this.cM.load();
         this.result = ""
     }
 
@@ -38,9 +38,7 @@ class RadioManager {
             this._liveStreamList = []
             this._liveStreamCount = 0
             this._paths = this.cM.getPaths()
-            console.log(this._paths)
-            this._path = this._paths.document.replaceAll("\\", "/")
-            console.log(this._path)
+            this._path = this._paths.document
             const live_streams_file_data = fs.readFileSync(path.join(this._path, "live_streams.sii"), "utf-8")
             live_streams_file_data.split("\n").forEach((line, index) => {
                 if (index === 3) {
@@ -64,10 +62,11 @@ class RadioManager {
                 }
             })
             this._data = {
-                count: this._liveStreamCount,
+                count: Number(this._liveStreamCount),
                 data: this._liveStreamList
             }
-            this.liveStreamsJsonPath = path.join(this._paths.application_file, "live_stream", "data.json")
+            fs.mkdirSync(path.join(this._paths.application_file, "Live_stream"), {recursive: true})
+            this.liveStreamsJsonPath = path.join(this._paths.application_file, "Live_stream", "data.json")
             fs.writeFileSync(this.liveStreamsJsonPath, JSON.stringify(this._data))
             this.result = true
         } catch (error) {
