@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=7" http-equiv="X-UA-Compatible"/>
+    <title>${page-title}</title>
+    <meta name="description" content="">
+
+    <!-- // Project Css -->
+    <link rel="stylesheet" href="../assets/css/root.css">
+    <link href="../assets/css/input.css" rel="stylesheet"/>
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/> <!-- // Bootstrap v5.3.1 -->
+
+    <!--//Public Css-->
+
+
+    <!-- // Browser Deveploment Css -->
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" rel="stylesheet"/>
+
+    <!-- Custom Style Settings -->
+    <style>
+
+    </style>
+</head>
+<body id="root" class="figure figure-caption overflow-hidden" data-bs-theme="light">
+<!-- Windows Toolbar  -->
+<div id="windowToolbar">
+    <nav class="navbar navbar-expand bg-dark " style="height: 50px">
+        <ul class="nav navbar-nav mx-auto" style="width: 80%">
+            <img src="../../icon.ico" class="me-2" width="20">
+            <li class="nav-item bg-transparent text-uppercase" id="page-title">${page-title}</li>
+        </ul>
+        <ul class="nav navbar-nav ms-auto px-4">
+            <!---
+            <li class="nav-item">
+
+                <button class="nav-link hide" id="modalBarCommands">
+                    <i class="fa-solid fa-bars text-white"></i>
+                </button>
+
+            </li>
+            -->
+            <li class="nav-item">
+                <button class="nav-link " onclick="minimizeModal()" id="modalMinimize">
+                    <i class="fa-solid fa-window-minimize text-white"></i>
+                </button>
+            </li>
+            <!--
+            <li class="nav-item">
+                <button class="nav-link disabled" onclick="maximizeModal()" id="modalRestore">
+                    <i class="fa-solid fa-window-restore text-white"></i>
+                </button>
+            </li>
+            -->
+            <li class="nav-item">
+                <button class="nav-link" onclick="closeModal()" id="modalClose">
+                    <i class="fa-solid fa-window-close text-white"> </i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Windows Toolbar End -->
+
+<div class="container-fluid  border-top ">
+    <div class="row">
+        <div class="col m-3">
+            <div class="card">
+                <div class="card-header" id="form-header-label">
+                    ${form-header-label}
+                </div>
+                <div class="card-body">
+                    <form action="">
+                        <table class="table">
+                            <tbody>
+                            <td>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">URL</span>
+                                    <input type="text" class="form-control" placeholder="https://name.fm/"
+                                           aria-label="URL"
+                                           aria-describedby="basic-addon1">
+                                </div>
+                            </td>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Scripts -->
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/popper.min.js"></script>
+<script src="../assets/js/modalRadioRenderer.js"></script>
+</body>
+</html>

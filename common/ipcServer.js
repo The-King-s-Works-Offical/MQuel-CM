@@ -6,6 +6,7 @@ const IpcCommand = require("./ipcCommand");
 //const modManager = require('../server/Mods');
 //const musicManager = require('../server/Music');
 const radioManager = require('../server/Radio');
+const {request} = require("express");
 
 //const ScreenShotManager = require('../server/Screenshot');
 
@@ -50,6 +51,7 @@ class IpcServer {
         });
         electron.ipcMain.on(IpcCommand.WINDOW_CLOSE, (event, request) => {
             this.window.close();
+            electron.app.quit();
         });
     }
 
@@ -98,29 +100,28 @@ class IpcServer {
         })
     }
     radio() {
-
-        // Radio Commands 
+        let addRadio
+        // Radio Commands
 
         const CMD = IpcCommand.RADIO;
-        // Uploading all Radio information to the application
-        electron.ipcMain.on(CMD.LOAD, (event, request) => {
-            console.log("Request to upload all radio information to the application : " + request)
-            new radioManager().init()
 
-        });
         // Radio ALL Count
         electron.ipcMain.on(CMD.COUNT, (event, request) => {
             console.log("Request All Radio Count : " + request)
-            const count = new radioManager().getCount()
+            const rM = new radioManager()
+            rM.load();
+            let res = rM.getCount();
+            event.reply(CMD.COUNT, res);
 
-            //const count = new radioManager().getCount();
-            event.reply(CMD.COUNT, count);
         });
 
         // Radio All Data
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
-            const liveStreams = new radioManager().getAll();
+            const rM = new radioManager()
+            rM.load();
+            let res = rM.getAll();
+            const liveStreams = res
             if (liveStreams.length > 0) {
                 const result = {
                     status: 200,
@@ -135,9 +136,66 @@ class IpcServer {
                 }
                 event.reply(CMD.DATA, result)
                 electron.dialog.showErrorBox("Upload live stream", result.message)
-
             }
         });
+
+        // Radio Add
+        electron.ipcMain.on(CMD.ADD, (event, request) => {
+            console.log("Request to add a radio: ", request)
+            console.log(addRadio)
+            if (addRadio === undefined) {
+                addRadio = new electron.BrowserWindow({
+                    width: 800,
+                    height: 600,
+                    frame: false,
+                    modal: true,
+                    resizable: true,
+                    visualEffectState: "followWindow",
+                    icon: path.join(process.cwd(), "icon.ico"),
+                    webPreferences: {
+                        preload: path.join(process.cwd(), 'preload.js'),
+                        nodeIntegration: true,
+                        contextIsolation: false,
+                    },
+                    autoHideMenuBar: true,
+                })
+
+
+                addRadio.loadFile(path.join(process.cwd(), "client", "modal", "add_radio.html"))
+
+                addRadio.show();
+            } else {
+                electron.dialog.showMessageBoxSync({
+                    title: "Radio Add Form",
+                    message: "Radio add form open !",
+                    detail: "Make sure the radio insertion form is open | make sure the window is closed !",
+                    type: "warning"
+                })
+            }
+
+
+        })
+        electron.ipcMain.on(CMD.MODAL.CLOSE, (event, request) => {
+            console.log("Request Radio Add Modal to close : ", request)
+            addRadio.close();
+            addRadio = null;
+        });
+        electron.ipcMain.on(CMD.MODAL.MAXIMIZE, (event, request) => {
+            console.log("Request Radio Add Modal to maximize : ", request)
+            if (!addRadio.isMaximized()) {
+                setTimeout(() => {
+                    addRadio.maximize();
+                }, 500);
+            } else {
+                setTimeout(() => {
+                    addRadio.restore();
+                }, 500);
+            }
+        })
+        electron.ipcMain.on(CMD.MODAL.MINIMIZE, (event, request) => {
+            console.log("Request Radio Add Modal to minimize : ", request)
+            addRadio.minimize();
+        })
     }
     screenshot() {
         const CMD = IpcCommand.SCREENSHOT;

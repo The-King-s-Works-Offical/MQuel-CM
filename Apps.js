@@ -19,7 +19,7 @@ class mainWindow {
       minWidth: 1185,
       minHeight: 630,
       frame: false,
-      icon: __dirname + "icon.ico",
+      icon: path.join(process.cwd(), "icon.ico"),
       title: "MQuel | Content Manager ",
       webPreferences: {
         preload: path.join(__dirname, "preload.js"),

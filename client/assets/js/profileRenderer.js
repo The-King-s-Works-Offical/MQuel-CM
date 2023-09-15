@@ -5,7 +5,6 @@ const {
 const path = require("path");
 const IpcCommand = require("../common/ipcCommand");
 const $ = require("jquery");
-const { log } = require("console");
 
 console.table(IpcCommand)
 

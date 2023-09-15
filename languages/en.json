@@ -41,8 +41,11 @@
         "radio-table-file-label" : "File",
         "radio-table-filePath-label" : "File Path",
         "radio-table-actions-label"  : "Actions",
-        "radio-table-radioDeleteBtn-label" : "Delete",
-        "radio-table-radioAddBtn-label" : "Add"
+      "radio-table-radioDeleteBtn-label": "Delete"
+    },
+  "add_radio": {
+    "title": "Radio Add Form ",
+    "description": "Radio Add Form Page"
     },
     "profile": {
         "title" : "Profiles",

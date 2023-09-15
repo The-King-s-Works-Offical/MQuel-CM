@@ -10,36 +10,22 @@ class RadioManager {
     constructor() {
         this.cM = new ConfigManager()
         this.cM.load();
+        this._paths = this.cM.getPaths()
+        this._path = this._paths.document
         this.result = ""
-    }
-
-    load() {
-        try {
-
-
-            this.result = true
-        } catch (error) {
-            this.result = false
-            console.error(error)
-        } finally {
-            if (this.result) {
-                console.log("📻 RadioManager().load() ")
-            } else {
-                console.log(`📻 RadioManager().load() Didn't work`)
-            }
-        }
-
-
-
+        this._baseLiveStreamsFile = path.join(this._path, "live_streams.sii")
+        this._appBaseLiveStreamsDirectory = path.join(this._paths.application_file, "Live_Stream")
+        this._liveStreamsJsonPath = path.join(this._appBaseLiveStreamsDirectory, "data.json")
+        this._baseData = []
     }
 
     init() {
         try {
             this._liveStreamList = []
             this._liveStreamCount = 0
-            this._paths = this.cM.getPaths()
-            this._path = this._paths.document
-            const live_streams_file_data = fs.readFileSync(path.join(this._path, "live_streams.sii"), "utf-8")
+
+            const live_streams_file_data = fs.readFileSync(this._baseLiveStreamsFile, "utf-8")
+            let id_count = 0
             live_streams_file_data.split("\n").forEach((line, index) => {
                 if (index === 3) {
                     this._liveStreamCount = line.split(": ")[1]
@@ -56,18 +42,20 @@ class RadioManager {
                     const bit = data[4].trim()
                     const favorite = Number(data[5].replace('"', '').trim())
 
-                     this._liveStreamList.push({
-                        id: index - 4, index, url, name, type, lang, bit, favorite, base_line
-                     })
+                    this._liveStreamList.push({
+                        id: id_count, index, url, name, type, lang, bit, favorite, base_line
+                    })
+                    id_count += 1
                 }
             })
-            this._data = {
+            const data = {
                 count: Number(this._liveStreamCount),
                 data: this._liveStreamList
             }
-            fs.mkdirSync(path.join(this._paths.application_file, "Live_stream"), {recursive: true})
-            this.liveStreamsJsonPath = path.join(this._paths.application_file, "Live_stream", "data.json")
-            fs.writeFileSync(this.liveStreamsJsonPath, JSON.stringify(this._data))
+            fs.mkdirSync(this._appBaseLiveStreamsDirectory, {recursive: true})
+
+            fs.writeFileSync(this._liveStreamsJsonPath, JSON.stringify(data))
+            this._baseData = this._data
             this.result = true
         } catch (error) {
             this.result = false
@@ -83,12 +71,34 @@ class RadioManager {
 
     }
 
+    load() {
+        try {
+
+            const liveStreams = fs.readFileSync(this._liveStreamsJsonPath, "utf-8")
+            this._baseData = JSON.parse(liveStreams)
+
+            this.result = true
+        } catch (error) {
+            this.result = false
+            console.error(error)
+        } finally {
+            if (this.result) {
+                console.log("📻 RadioManager().load() ")
+            } else {
+                console.log(`📻 RadioManager().load() Didn't work`)
+            }
+        }
+
+
+    }
+
+
     getCount() {
         try {
-            const dataReadStream = fs.readFileSync(__dirname + "/data.json", "utf-8")
-            const count = JSON.parse(dataReadStream).count
+            const count = this._baseData.count
             this.result = true
             return count
+
         } catch (error) {
             this.result = false
             console.error(error)
@@ -102,10 +112,8 @@ class RadioManager {
     }
     getAll() {
         try {
-            const dataReadStream = fs.readFileSync(__dirname + "/data.json", "utf-8")
-            const data = JSON.parse(dataReadStream).data
             this.result = true
-            return data
+            return this._baseData.data
         } catch (error) {
             this.result = false
             console.error(error)
@@ -117,7 +125,8 @@ class RadioManager {
             }
         }
     }
-    delete(id) {
+
+    add(id) {
     }
     /*
         try {

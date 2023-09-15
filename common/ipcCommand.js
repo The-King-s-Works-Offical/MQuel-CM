@@ -12,29 +12,34 @@ const IpcCommand = {
   LOAD_PROFILE: "load-profile",
   GET_LANG: "get-language",
   PROFILE: {
-    ALL_PROFILE_COUNT: "all-profile-count",
-    ALL_PROFILE_DATA: "all-profile"
+      ALL_PROFILE_COUNT: "all-profile-count", ALL_PROFILE_DATA: "all-profile", MODAL: {
+          MINIMIZE: "modal-minimize", MAXIMIZE: "modal-maximize", CLOSE: "modal-close",
+      }
+
   },
   MOD: {
-    ALL_MOD_COUNT: "all-mod-count",
-    ALL_MOD_DATA: "all-mod",
-    DELETE: "delete",
-    ADD: "add"
+      COUNT: "mod-count", DATA: "mod-data", DELETE: "mod-delete", ADD: "mod-add", MODAL: {
+          MINIMIZE: "modal-minimize", MAXIMIZE: "modal-maximize", CLOSE: "modal-close",
+      }
   },
   MUSIC: {
-    ALL_MUSIC_COUNT: "all-music-count",
+      COUNT: "music-count", MODAL: {
+          MINIMIZE: "modal-minimize", MAXIMIZE: "modal-maximize", CLOSE: "modal-close",
+      }
   },
   RADIO: {
-    LOAD: "radio-load",
-    COUNT: "radio-count",
-    DATA: "radio-data"
+      LOAD: "radio-load", COUNT: "radio-count", DATA: "radio-data", ADD: "radio-add", MODAL: {
+          MINIMIZE: "modal-minimize", MAXIMIZE: "modal-maximize", CLOSE: "modal-close",
+      }
+
   },
   SCREENSHOT: {
     ALL_SCREENSHOT_COUNT: "all-screenshot-count",
   },
   SAVE: {
     ALL_SAVE_COUNT: "all-save-count",
-  }
+  },
+
 
 };
 

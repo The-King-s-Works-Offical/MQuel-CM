@@ -102,7 +102,6 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
     }
 });
 
-const radioDeleteFunc = (event) => {
-    console.log(this.target);
-
+const addRadio = (event) => {
+    ipcRenderer.send(IpcCommand.RADIO.ADD, true)
 };

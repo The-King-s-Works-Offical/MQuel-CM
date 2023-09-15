@@ -41,3 +41,6 @@ app.on("ready", () => {
 app.on("window-all-closed", () => {
   app.quit();
 });
+app.on("quit", () => {
+    app.quit();
+})

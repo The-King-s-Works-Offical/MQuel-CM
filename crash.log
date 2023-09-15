@@ -1,8 +1,6 @@
 Uncaught Exception:
-ReferenceError: packageData is not defined
-    at new ConfigManager (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\server\Config\ConfigManager.js:11:67)
-    at new RadioManager (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\server\Radio\RadioManager.js:11:19)
-    at IpcMainImpl.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\common\ipcServer.js:108:13)
+TypeError: Cannot read properties of null (reading 'isMaximized')
+    at IpcMainImpl.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\common\ipcServer.js:175:27)
     at IpcMainImpl.emit (node:events:513:28)
     at WebContents.<anonymous> (node:electron/js2c/browser_init:2:89074)
     at WebContents.emit (node:events:513:28)
