@@ -7,6 +7,7 @@ const IpcCommand = require("./ipcCommand")
 //const musicManager = require('../server/Music')
 const radioManager = require('../server/Radio')
 const {request} = require("express")
+const {RadioManager} = require("../server/Radio/RadioManager");
 
 //const ScreenShotManager = require('../server/Screenshot')
 
@@ -174,8 +175,6 @@ class IpcServer {
                 title: "Add Radio", message: reqQuestion, buttons: ["Back", "Okay"], type: "question"
             }).then((result) => {
                 if (result.response === 1) {
-                    addRadio.close()
-                    addRadio = undefined
                     event.reply(CMD.MODAL.FORM.QUESTION, {
                         status: 200,
                         statusMessage: "OK",
@@ -197,7 +196,9 @@ class IpcServer {
          * Radio Modal Dialog Form Insert - Start
          */
         electron.ipcMain.on(CMD.MODAL.FORM.INSERT, (event, request) => {
-            console.log("")
+            console.log("Request to add radio to the system : " + true)
+            const rM = new RadioManager();
+            rM.add(request)
         })
     }
 
@@ -205,6 +206,7 @@ class IpcServer {
     }
 
     mod() {
+
     }
 
     music() {

@@ -43,7 +43,7 @@ class RadioManager {
                     const favorite = Number(data[5].replace('"', '').trim())
 
                     this._liveStreamList.push({
-                        id: id_count, index, url, name, type, lang, bit, favorite, base_line
+                        id: id_count, index, file_line_index: index + 1, url, name, type, lang, bit, favorite, base_line
                     })
                     id_count += 1
                 }
@@ -55,7 +55,7 @@ class RadioManager {
             fs.mkdirSync(this._appBaseLiveStreamsDirectory, {recursive: true})
 
             fs.writeFileSync(this._liveStreamsJsonPath, JSON.stringify(data))
-            this._baseData = this._data
+            this._baseData = data
             this.result = true
         } catch (error) {
             this.result = false
@@ -126,7 +126,26 @@ class RadioManager {
         }
     }
 
-    add(id) {
+    add(radioData) {
+        let result
+        try {
+            this.load()
+            result = this._baseData
+            result = result.data[result.count - 1]
+            this.result = true
+
+        } catch (error) {
+            this.result = false
+            console.error(error)
+        } finally {
+            if (this.result) {
+                console.log("📻 RadioManager().add() ")
+                console.log(result)
+
+            } else {
+                console.log(`📻 RadioManager().add() Didn't work`)
+            }
+        }
     }
     /*
         try {

@@ -76,7 +76,7 @@
             <div class="card border-0">
 
                 <div class="card-body">
-                    <form method="post" id="radio-add-form">
+                    <form method="dialog" id="radio-add-form" onsubmit="formSubmit()">
                         <table class="table table-borderless">
                             <tr class="border-bottom">
                                 <th colspan="3" class="card-header" id="form-header-label"> ${form-header-label}</th>
@@ -87,7 +87,7 @@
                                         <span class="input-group-text text-uppercase bg-transparent "
                                               id="form-url-label">${form-url-label}</span>
                                         <input type="url" class="form-control " name="radio-url" id="radio-url"
-                                               placeholder="https://name.fm/" required>
+                                               placeholder="https://name.fm/" value="https://name.fm/">
                                     </div>
                                 </td>
                                 <td colspan="3">
@@ -95,7 +95,7 @@
                                         <span class="input-group-text text-uppercase bg-transparent  "
                                               id="form-name-label">${form-name-label}</span>
                                         <input type="text" class="form-control" id="radio-name" name="radio-name"
-                                               placeholder="Name" required/>
+                                               placeholder="Name"/>
                                     </div>
                                 </td>
 
@@ -106,7 +106,7 @@
                                         <span class="input-group-text text-uppercase bg-transparent "
                                               id="form-type-label">${form-type-label}</span>
                                         <input type="text" class="form-control " name="radio-type" id="radio-type"
-                                               placeholder="Type" required>
+                                               placeholder="Type">
                                     </div>
                                 </td>
                                 <td colspan="3">
@@ -115,7 +115,7 @@
                                               id="form-language-label">${form-language-label}</span>
                                         <input type="text" class="form-control" id="radio-language"
                                                name="radio-language"
-                                               placeholder="Language" required/>
+                                               placeholder="Language"/>
                                     </div>
                                 </td>
 
@@ -126,7 +126,7 @@
                                         <span class="input-group-text text-uppercase bg-transparent "
                                               id="form-bit-label">${form-bit-label}</span>
                                         <input type="number" class="form-control " name="radio-bit" id="radio-bit"
-                                               placeholder="128" required>
+                                               placeholder="128">
                                     </div>
                                 </td>
                                 <td colspan="3">
@@ -135,7 +135,7 @@
                                               id="form-favorites-label">${form-favorites-label}</span>
                                         <input type="number" class="form-control" id="radio-favorites"
                                                name="radio-favorites"
-                                               placeholder="Favorite = 0 / 1" min="0" max="1" value="0" required/>
+                                               placeholder="Favorite = 0 / 1" min="0" max="1" value="0"/>
                                     </div>
                                 </td>
                             </tr>
@@ -143,11 +143,10 @@
                                 <td></td>
                                 <td colspan="4" class="d-flex justify-content-end w-100">
                                     <button type="submit" class="w-25 btn btn-success btn-sm border-0"
-                                            onclick="formSubmit()" id="form-submit-button"> ${form-submit-button}
+                                            id="form-submit-button"> ${form-submit-button}
                                     </button>
-                                    <button type="reset" class="w-25 btn btn-danger btn-sm border-0
-"
-                                            onclick="formReset()" id="form-reset-button"> ${form-reset-button}
+                                    <button type="reset" class="w-25 btn btn-danger btn-sm border-0"
+                                            id="form-reset-button"> ${form-reset-button}
                                     </button>
                                 </td>
 

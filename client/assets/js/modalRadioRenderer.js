@@ -32,17 +32,24 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
 const minimizeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.MINIMIZE, true)
 const closeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
 
-const formSubmit = () => {
+const formSubmit = (event) => {
+
     const question = "Should the entered information be added to the radio system ?"
     ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.QUESTION, question);
     ipcRenderer.on(RADIO_COMMAND.MODAL.FORM.QUESTION, (event, response) => {
+        console.log(response)
         if (response.status === 200) {
+            console.log("Status : ", 200)
             const formData = $("#radio-add-form").serializeArray()
             ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.INSERT, {
                 ...response, data: formData
             })
+            setTimeout(() => {
+                ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
+            }, 2500)
         }
     })
+    event.preventDefault();
 }
 const formReset = () => {
     console.log(Notification.isSupported())
