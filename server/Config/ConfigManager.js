@@ -8,9 +8,11 @@ const path = require("path")
 class ConfigManager {
   constructor() {
     this.result = ""
-    const packageData = fs.readFileSync(path.join(__dirname, "../../package.json"), "utf-8")
-    this._baseAppPath = path.join(process.env.APPDATA, JSON.parse(packageData).name)
-    this._baseConfigPath = path.join(this._baseAppPath, "config.json")
+      const packageData = fs.readFileSync(path.join(process.env.npm_package_json), "utf-8")
+      this._gameDocuments = `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`
+      this._baseApplicationRoamingFile = path.join(process.env.APPDATA, JSON.parse(packageData).name)
+      this._baseConfigPath = path.join(this._baseApplicationRoamingFile, "config.json")
+      this._baseApplicationMainFile = process.mainModule.path
     this._config = ""
   }
   init() {
@@ -24,9 +26,28 @@ class ConfigManager {
         public_key: "178cfbd71c39f0eb34062749e50fa63125544e88f83a4f3c9414877557e01f47"
       }
       const paths = {
-        games: "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Euro Truck Simulator 2\\",
-        document: `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`,
-        application_file: this._baseAppPath,
+          document: this._gameDocuments,
+          application_file: this._baseApplicationRoamingFile,
+          application_base_file: this._baseApplicationMainFile,
+          liveStream_file: path.join(this._gameDocuments, "live_streams.sii"),
+          mod_directory: path.join(this._gameDocuments, "mod"),
+          mod_info_file: path.join(this._gameDocuments, "mods_info.sii"),
+          music_directory: path.join(this._gameDocuments, "music"),
+          profiles_directory: path.join(this._gameDocuments, "profiles"),
+          screenshot_directory: path.join(this._gameDocuments, "screenshot"),
+          history_console_file: path.join(this._gameDocuments, "_history.sii"),
+          config_cfg_file: path.join(this._gameDocuments, "config.cfg"),
+          config_ds_cfg_file: path.join(this._gameDocuments, "config_ds.cfg"),
+          game_crash_log_file: path.join(this._gameDocuments, "game.crash.txt"),
+          game_log_file: path.join(this._gameDocuments, "game.log.txt"),
+          global_controls_file: path.join(this._gameDocuments, "global_controls.sii"),
+          inventory_item_data_file: path.join(this._gameDocuments, "inventory_item_data.sii"),
+          net_log_file: path.join(this._gameDocuments, "net.log"),
+          news_file: path.join(this._gameDocuments, "news.sii"),
+          readme_file: path.join(this._gameDocuments, "readme.rtf"),
+          server_config_file: path.join(this._gameDocuments, "server_config.sii"),
+          server_packages_file: path.join(this._gameDocuments, "server_packages.sii")
+
       }
       const data = {
         discord, paths

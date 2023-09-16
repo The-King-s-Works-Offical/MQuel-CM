@@ -1,12 +1,14 @@
 "use strict";
-
+const electron = require("electron");
 const {
-    ipcRenderer,
-} = require("electron");
+    ipcRenderer, Notification,
+} = electron;
 const path = require("path");
 const IpcCommand = require("../../common/ipcCommand");
 const $ = require("jquery");
 const url = require("url");
+const {response} = require("express");
+
 
 console.log(IpcCommand)
 const RADIO_COMMAND = IpcCommand.RADIO;
@@ -28,8 +30,25 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
     }
 });
 const minimizeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.MINIMIZE, true)
-const maximizeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.MAXIMIZE, true)
 const closeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
 
+const formSubmit = () => {
+    const question = "Should the entered information be added to the radio system ?"
+    ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.QUESTION, question);
+    ipcRenderer.on(RADIO_COMMAND.MODAL.FORM.QUESTION, (event, response) => {
+        if (response.status === 200) {
+            const formData = $("#radio-add-form").serializeArray()
+            ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.INSERT, {
+                ...response, data: formData
+            })
+        }
+    })
+}
+const formReset = () => {
+    console.log(Notification.isSupported())
+    alert("Please enter form reset")
 
+
+    alert("Radio add form reset !")
+}
 console.log("Radio Add Panel Ready")

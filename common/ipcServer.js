@@ -1,126 +1,91 @@
-const electron = require('electron');
-const fs = require('fs');
-const path = require('path');
-const IpcCommand = require("./ipcCommand");
+const electron = require('electron')
+const fs = require('fs')
+const path = require('path')
+const IpcCommand = require("./ipcCommand")
 //const profileManager = require('../server/ProfileManager')
-//const modManager = require('../server/Mods');
-//const musicManager = require('../server/Music');
-const radioManager = require('../server/Radio');
-const {request} = require("express");
+//const modManager = require('../server/Mods')
+//const musicManager = require('../server/Music')
+const radioManager = require('../server/Radio')
+const {request} = require("express")
 
-//const ScreenShotManager = require('../server/Screenshot');
-
+//const ScreenShotManager = require('../server/Screenshot')
 
 
 class IpcServer {
     constructor(window) {
-        this.window = window;
+        this.window = window
 
-        this.toolbar();
-        //this.profile();
-        //this.mod();
-        //this.music();
-        this.radio();
-        //this.screenshot();
-        //this.save();
-        this.appLanguageLoader();
+        console.log(this.window)
+        this.toolbar()
+        this.profile()
+        this.mod()
+        this.music()
+        this.radio()
+        this.screenshot()
+        this.save()
+        this.appLanguageLoader()
     }
+
     appLanguageLoader() {
         electron.ipcMain.on(IpcCommand.GET_LANG, (event, request) => {
-            const localeFile = path.join(__dirname, '../languages/en.json');
-            const localeFileReadStream = fs.readFileSync(localeFile, "utf8");
-            const localeFileData = JSON.parse(localeFileReadStream);
+            const localeFile = path.join(__dirname, '../languages/en.json')
+            const localeFileReadStream = fs.readFileSync(localeFile, "utf8")
+            const localeFileData = JSON.parse(localeFileReadStream)
             event.reply(IpcCommand.GET_LANG, localeFileData)
 
-        });
+        })
     }
+
     toolbar() {
         electron.ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, request) => {
-            this.window.minimize();
-        });
+            this.window.minimize()
+        })
         electron.ipcMain.on(IpcCommand.WINDOW_MAXIMIZE, (event, request) => {
             if (!this.window.isMaximized()) {
                 setTimeout(() => {
-                    this.window.maximize();
-                }, 500);
+                    this.window.maximize()
+                }, 500)
             } else {
                 setTimeout(() => {
-                    this.window.restore();
-                }, 500);
+                    this.window.restore()
+                }, 500)
             }
-        });
+        })
         electron.ipcMain.on(IpcCommand.WINDOW_CLOSE, (event, request) => {
-            this.window.close();
-            electron.app.quit();
-        });
-    }
-
-    profile() {
-        const CMD = IpcCommand.PROFILE;
-        electron.ipcMain.on(CMD.ALL_PROFILE_COUNT, (event, request) => {
-            console.log("Request All Profile Count : " + request)
-            const count = new profileManager().getCount()
-            event.reply(CMD.ALL_PROFILE_COUNT, count)
-        });
-        electron.ipcMain.on(CMD.ALL_PROFILE_DATA, (event, request) => {
-            console.log("Request All Profiles : " + request)
-            const profiles = new profileManager().getAll()
-            event.reply(CMD.ALL_PROFILE_DATA, profiles)
-        });
-    }
-    mod() {
-        const CMD = IpcCommand.MOD;
-        electron.ipcMain.on(CMD.ALL_MOD_COUNT, (event, request) => {
-            console.log("Request All Mod Count: " + request)
-            const count = new modManager().getCount();
-            event.reply(CMD.ALL_MOD_COUNT, count);
-        });
-        electron.ipcMain.on(CMD.ALL_MOD_DATA, (event, request) => {
-            console.log("Request All Mod Data :" + request)
-            const mods = new modManager().getAll();
-            event.reply(CMD.ALL_MOD_DATA, mods)
-        });
-        electron.ipcMain.on(CMD.DELETE, (event, request) => {
-            console.log("Request Delete Mod :" + request)
-            const response = new modManager().delete(request)
-            console.log(response);
-            event.reply(CMD.DELETE, response)
-        });
-        electron.ipcMain.on(CMD.ADD, (event, request) => {
-            console.log("Request Add Mod :" + request)
-            alert("Add Mod Function");
-        });
-    }
-    music() {
-        const CMD = IpcCommand.MUSIC;
-        electron.ipcMain.on(CMD.ALL_MUSIC_COUNT, (event, request) => {
-            console.log("Request All Music Count : " + request)
-            const count = new musicManager().getCount();
-            event.reply(CMD.ALL_MUSIC_COUNT, count);
+            this.window.close()
+            electron.app.quit()
         })
     }
+
     radio() {
         let addRadio
         // Radio Commands
 
-        const CMD = IpcCommand.RADIO;
+        const CMD = IpcCommand.RADIO
 
-        // Radio ALL Count
+        /*
+         * Radio All Count Function - Start
+         */
         electron.ipcMain.on(CMD.COUNT, (event, request) => {
             console.log("Request All Radio Count : " + request)
             const rM = new radioManager()
-            rM.load();
-            let res = rM.getCount();
-            event.reply(CMD.COUNT, res);
+            rM.load()
+            let res = rM.getCount()
+            event.reply(CMD.COUNT, res)
 
-        });
+        })
+        /*
+         * Radio All Count Function - End
+         */
 
-        // Radio All Data
+        /*
+         * Radio All Data Function - Start
+         */
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
             const rM = new radioManager()
-            rM.load();
-            let res = rM.getAll();
+            rM.load()
+            let res = rM.getAll()
             const liveStreams = res
             if (liveStreams.length > 0) {
                 const result = {
@@ -137,23 +102,27 @@ class IpcServer {
                 event.reply(CMD.DATA, result)
                 electron.dialog.showErrorBox("Upload live stream", result.message)
             }
-        });
+        })
+        /*
+         * Radio All Data Function - End
+         */
 
-        // Radio Add
+        /*
+         * Radio Add Modal Dialog Create Function - Start
+         */
         electron.ipcMain.on(CMD.ADD, (event, request) => {
             console.log("Request to add a radio: ", request)
-            console.log(addRadio)
             if (addRadio === undefined) {
                 addRadio = new electron.BrowserWindow({
                     width: 800,
-                    height: 600,
+                    height: 350,
+                    title: "Radio Add Form",
                     frame: false,
-                    modal: true,
                     resizable: true,
-                    visualEffectState: "followWindow",
-                    icon: path.join(process.cwd(), "icon.ico"),
+                    fullscreenable: false,
+                    icon: path.join(process.mainModule.path, "icon.ico"),
                     webPreferences: {
-                        preload: path.join(process.cwd(), 'preload.js'),
+                        preload: path.join(process.mainModule.path, 'preload.js'),
                         nodeIntegration: true,
                         contextIsolation: false,
                     },
@@ -161,9 +130,14 @@ class IpcServer {
                 })
 
 
-                addRadio.loadFile(path.join(process.cwd(), "client", "modal", "add_radio.html"))
-
-                addRadio.show();
+                addRadio.loadFile(path.join(process.mainModule.path, "client", "modal", "add_radio.html"))
+                addRadio.set
+                addRadio.show()
+                this.window.on("focus", () => {
+                    if (addRadio) {
+                        addRadio.focus()
+                    }
+                })
             } else {
                 electron.dialog.showMessageBoxSync({
                     title: "Radio Add Form",
@@ -175,39 +149,74 @@ class IpcServer {
 
 
         })
+        /*
+         * Radio Add Modal Dialog Create Function - End
+         */
+
+        /*
+         * Radio Modal Dialog Close - Start
+         */
         electron.ipcMain.on(CMD.MODAL.CLOSE, (event, request) => {
             console.log("Request Radio Add Modal to close : ", request)
-            addRadio.close();
-            addRadio = null;
-        });
-        electron.ipcMain.on(CMD.MODAL.MAXIMIZE, (event, request) => {
-            console.log("Request Radio Add Modal to maximize : ", request)
-            if (!addRadio.isMaximized()) {
-                setTimeout(() => {
-                    addRadio.maximize();
-                }, 500);
-            } else {
-                setTimeout(() => {
-                    addRadio.restore();
-                }, 500);
-            }
+            addRadio.close()
+            addRadio = undefined
         })
-        electron.ipcMain.on(CMD.MODAL.MINIMIZE, (event, request) => {
-            console.log("Request Radio Add Modal to minimize : ", request)
-            addRadio.minimize();
+        /*
+         * Radio Modal Dialog Close - End
+         */
+
+        /*
+         * Radio Modal Dialog Form Question - Start
+         */
+        electron.ipcMain.on(CMD.MODAL.FORM.QUESTION, (event, request) => {
+            const reqQuestion = request;
+            const resQuestion = electron.dialog.showMessageBox(this.window, {
+                title: "Add Radio", message: reqQuestion, buttons: ["Back", "Okay"], type: "question"
+            }).then((result) => {
+                if (result.response === 1) {
+                    addRadio.close()
+                    addRadio = undefined
+                    event.reply(CMD.MODAL.FORM.QUESTION, {
+                        status: 200,
+                        statusMessage: "OK",
+                    })
+                } else if (result.response === 0) {
+                    event.reply(CMD.MODAL.FORM.QUESTION, {
+                        status: 205,
+                        statusMessage: "Reset Content"
+                    })
+                }
+            })
+        })
+        /*
+         * Radio Modal Dialog Form Question - End
+         */
+
+
+        /*
+         * Radio Modal Dialog Form Insert - Start
+         */
+        electron.ipcMain.on(CMD.MODAL.FORM.INSERT, (event, request) => {
+            console.log("")
         })
     }
+
+    profile() {
+    }
+
+    mod() {
+    }
+
+    music() {
+    }
+
     screenshot() {
-        const CMD = IpcCommand.SCREENSHOT;
-        electron.ipcMain.on(CMD.ALL_SCREENSHOT_COUNT, (event, request) => {
-            console.log("Request All Screenshot Count : " + request);
-            const count = new ScreenShotManager().getCount()
-            event.reply(CMD.ALL_SCREENSHOT_COUNT, count);
-        })
+
     }
 
 
-
+    save() {
+    }
 }
 
-module.exports = IpcServer;
+module.exports = IpcServer

@@ -6,6 +6,7 @@
 const url = require("url");
 const path = require("path");
 const fs = require("fs");
+
 const electron = require("electron");
 const processManager = require("./process")
 const {
@@ -15,11 +16,18 @@ const {
 
 // User Modules
 const mainApp = require("./Apps");
+const winston = require("winston");
 
 
 process.on("loaded", () => {
+    const package_json = JSON.parse(fs.readFileSync(__dirname + "/package.json", "utf-8"))
+    const logStream = fs.createWriteStream(path.join(process.env.APPDATA, package_json.name, "logs.log"));
+    process.stdout.write = logStream.write.bind(logStream);
+    process.stderr.write = logStream.write.bind(logStream);
+
   console.log("App Loaded");
-  new processManager().loaded()
+    const pM = new processManager()
+    pM.loaded()
 
 })
 

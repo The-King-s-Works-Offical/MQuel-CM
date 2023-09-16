@@ -45,8 +45,17 @@
     },
   "add_radio": {
     "title": "Radio Add Form ",
-    "description": "Radio Add Form Page"
-    },
+    "description": "Radio Add Form Page",
+    "form-header-label": "Add Live Stream",
+    "form-url-label": "Url",
+    "form-name-label": "Name",
+    "form-type-label": "Type",
+    "form-language-label": "Language",
+    "form-bit-label": "Bit",
+    "form-favorites-label": "Favorites",
+    "form-submit-button": "Add",
+    "form-reset-button": "Reset"
+  },
     "profile": {
         "title" : "Profiles",
         "description" : "Profiles Page",

@@ -19,17 +19,17 @@ class mainWindow {
       minWidth: 1185,
       minHeight: 630,
       frame: false,
-      icon: path.join(process.cwd(), "icon.ico"),
+        icon: path.join(process.mainModule.path, "icon.ico"),
       title: "MQuel | Content Manager ",
       webPreferences: {
-        preload: path.join(__dirname, "preload.js"),
+          preload: path.join(process.mainModule.path, "preload.js"),
         nodeIntegration: true,
         contextIsolation: false,
       },
     });
     mainWindow.loadURL(
       url.format({
-        pathname: path.join(__dirname, "client/home.html"),
+          pathname: path.join(process.mainModule.path, "client/home.html"),
         protocol: "file",
         slashes: true,
       }),
@@ -44,7 +44,7 @@ class mainWindow {
 
             mainWindow.loadURL(
               url.format({
-                pathname: path.join(__dirname, "/client/404.html"),
+                  pathname: path.join(process.mainModule.path, "/client/404.html"),
                 protocol: "file",
                 slashes: true,
               }),
