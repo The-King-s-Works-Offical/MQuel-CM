@@ -6,8 +6,7 @@ const IpcCommand = require("./ipcCommand")
 //const modManager = require('../server/Mods')
 //const musicManager = require('../server/Music')
 const radioManager = require('../server/Radio')
-const {request} = require("express")
-const {RadioManager} = require("../server/Radio/RadioManager");
+const RadioManager = require("../server/Radio");
 
 //const ScreenShotManager = require('../server/Screenshot')
 
@@ -16,7 +15,6 @@ class IpcServer {
     constructor(window) {
         this.window = window
 
-        console.log(this.window)
         this.toolbar()
         this.profile()
         this.mod()
@@ -82,6 +80,7 @@ class IpcServer {
         /*
          * Radio All Data Function - Start
          */
+        let data
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
             const rM = new radioManager()
@@ -198,8 +197,11 @@ class IpcServer {
         electron.ipcMain.on(CMD.MODAL.FORM.INSERT, (event, request) => {
             console.log("Request to add radio to the system : " + true)
             const rM = new RadioManager();
-            rM.add(request)
+            const res = rM.add(request)
+            event.reply(CMD.MODAL.FORM.INSERT, true)
         })
+
+
     }
 
     profile() {

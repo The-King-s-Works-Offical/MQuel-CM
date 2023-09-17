@@ -44,9 +44,8 @@ const formSubmit = (event) => {
             ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.INSERT, {
                 ...response, data: formData
             })
-            setTimeout(() => {
-                ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
-            }, 2500)
+            ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
+            ipcRenderer.send(RADIO_COMMAND.READY, true)
         }
     })
     event.preventDefault();

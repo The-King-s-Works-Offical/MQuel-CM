@@ -167,18 +167,14 @@ class RadioManager {
 
                 }
             }
+            const id = this._baseData.data[this._baseData.count - 1].id + 1
+            const index = this._baseData.data[this._baseData.count - 1].index + 1
             const base_line_index = this._baseData.data[this._baseData.count - 1].base_line_index + 1
             const base_line = ` stream_data[${this._baseData.data[this._baseData.count - 1].id + 1}]: "${url}|${name}|${type}|${lang}|${bit}|${favorite}"`
 
-            console.log(`
-                end_line: ${base_line_index}
-                base_line: ${base_line}
-            `)
 
-            // Data Item
-            /*
-            {
-                id: id_count,
+            const item = {
+                id: id,
                 index,
                 base_line_index: index,
                 url,
@@ -189,9 +185,26 @@ class RadioManager {
                 favorite,
                 base_line
             }
-             */
+            this._baseData.count += 1
+            this._baseData.data.push(item)
+            const strData = this._baseData
+            fs.writeFileSync(this._liveStreamsJsonPath, JSON.stringify(strData))
+            this.result = true
+            return true
+        } catch (error) {
+            this.result = false
+            console.error(error)
+        } finally {
+            if (this.result) {
+                console.log("📻 RadioManager().add() ")
+            } else {
+                console.log(`📻 RadioManager().add() Didn't work`)
+            }
+        }
+    }
 
-            /*
+    save() {
+        /*
             fs.readFile(liveStream_file_path, 'utf8', function (err, data) {
                 if (err) {
                     console.error(err)
@@ -217,23 +230,6 @@ class RadioManager {
 
             })
             */
-
-            this.result = true
-            return true
-        } catch (error) {
-            this.result = false
-            console.error(error)
-        } finally {
-            if (this.result) {
-                console.log("📻 RadioManager().add() ")
-                this.init()
-                this.load()
-
-
-            } else {
-                console.log(`📻 RadioManager().add() Didn't work`)
-            }
-        }
     }
     /*
         try {

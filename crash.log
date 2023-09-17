@@ -1,5 +1,7 @@
 Uncaught Exception:
-TypeError: Cannot read properties of undefined (reading 'focus')
-    at BrowserWindow.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\common\ipcServer.js:120:30)
-    at BrowserWindow.emit (node:events:525:35)
-    at BrowserWindow.callbackTrampoline (node:internal/async_hooks:130:17)
+ReferenceError: RadioManager is not defined
+    at IpcMainImpl.<anonymous> (C:\Users\murse\Desktop\MQuel\Projects\MQuel-CM\common\ipcServer.js:198:24)
+    at IpcMainImpl.emit (node:events:513:28)
+    at WebContents.<anonymous> (node:electron/js2c/browser_init:2:89074)
+    at WebContents.emit (node:events:513:28)
+    at WebContents.callbackTrampoline (node:internal/async_hooks:130:17)

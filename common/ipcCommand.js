@@ -41,6 +41,7 @@ const IpcCommand = {
         }
     },
     RADIO: {
+        READY: "ready",
         LOAD: "radio-load",
         COUNT: "radio-count",
         DATA: "radio-data",

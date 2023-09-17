@@ -8,7 +8,8 @@ const path = require("path")
 class ConfigManager {
   constructor() {
     this.result = ""
-      const packageData = fs.readFileSync(path.join(process.env.npm_package_json), "utf-8")
+      const packagePath = process.mainModule.path + "/package.json"
+      const packageData = fs.readFileSync(packagePath, "utf-8")
       this._gameDocuments = `C:\\Users\\${process.env.username}\\Documents\\Euro Truck Simulator 2\\`
       this._baseApplicationRoamingFile = path.join(process.env.APPDATA, JSON.parse(packageData).name)
       this._baseConfigPath = path.join(this._baseApplicationRoamingFile, "config.json")
