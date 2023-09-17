@@ -1,3 +1,10 @@
+/*
+    ORGANIZATION : 
+    PROJECT : MQuel-CM
+    FILE : RadioManager.js
+    Date : 17.09.2023
+
+*/
 "use strict"
 /*
     File : RadioManager.js Version : v1.0.7
@@ -9,11 +16,11 @@ const ConfigManager = require("../Config/index")
 class RadioManager {
     constructor() {
         this.cM = new ConfigManager()
-        this.cM.load();
+        this.cM.load()
         this._paths = this.cM.getPaths()
         this._path = this._paths.document
         this.result = ""
-        this._baseLiveStreamsFile = path.join(this._path, "live_streams.sii")
+        this._baseLiveStreamsFile = this._paths.liveStream_file
         this._appBaseLiveStreamsDirectory = path.join(this._paths.application_file, "Live_Stream")
         this._liveStreamsJsonPath = path.join(this._appBaseLiveStreamsDirectory, "data.json")
         this._baseData = []
@@ -43,7 +50,7 @@ class RadioManager {
                     const favorite = Number(data[5].replace('"', '').trim())
 
                     this._liveStreamList.push({
-                        id: id_count, index, file_line_index: index + 1, url, name, type, lang, bit, favorite, base_line
+                        id: id_count, index, base_line_index: index, url, name, type, lang, bit, favorite, base_line
                     })
                     id_count += 1
                 }
@@ -76,7 +83,6 @@ class RadioManager {
 
             const liveStreams = fs.readFileSync(this._liveStreamsJsonPath, "utf-8")
             this._baseData = JSON.parse(liveStreams)
-
             this.result = true
         } catch (error) {
             this.result = false
@@ -128,19 +134,101 @@ class RadioManager {
 
     add(radioData) {
         let result
+
+        const liveStream_file_path = this._paths.liveStream_file
         try {
             this.load()
-            result = this._baseData
-            result = result.data[result.count - 1]
-            this.result = true
 
+
+            result = radioData
+
+            let url, name, type, lang, bit, favorite
+            // result = this._baseData.data[this._baseData.count - 1]
+            for (let data of radioData.data) {
+                switch (data.name) {
+                    case "radio-url":
+                        url = data.value
+                        break
+                    case "radio-name":
+                        name = data.value
+                        break
+                    case "radio-type":
+                        type = data.value
+                        break
+                    case "radio-language":
+                        lang = data.value
+                        break
+                    case "radio-bit":
+                        bit = data.value
+                        break
+                    case "radio-favorites":
+                        favorite = data.value
+                        break
+
+                }
+            }
+            const base_line_index = this._baseData.data[this._baseData.count - 1].base_line_index + 1
+            const base_line = ` stream_data[${this._baseData.data[this._baseData.count - 1].id + 1}]: "${url}|${name}|${type}|${lang}|${bit}|${favorite}"`
+
+            console.log(`
+                end_line: ${base_line_index}
+                base_line: ${base_line}
+            `)
+
+            // Data Item
+            /*
+            {
+                id: id_count,
+                index,
+                base_line_index: index,
+                url,
+                name,
+                type,
+                lang,
+                bit,
+                favorite,
+                base_line
+            }
+             */
+
+            /*
+            fs.readFile(liveStream_file_path, 'utf8', function (err, data) {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+
+                // Split the file into lines
+                let lines = data.split('\n')
+                lines.splice(3,1, countStr)
+                // Insert the new line at the specified index
+                lines.splice(end_line + 1, 0, items)
+                // Write the updated file
+
+                fs.writeFile(liveStream_file_path, lines.join('\n'), function (err) {
+                    if (err) {
+                        console.error(err)
+                        return
+                    }
+                    console.log('Successfully wrote to file.')
+
+                })
+
+
+            })
+            */
+
+            this.result = true
+            return true
         } catch (error) {
             this.result = false
             console.error(error)
         } finally {
             if (this.result) {
                 console.log("📻 RadioManager().add() ")
-                console.log(result)
+                this.init()
+                this.load()
+
 
             } else {
                 console.log(`📻 RadioManager().add() Didn't work`)
