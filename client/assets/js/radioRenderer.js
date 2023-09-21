@@ -39,6 +39,7 @@ $.ajax({
 });
 
 
+
 ipcRenderer.send(IpcCommand.GET_LANG);
 ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
     const pageName = window.location.href.split('/').pop().split('.')[0];
@@ -101,12 +102,6 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
 
     }
 });
-
 const addRadio = (event) => {
     ipcRenderer.send(IpcCommand.RADIO.ADD, true)
-    ipcRenderer.on(IpcCommand.RADIO.MODAL.FORM.INSERT, (event, response) => {
-        console.log("Radyo listeleme sayfasını yenileme isteği : ", response)
-        location.reload()
-    })
-
 };

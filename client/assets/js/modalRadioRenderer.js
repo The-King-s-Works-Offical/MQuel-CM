@@ -34,21 +34,27 @@ const closeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
 
 const formSubmit = (event) => {
 
-    const question = "Should the entered information be added to the radio system ?"
-    ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.QUESTION, question);
+    const message = "Should the entered information be added to the radio system ?"
+    const command = "INSERT"
+    const result = {command, message}
+    ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.QUESTION, result);
     ipcRenderer.on(RADIO_COMMAND.MODAL.FORM.QUESTION, (event, response) => {
         console.log(response)
         if (response.status === 200) {
-            console.log("Status : ", 200)
+
             const formData = $("#radio-add-form").serializeArray()
             ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.INSERT, {
                 ...response, data: formData
             })
-            ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
-            ipcRenderer.send(RADIO_COMMAND.READY, true)
+            ipcRenderer.on(RADIO_COMMAND.MODAL.FORM.INSERT, (event,response) => {
+                if (response === true){
+                    ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
+                }
+            })
+
         }
     })
-    event.preventDefault();
+
 }
 const formReset = () => {
     console.log(Notification.isSupported())

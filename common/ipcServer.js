@@ -6,7 +6,8 @@ const IpcCommand = require("./ipcCommand")
 //const modManager = require('../server/Mods')
 //const musicManager = require('../server/Music')
 const radioManager = require('../server/Radio')
-const RadioManager = require("../server/Radio");
+const RadioManager = require("../server/Radio")
+const {request} = require("express");
 
 //const ScreenShotManager = require('../server/Screenshot')
 
@@ -89,15 +90,12 @@ class IpcServer {
             const liveStreams = res
             if (liveStreams.length > 0) {
                 const result = {
-                    status: 200,
-                    data: liveStreams
+                    status: 200, data: liveStreams
                 }
                 event.reply(CMD.DATA, result)
             } else {
                 const result = {
-                    status: 404,
-                    message: "No installed live stream stations found!",
-                    data: {}
+                    status: 404, message: "No installed live stream stations found!", data: {}
                 }
                 event.reply(CMD.DATA, result)
                 electron.dialog.showErrorBox("Upload live stream", result.message)
@@ -115,7 +113,7 @@ class IpcServer {
             if (addRadio === undefined) {
                 addRadio = new electron.BrowserWindow({
                     width: 800,
-                    height: 350,
+                    height: 400,
                     title: "Radio Add Form",
                     frame: false,
                     resizable: true,
@@ -131,7 +129,6 @@ class IpcServer {
 
 
                 addRadio.loadFile(path.join(process.mainModule.path, "client", "modal", "add_radio.html"))
-                addRadio.set
                 addRadio.show()
                 this.window.on("focus", () => {
                     if (addRadio) {
@@ -160,6 +157,7 @@ class IpcServer {
             console.log("Request Radio Add Modal to close : ", request)
             addRadio.close()
             addRadio = undefined
+            this.window.reload()
         })
         /*
          * Radio Modal Dialog Close - End
@@ -169,14 +167,20 @@ class IpcServer {
          * Radio Modal Dialog Form Question - Start
          */
         electron.ipcMain.on(CMD.MODAL.FORM.QUESTION, (event, request) => {
-            const reqQuestion = request;
-            const resQuestion = electron.dialog.showMessageBox(this.window, {
-                title: "Add Radio", message: reqQuestion, buttons: ["Back", "Okay"], type: "question"
-            }).then((result) => {
+            const questionMessage = request.message
+            electron.dialog.showMessageBox(this.window, {
+                title: "Add Radio",
+                message: questionMessage,
+                buttons: ["Back", "Okay"],
+                type: "question"
+            })
+                .then((result) => {
                 if (result.response === 1) {
                     event.reply(CMD.MODAL.FORM.QUESTION, {
                         status: 200,
                         statusMessage: "OK",
+                        questionMessage: request.message,
+                        command: request.command
                     })
                 } else if (result.response === 0) {
                     event.reply(CMD.MODAL.FORM.QUESTION, {
@@ -185,6 +189,7 @@ class IpcServer {
                     })
                 }
             })
+
         })
         /*
          * Radio Modal Dialog Form Question - End
@@ -196,10 +201,14 @@ class IpcServer {
          */
         electron.ipcMain.on(CMD.MODAL.FORM.INSERT, (event, request) => {
             console.log("Request to add radio to the system : " + true)
-            const rM = new RadioManager();
-            const res = rM.add(request)
-            event.reply(CMD.MODAL.FORM.INSERT, true)
+            const rM = new RadioManager()
+            const result = rM.add(request)
+            event.reply(CMD.MODAL.FORM.INSERT,result)
         })
+        /*
+         * Radio Modal Dialog Form Insert - End
+         */
+
 
 
     }
