@@ -33,10 +33,10 @@ const minimizeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.MINIMIZE, true)
 const closeModal = () => ipcRenderer.send(RADIO_COMMAND.MODAL.CLOSE, true)
 
 const formSubmit = (event) => {
-
+    const title = "Add Radio"
     const message = "Should the entered information be added to the radio system ?"
     const command = "INSERT"
-    const result = {command, message}
+    const result = {title,command, message}
     ipcRenderer.send(RADIO_COMMAND.MODAL.FORM.QUESTION, result);
     ipcRenderer.on(RADIO_COMMAND.MODAL.FORM.QUESTION, (event, response) => {
         console.log(response)

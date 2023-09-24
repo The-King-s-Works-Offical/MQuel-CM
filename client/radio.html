@@ -54,26 +54,30 @@
           <div class="row">
             <div class="col py-4">
               <div class="card text-white bg-dark bg-opacity-75">
-                <div class="card-header d-flex align-items-baseline flex-wrap border-white">
-                  <i class="fa-solid fa-radio me-2"></i>
-                  <h6 id="radio-card-label"> ${radio-card-label}</h6>
-                  <div class="d-grid ms-auto">
+                <form method="get" action="#" id="radio-list-form" onsubmit="deleteRadio()">
+                  <div class="card-header d-flex align-items-baseline flex-wrap border-white">
+                    <i class="fa-solid fa-radio me-2"></i>
+                    <h6 id="radio-card-label"> ${radio-card-label}</h6>
+                    <div class="d-flex ms-auto">
+
+                      <button type="reset" id="radio-radioResetBtn-label" title="Reset Radios"
+                              class="btn btn-dark bg-opacity-25 me-1"><i class='fa-solid fa-refresh'></i>
+                      </button>
+                      <button type="submit" id="radio-radioDeleteBtn-label" title="Delete Selected Radios"
+                              class="btn btn-dark bg-opacity-25 me-1"><i class='fa-solid fa-trash'></i>
+                      </button>
                       <button type="button" id="radio-radioAddBtn-label" title="Add new radio"
                               class="btn btn-dark bg-opacity-25" onclick="addRadio()"><i class='fa-solid fa-plus'></i>
                       </button>
+                    </div>
                   </div>
-                </div>
-                <div class="card-body d-flex flex-column mb-5" style="height: 82.5vh; overflow-y: auto"
-                  id="radio-card-list">
-                  <div class="accordion accordion-flush" id="radio-list-accordionFlush">
+                  <div class="card-body d-flex flex-column mb-5" style="height: 82.5vh; overflow-y: auto"
+                       id="radio-card-list">
 
-
-
-
+                    <div class="accordion accordion-flush" id="radio-list-accordionFlush"></div>
 
                   </div>
-
-                </div>
+                </form>
               </div>
             </div>
 

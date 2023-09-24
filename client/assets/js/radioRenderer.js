@@ -67,7 +67,7 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
             html = `<div class="accordion-item">
             <h2 class="accordion-header d-flex align-items-center" id="ac-flush-collapse${live_stream.index}">
               <div class="form-check form-switch ms-3">
-                <input class="form-check-input bg-dark" name="" id="" type="checkbox" value="checkedValue" aria-label="Text for screen reader">
+                <input class="form-check-input bg-dark" name="stream_id" id="stream_id" type="checkbox" value="${live_stream.id}" aria-label="Text for screen reader">
               </div>
               <button class="accordion-button collapsed "  type="button" data-bs-toggle="collapse"
                 data-bs-target="#flush-collapse${live_stream.index}" aria-expanded="false" aria-controls="flush-collapse${live_stream.index}">
@@ -102,6 +102,10 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
 
     }
 });
-const addRadio = (event) => {
-    ipcRenderer.send(IpcCommand.RADIO.ADD, true)
-};
+const addRadio = (event) => ipcRenderer.send(IpcCommand.RADIO.ADD, true)
+const deleteRadio = (event) => {
+    const formData = $("#radio-list-form").serializeArray()
+    ipcRenderer.send(IpcCommand.RADIO.DELETE,{data : formData})
+
+
+}

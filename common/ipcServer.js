@@ -150,6 +150,18 @@ class IpcServer {
          * Radio Add Modal Dialog Create Function - End
          */
 
+        electron.ipcMain.on(CMD.DELETE, (event,request) => {
+            console.log("Radio deletion request : ",true)
+            if (request.data.length < 1) {
+                electron.dialog.showErrorBox("Delete Radio","No radio has been chosen!")
+            } else {
+                const rM = new RadioManager();
+                rM.load()
+                rM.delete(request.data)
+
+            }
+        })
+
         /*
          * Radio Modal Dialog Close - Start
          */
@@ -167,9 +179,10 @@ class IpcServer {
          * Radio Modal Dialog Form Question - Start
          */
         electron.ipcMain.on(CMD.MODAL.FORM.QUESTION, (event, request) => {
+            const questionTitle = request.title
             const questionMessage = request.message
             electron.dialog.showMessageBox(this.window, {
-                title: "Add Radio",
+                title: questionTitle,
                 message: questionMessage,
                 buttons: ["Back", "Okay"],
                 type: "question"
