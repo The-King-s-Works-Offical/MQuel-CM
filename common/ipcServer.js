@@ -5,9 +5,8 @@ const IpcCommand = require("./ipcCommand")
 //const profileManager = require('../server/ProfileManager')
 //const modManager = require('../server/Mods')
 //const musicManager = require('../server/Music')
-const radioManager = require('../server/Radio')
 const RadioManager = require("../server/Radio")
-const {request} = require("express");
+const GameConfigManager = require("../server/Games")
 
 //const ScreenShotManager = require('../server/Screenshot')
 
@@ -22,11 +21,11 @@ class IpcServer {
         this.music()
         this.radio()
         this.screenshot()
-        this.save()
+        this.gameConfig()
         this.appLanguageLoader()
     }
 
-    appLanguageLoader() {
+    appLanguageLoader = () => {
         electron.ipcMain.on(IpcCommand.GET_LANG, (event, request) => {
             const localeFile = path.join(__dirname, '../languages/en.json')
             const localeFileReadStream = fs.readFileSync(localeFile, "utf8")
@@ -36,7 +35,7 @@ class IpcServer {
         })
     }
 
-    toolbar() {
+    toolbar = () => {
         electron.ipcMain.on(IpcCommand.WINDOW_MINIMIZE, (event, request) => {
             this.window.minimize()
         })
@@ -57,7 +56,7 @@ class IpcServer {
         })
     }
 
-    radio() {
+    radio = () => {
         let addRadio
         // Radio Commands
 
@@ -68,7 +67,7 @@ class IpcServer {
          */
         electron.ipcMain.on(CMD.COUNT, (event, request) => {
             console.log("Request All Radio Count : " + request)
-            const rM = new radioManager()
+            const rM = new RadioManager()
             rM.load()
             let res = rM.getCount()
             event.reply(CMD.COUNT, res)
@@ -84,7 +83,7 @@ class IpcServer {
         let data
         electron.ipcMain.on(CMD.DATA, (event, request) => {
             console.log("Request All Radio Data : " + request)
-            const rM = new radioManager()
+            const rM = new RadioManager()
             rM.load()
             let res = rM.getAll()
             const liveStreams = res
@@ -216,33 +215,81 @@ class IpcServer {
             console.log("Request to add radio to the system : " + true)
             const rM = new RadioManager()
             const result = rM.add(request)
-            event.reply(CMD.MODAL.FORM.INSERT,result)
+            event.reply(CMD.MODAL.FORM.INSERT, result)
         })
         /*
          * Radio Modal Dialog Form Insert - End
          */
 
 
+    }
+
+    gameConfig = () => {
+        let result
+        let command_title = ''
+        const CMD = IpcCommand.GAME_CONFIG
+        electron.ipcMain.on(CMD.LOAD, (event, request) => {
+            command_title = CMD.LOAD
+            try {
+                console.log("Request to upload all Game config information: ", true)
+                const gCM = new GameConfigManager();
+                gCM.load()
+                const data = gCM.getAll()
+                event.reply(CMD.LOAD, data)
+
+
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`🎮 Game Config Command : ${command_title}`)
+                } else {
+                    console.log(`🎮 Game Config Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+
+        electron.ipcMain.on(CMD.SAVE, (event, request) => {
+            command_title = CMD.SAVE
+            try {
+                console.log("Request to upload all Game config information: ", true)
+                const gCM = new GameConfigManager();
+                gCM.save(request)
+
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`🎮 Game Config Command : ${command_title}`)
+                } else {
+                    console.log(`🎮 Game Config Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+    }
+
+    profile = () => {
+    }
+
+
+    mod = () => {
 
     }
 
-    profile() {
+    music = () => {
     }
 
-    mod() {
-
-    }
-
-    music() {
-    }
-
-    screenshot() {
+    screenshot = () => {
 
     }
 
 
-    save() {
-    }
 }
 
 module.exports = IpcServer

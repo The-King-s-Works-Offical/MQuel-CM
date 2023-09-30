@@ -105,6 +105,7 @@ ipcRenderer.on(IpcCommand.RADIO.DATA, (event, response) => {
 const addRadio = (event) => ipcRenderer.send(IpcCommand.RADIO.ADD, true)
 const deleteRadio = (event) => {
     const formData = $("#radio-list-form").serializeArray()
+
     ipcRenderer.send(IpcCommand.RADIO.DELETE,{data : formData})
 
 

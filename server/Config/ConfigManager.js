@@ -7,6 +7,8 @@ const path = require("path")
 
 class ConfigManager {
     constructor() {
+        this.className = "Config_Manager"
+        this.method = ""
         this.result = ""
         const packagePath = process.mainModule.path + "/package.json"
         const packageData = fs.readFileSync(packagePath, "utf-8")
@@ -18,9 +20,8 @@ class ConfigManager {
     }
 
     init() {
+        this.method = "init()"
         try {
-
-
             const discord = {
                 rpc: true,
                 application_id: 1132021187858419832,
@@ -28,6 +29,7 @@ class ConfigManager {
                 public_key: "178cfbd71c39f0eb34062749e50fa63125544e88f83a4f3c9414877557e01f47"
             }
             const paths = {
+
                 document: this._gameDocuments,
                 application_file: this._baseApplicationRoamingFile,
                 application_base_file: this._baseApplicationMainFile,
@@ -66,15 +68,16 @@ class ConfigManager {
         } finally {
 
             if (this.result) {
-                console.log("⚙️ ConfigManager().init() ")
+                console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
-                console.log(`⚙️ ConfigManager().init() Didn't work`)
+                console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
 
         }
     }
 
     load() {
+        this.method = "laod()"
         try {
             this._data = fs.readFileSync(this._baseConfigPath, "utf8")
             const configFileData = JSON.parse(this._data)
@@ -85,14 +88,15 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log("⚙️ ConfigManager().load() ")
+                console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
-                console.log(`⚙️ ConfigManager().load() Didn't work`)
+                console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
         }
     }
 
     getPaths() {
+        this.method = "getPaths()"
         try {
             this.result = true
             return this._config.paths
@@ -101,15 +105,16 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log("⚙️ ConfigManager().getPaths() ")
+                console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
-                console.log(`⚙️ ConfigManager().getPaths() Didn't work`)
+                console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
         }
 
     }
 
     getDiscord() {
+        this.method = "getDiscord()"
         try {
             this.result = true
             return this._config.discord
@@ -118,9 +123,9 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log("⚙️ ConfigManager().getDiscord() ")
+                console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
-                console.log(`⚙️ ConfigManager().getDiscord() Didn't work`)
+                console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
         }
 

@@ -60,5 +60,9 @@
         "title" : "Profiles",
         "description" : "Profiles Page",
         "profile-card-label" : "Profile List"
-    }
+    },
+  "gamesConfig" : {
+    "title" : "Game Config Setting",
+    "gamesConfig-card-label" : "Game Config Setting List"
+  }
 }

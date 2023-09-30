@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=7" http-equiv="X-UA-Compatible"/>
+    <title>${page-title}</title>
+    <meta name="description" content="
+    ">
+
+    <!-- // Project Css -->
+    <link rel="stylesheet" href="assets/css/root.css">
+    <link href="assets/css/input.css" rel="stylesheet"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/> <!-- // Bootstrap v5.3.1 -->
+
+    <!--//Public Css-->
+
+
+    <!-- // Browser Deveploment Css -->
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css" rel="stylesheet"/>
+
+    <link href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css" rel="stylesheet"/>
+
+    <!-- Custom Style Settings -->
+    <style>
+
+    </style>
+</head>
+
+<body id="root" class="figure figure-caption overflow-hidden" data-bs-theme="light">
+<!-- Windows Toolbar  -->
+<div id="windowToolbar"></div>
+<!-- Windows Toolbar End -->
+
+<!-- Windows Titlebar -->
+<div id="windowTitleBar"></div>
+<!-- Windows Title bar End -->
+
+<!-- Windows Main Frame -->
+<div class="container-fluid  border-top ">
+    <div class="row">
+        <!-- Sidebar Menu -->
+        <div class="col-2  p-0" style="height: 100vh; overflow-y: auto" id="windowSidebar"></div>
+        <!-- Sidebar Menu End -->
+        <!-- Content -->
+        <div class="col pb-5 mb-5" id="windowContent">
+            <div class="container-fluid" style="height:  100vh; overflow-y: auto">
+                <form method="POST" id="game-config-form" onsubmit="game_config_submit()" class="mb-5">
+                    <div class="row py-3">
+                        <div class="col card text-white bg-dark bg-opacity-75 mx-3">
+                            <div class="card-header d-flex align-items-baseline flex-wrap">
+                                <i class="fa-solid me-2">🎮️</i>|<h6 class="ms-2" id="gamesConfig-card-label"> ${gamesConfig-card-label}</h6>
+                                <div class="d-flex ms-auto">
+
+                                    <button type="reset" id="radio-radioResetBtn-label" title="Config Reset"
+                                            class="btn btn-dark bg-opacity-25 me-1"><i class='fa-solid fa-home-blank'></i>
+                                    </button>
+                                    <button type="submit" id="radio-radioDeleteBtn-label" title="Config Save"
+                                            class="btn btn-dark bg-opacity-25 me-1"><i class='fa-solid fa-check'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row px-3 pb-5 mb-5" id="game-config-form-list"></div>
+                </form>
+
+            </div>
+        </div>
+        <!-- Content End -->
+    </div>
+</div>
+<!-- Main Frame End -->
+
+<!-- Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/gamesConfigRenderer.js"></script>
+</body>
+
+</html>

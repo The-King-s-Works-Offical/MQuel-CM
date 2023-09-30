@@ -4,6 +4,7 @@
 
 const ConfigManager = require("./server/Config")
 const RadioManager = require("./server/Radio")
+const GamesConfigManager = require("./server/Games")
 
 class ProcessManager {
     loaded() {
@@ -11,6 +12,8 @@ class ProcessManager {
         cM.init()
         const rM = new RadioManager()
         rM.init()
+        const gcM = new GamesConfigManager();
+        gcM.init()
     }
 }
 

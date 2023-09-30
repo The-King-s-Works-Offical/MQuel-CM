@@ -16,19 +16,19 @@ const {
 
 // User Modules
 const mainApp = require("./Apps");
-const winston = require("winston");
 
 
 process.on("loaded", () => {
     const package_json = JSON.parse(fs.readFileSync(__dirname + "/package.json", "utf-8"))
-    const logStream = fs.createWriteStream(path.join(process.env.APPDATA, package_json.name, "logs.log"));
-    process.stdout.write = logStream.write.bind(logStream);
-    process.stderr.write = logStream.write.bind(logStream);
+    const infoLogStream = fs.createWriteStream(path.join(process.env.APPDATA, package_json.name, "log.log"));
+    process.stdout.write = infoLogStream.write.bind(infoLogStream);
+    const errorLogStream = fs.createWriteStream(path.join(process.env.APPDATA, package_json.name, "error.log"));
+    process.stderr.write = errorLogStream.write.bind(errorLogStream);
 
-  console.log("App Loaded");
+
     const pM = new processManager()
     pM.loaded()
-
+    console.log("App Loaded");
 })
 
 // Application keeps Error log

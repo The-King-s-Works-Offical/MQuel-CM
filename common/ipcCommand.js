@@ -67,6 +67,12 @@ const IpcCommand = {
     SAVE: {
         ALL_SAVE_COUNT: "all-save-count",
     },
+    GAME_CONFIG:{
+        LOAD: "game_config-load",
+        SAVE: "game_config-save",
+        DATA: "game_config-data",
+    }
+
 
 
 };
