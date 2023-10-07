@@ -2,13 +2,11 @@ const electron = require('electron')
 const fs = require('fs')
 const path = require('path')
 const IpcCommand = require("./ipcCommand")
-//const profileManager = require('../server/ProfileManager')
 //const modManager = require('../server/Mods')
 //const musicManager = require('../server/Music')
 const RadioManager = require("../server/Radio")
 const GameConfigManager = require("../server/Games")
-
-//const ScreenShotManager = require('../server/Screenshot')
+const ProfileManager = require("../server/Profile")
 
 
 class IpcServer {
@@ -275,6 +273,105 @@ class IpcServer {
     }
 
     profile = () => {
+        const CMD = IpcCommand.PROFILE
+        let result
+        let command_title = ''
+        // 👥 GET COUNT
+        electron.ipcMain.on(CMD.COUNT, (event, request) => {
+            command_title = CMD.COUNT
+            try {
+                console.log("Request to get the number of profiles: ", request)
+                const pM = new ProfileManager();
+                const getProfileCount = pM.getCount()
+
+                event.reply(command_title, getProfileCount)
+
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`👥 Profile Command : ${command_title}`)
+                } else {
+                    console.log(`👥 Profile Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+
+
+        // 👥 GET DATA LOAD
+        electron.ipcMain.on(CMD.LOAD, (event, request) => {
+            command_title = CMD.LOAD
+            try {
+                console.log("Request to get all profiles: ", request)
+                const pM = new ProfileManager()
+                const getAllProfileData = pM.getAll()
+                event.reply(command_title, getAllProfileData)
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`👥 Profile Command : ${command_title}`)
+                } else {
+                    console.log(`👥 Profile Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+
+        // 👥 GET ITEM PROFILE ID
+        electron.ipcMain.on(CMD.GET_PROFILE , (event,request) => {
+            command_title = CMD.GET_PROFILE
+            try {
+                console.log(request," | Request to get profile information with ID :", true)
+                const pM = new ProfileManager()
+                const profile = pM.getProfile(request)
+                //console.log(profile)
+                event.reply(command_title,profile)
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`👥 Profile Command : ${command_title}`)
+                } else {
+                    console.log(`👥 Profile Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+
+        /*
+
+        electron.ipcMain.on(CMD.command , (event,request) => {
+            command_title = CMD.command
+            try {
+                console.log("Request Title Message ", true)
+
+                result = true
+            } catch (error) {
+                result = false
+                console.error(error)
+                console.error(error.message)
+            } finally {
+                if (result) {
+                    console.log(`👥 Profile Command : ${command_title}`)
+                } else {
+                    console.log(`👥 Profile Command : ${command_title} Didn't work`)
+                }
+            }
+        })
+         */
+
+
+
+
+
     }
 
 

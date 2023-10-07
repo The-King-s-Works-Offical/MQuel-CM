@@ -1,7 +1,7 @@
 [
   {
     "type": "header",
-    "imageIcon" : "../icon.ico",
+    "imageIcon": "../icon.ico",
     "text": "<i>MQuel <br> The King's Works </i>"
   },
   {
@@ -21,43 +21,6 @@
     "text": "Profiles"
   },
   {
-    "id": "ProfileDropDownMenuCollapse",
-    "type": "dropdown-link",
-    "icon": "fa-solid fa-id-card",
-    "text": "Profil Listesi",
-    "base": {
-      "a": {
-        "href": "profile.html"
-      }
-    },
-    "dropdownLinks": [
-      {
-        "type": "link",
-        "a": {
-          "href": "profile.html?profile=4D52534C"
-        },
-        "icon": "fa-solid fa-id-card",
-        "text": "MRSL"
-      }
-    ]
-  },
-  {
-    "type": "link",
-    "a": {
-      "href": "mod.html"
-    },
-    "icon": "fa-solid fa-list",
-    "text": "Mods"
-  },
-  {
-    "type": "link",
-    "a": {
-      "href": "musics.html"
-    },
-    "icon": "fa-solid fa-music",
-    "text": "Musics"
-  },
-  {
     "type": "link",
     "a": {
       "href": "radio.html"
@@ -65,14 +28,7 @@
     "icon": "fa-solid fa-radio",
     "text": "Radio"
   },
-  {
-    "type": "link",
-    "a": {
-      "href": "news.html"
-    },
-    "icon": "fa-solid fa-newspaper",
-    "text": "News"
-  },
+
   {
     "type": "link",
     "a": {
@@ -80,13 +36,5 @@
     },
     "icon": "fa-solid fa-cogs",
     "text": "Game Settings"
-  },
-  {
-    "type": "link",
-    "a": {
-      "href": "settings.html"
-    },
-    "icon": "fa-solid fa-cogs",
-    "text": "Main Settings"
   }
 ]

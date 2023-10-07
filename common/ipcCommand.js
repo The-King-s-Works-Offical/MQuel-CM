@@ -12,8 +12,10 @@ const IpcCommand = {
     LOAD_PROFILE: "load-profile",
     GET_LANG: "get-language",
     PROFILE: {
-        ALL_PROFILE_COUNT: "all-profile-count",
-        ALL_PROFILE_DATA: "all-profile",
+        LOAD: "profile-load",
+        COUNT: "all-profile-count",
+        DATA: "all-profile",
+        GET_PROFILE : "get_item_profile",
         MODAL: {
             MINIMIZE: "modal-minimize",
             MAXIMIZE: "modal-maximize",
@@ -23,6 +25,7 @@ const IpcCommand = {
     },
     MOD: {
         COUNT: "mod-count",
+        LOAD: "mod-load",
         DATA: "mod-data",
         DELETE: "mod-delete",
         ADD: "mod-add",
@@ -34,6 +37,7 @@ const IpcCommand = {
     },
     MUSIC: {
         COUNT: "music-count",
+        LOAD: "music-load",
         MODAL: {
             MINIMIZE: "modal-minimize",
             MAXIMIZE: "modal-maximize",

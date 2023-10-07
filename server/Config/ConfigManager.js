@@ -17,6 +17,7 @@ class ConfigManager {
         this._baseConfigPath = path.join(this._baseApplicationRoamingFile, "config.json")
         this._baseApplicationMainFile = process.mainModule.path
         this._config = ""
+
     }
 
     init() {

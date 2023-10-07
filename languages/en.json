@@ -56,11 +56,17 @@
     "form-submit-button": "Add",
     "form-reset-button": "Reset"
   },
-    "profile": {
+  "profile": {
         "title" : "Profiles",
         "description" : "Profiles Page",
         "profile-card-label" : "Profile List"
     },
+  "profileView": {
+    "title": "Profile View : ",
+    "description": "Profile Detail Pages",
+    "profileView-label": "Profile View",
+    "v-pills-profile-tab": "Profile"
+  },
   "gamesConfig" : {
     "title" : "Game Config Setting",
     "gamesConfig-card-label" : "Game Config Setting List"

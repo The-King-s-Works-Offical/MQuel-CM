@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "electron-packager": "^17.1.2",
     "express": "^4.18.2",
     "jquery": "^3.7.1",
@@ -24,7 +25,7 @@
   "scripts": {
     "start": "electron .",
     "packagerWin32": "electron-packager . Mquel-CM --out=../Package/Mquel-CM/Win32 --asar --platform=win32 --arch=ia32 --icon=icon.ico",
-    "packagerWin64": "electron-packager . Mquel-CM --out=../Package/Mquel-CM//Mquel-CM/Win64 --asar --platform=win32 --arch=x64 --icon=icon.ico",
+    "packagerWin64": "electron-packager . Mquel-CM --out=../Package/Mquel-CM/Win64 --asar --platform=win32 --arch=x64 --icon=icon.ico",
     "noAsarPackagerWin32": "electron-packager . Mquel-CM --out=../Package/Mquel-CM//NoAsar/Win32 --platform=win32 --arch=ia32 --icon=icon.ico",
     "noAsarPackagerWin64": "electron-packager . Mquel-CM --out=../Package/Mquel-CM//NoAsar/Win64 --platform=win32 --arch=x64 --icon=icon.ico"
   },
