@@ -67,9 +67,8 @@ class ConfigManager {
             console.error(error)
 
         } finally {
-
             if (this.result) {
-                console.log(`⚙️ ${this.className}.${this.method} ️️`)
+                //console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
                 console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
@@ -78,7 +77,7 @@ class ConfigManager {
     }
 
     load() {
-        this.method = "laod()"
+        this.method = "load()"
         try {
             this._data = fs.readFileSync(this._baseConfigPath, "utf8")
             const configFileData = JSON.parse(this._data)
@@ -89,7 +88,7 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log(`⚙️ ${this.className}.${this.method} ️️`)
+                //console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
                 console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
@@ -106,7 +105,7 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log(`⚙️ ${this.className}.${this.method} ️️`)
+               // console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
                 console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }
@@ -124,7 +123,7 @@ class ConfigManager {
             console.error(error)
         } finally {
             if (this.result) {
-                console.log(`⚙️ ${this.className}.${this.method} ️️`)
+                //console.log(`⚙️ ${this.className}.${this.method} ️️`)
             } else {
                 console.log(`⚙️ ${this.className}.${this.method} ️️ Didn't work`)
             }

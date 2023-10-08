@@ -70,7 +70,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`)
+        //console.log(`📻 ${this.className}.${this.method}`)
       } else {
         console.log(`📻 ${this.className}.${this.method} -> Failed to load radio streams from  `,);
       }
@@ -89,7 +89,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
       }
@@ -107,7 +107,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
       }
@@ -124,7 +124,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
       }
@@ -193,7 +193,7 @@ class RadioManager {
       return this.result;
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
       }
@@ -231,7 +231,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
         console.log(result);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
@@ -270,7 +270,7 @@ class RadioManager {
       console.error(error);
     } finally {
       if (this.result) {
-        console.log(`📻 ${this.className}.${this.method}`);
+        //console.log(`📻 ${this.className}.${this.method}`);
       } else {
         console.log(`📻 ${this.className}.${this.method} Didn't work`);
       }

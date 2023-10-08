@@ -44,7 +44,7 @@ class GamesConfigManager {
       console.error(error)
     } finally {
       if (this.result) {
-        console.log(`🎮️ ${this.className}.${this.method}`)
+        //console.log(`🎮️ ${this.className}.${this.method}`)
 
       } else {
         console.log(`🎮️ ${this.className}.${this.method} Not working`)
@@ -64,7 +64,7 @@ class GamesConfigManager {
       console.error(error)
     } finally {
       if (this.result) {
-        console.log(`🎮️ ${this.className}.${this.method}`)
+        //console.log(`🎮️ ${this.className}.${this.method}`)
       } else {
         console.log(`🎮️ ${this.className}.${this.method} Didn't work`)
       }
@@ -89,7 +89,7 @@ class GamesConfigManager {
       console.error(error)
     } finally {
       if (this.result) {
-        console.log(`🎮️ ${this.className}.${this.method}`)
+        //console.log(`🎮️ ${this.className}.${this.method}`)
       } else {
         console.log(`🎮️ ${this.className}.${this.method} Didn't work`)
       }
@@ -106,7 +106,7 @@ class GamesConfigManager {
       console.error(error)
     } finally {
       if (this.result) {
-        console.log(`🎮️ ${this.className}.${this.method}`)
+        //console.log(`🎮️ ${this.className}.${this.method}`)
       } else {
         console.log(`🎮️ ${this.className}.${this.method} Didn't work`)
       }
@@ -123,7 +123,7 @@ class GamesConfigManager {
       console.error(error)
     } finally {
       if (this.result) {
-        console.log(`🎮️ ${this.className}.${this.method}`)
+        //console.log(`🎮️ ${this.className}.${this.method}`)
       } else {
         console.log(`🎮️ ${this.className}.${this.method} Didn't work`)
       }

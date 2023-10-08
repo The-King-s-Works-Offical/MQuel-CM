@@ -6,23 +6,17 @@ const path = require("path");
 const Profile = require("./Profile"); // Class
 const ConfigManager = require("../Config"); // Class
 
-class ProfileManager {
+class ProfileManager extends ConfigManager {
     constructor() {
+        super()
+
         this.className = "Profile Manager"
         this.method = ""
         this.result = Boolean
-        this.profiles = [];
 
         try {
-            const cM = new ConfigManager()
-            cM.load()
-            this._paths = cM.getPaths()
-            this.path = this._paths.profiles_directory
-            const _profilesDirExists = fs.existsSync(path.join(cM.getPaths().application_file, "Profiles"))
-            if (!_profilesDirExists) {
-                fs.mkdirSync(path.join(cM.getPaths().application_file, "Profiles"))
-            }
-            this.profilesLoad();
+            this._profilesSystempPath = path.join(this._baseApplicationRoamingFile, "Profiles")
+            this._profilesGamesPath = path.join(this._gameDocuments, "Profiles")
             this.result = true
         } catch (error) {
             this.result = false
@@ -30,10 +24,11 @@ class ProfileManager {
             console.error(error.message)
         } finally {
             if (this.result) {
-                // console.log(`👥 ${this.className}`)
+                console.log(`👥 ${this.className}`)
+                console.log(this)
             } else {
                 console.log(`👥 ${this.className} Didn't work`)
-                return false
+                return;
             }
         }
     }
@@ -41,7 +36,12 @@ class ProfileManager {
     init = () => {
         this.method = "init()"
         try {
+            const _profilesDirExists = fs.existsSync(this._profilesSystempPath)
+            if (!_profilesDirExists) {
+                fs.mkdirSync(this._profilesSystempPath)
+            }
 
+            this.profilesSystemLoad();
             this.result = true
         } catch (error) {
             this.result = false
@@ -54,12 +54,13 @@ class ProfileManager {
             }
         }
     }
-    profilesLoad = () => {
-        const _profileDirs = fs.readdirSync(this.path);
+    profilesSystemLoad = () => {
+
+        const _profileDirs = fs.readdirSync(this._profilesGamesPath);
 
         for (const _profile of _profileDirs) {
-            const _pro = new Profile(_profile, _profile, path.join(this.path, _profile), false);
-            this.profiles.push(_pro);
+            const _pro = new Profile(_profile, _profile, path.join(this._profilesGamesPath, _profile), false);
+            // this.profiles.push(_pro);
         }
     }
 
@@ -76,7 +77,7 @@ class ProfileManager {
         this.method = "getAll()"
         try {
             this.result = true
-            return this.profiles;
+            //return this.profiles;
         } catch (error) {
             this.result = false
             console.error(error)
@@ -100,14 +101,16 @@ class ProfileManager {
     getCount = () => {
         this.method = "getCount()"
         try {
+
+
             this.result = true
-            return this.profiles.length;
         } catch (error) {
             this.result = false
             console.error(error)
         } finally {
             if (this.result) {
                 console.log(`👥 ${this.className}.${this.method}`)
+                console.log(this)
             } else {
                 console.log(`👥 ${this.className}.${this.method} Didn't work`)
             }
