@@ -36,11 +36,14 @@ class Profile extends ConfigManager {
 
 
             this._profileGeneralPath = path.join(this._baseApplicationRoamingFile, "Profiles", fileName)
-            this._profileGeneralInfoPath = path.join(this._profileGeneralPath, "info.json")
             const _profileGeneralPathExists = fs.existsSync(this._profileGeneralPath)
             if (!_profileGeneralPathExists) {
                 fs.mkdirSync(this._profileGeneralPath)
             }
+            this._profileGeneralSaves = path.join(this._profileGeneralPath, "Saves")
+            this._profileGeneralInfoPath = path.join(this._profileGeneralPath, "info.json")
+
+
             this.load();
             this.result = true
         } catch (error) {
@@ -49,11 +52,11 @@ class Profile extends ConfigManager {
             console.error(error.message)
         } finally {
             if (this.result) {
-                console.log(`👥 ${this.className} ${this._id} Created`)
+                //console.log(`👥 ${this.className} ${this._id} Created`)
 
             } else {
                 console.log(`👥 ${this.className} Didn't work`)
-                return false
+
             }
         }
 
@@ -65,7 +68,6 @@ class Profile extends ConfigManager {
         this.loadControls();
         this.loadGearboxs();
         this.loadProfileInfo();
-        this.loadSavesDir();
         this.loadSaves();
     }
 
@@ -108,22 +110,31 @@ class Profile extends ConfigManager {
         }
     }
 
-    loadSavesDir() {
-        for (const _file of this._allFiles) {
-            if (_file.name == "save") {
-                const _Saves = fs.readdirSync(_file.path);
-                for (const _save of _Saves) {
-                    this._saves.push({
-                        name: _save,
-                        path: path.join(_file.path, _save).replaceAll("\\", "/"),
-                    });
-                }
+    loadSaves() {
+        this.method = "loadSaves()"
+        try {
+
+            if (!fs.existsSync(this._profileGeneralSaves)) {
+                fs.mkdirSync(this._profileGeneralSaves)
+            }
+
+            const readDirReturnList = fs.readdirSync(path.join(this._path,"save"))
+            readDirReturnList.forEach((dir, index) => {
+                console.log(this._id, dir)
+                console.log("----------------------------------------------")
+            })
+            this.result = true
+        } catch
+            (error) {
+            this.result = false
+            console.error(error)
+        } finally {
+            if (this.result) {
+                console.log(`👥 ${this.className}.${this.method}`)
+            } else {
+                console.error(`👥 ${this.className}.${this.method} Didn't work`)
             }
         }
-    }
-
-    loadSaves() {
-
     }
 
     loadProfileInfo() {
@@ -133,7 +144,7 @@ class Profile extends ConfigManager {
             const _profileDetailsReadStream = fs.readFileSync(this._profileFile.profileFilePath, "utf8");
             let newData = _profileDetailsReadStream.split("\n");
             const _profileInfo = {
-                active_mods: 0,
+                active_mods: 0, active_mods_list: [],
                 brand: "",
                 cached_discovery: 0,
                 cached_distance: 0,
@@ -155,9 +166,16 @@ class Profile extends ConfigManager {
             }
             for (let line of newData) {
                 line = line.trim().split(": ");
+
                 let key = line[0];
                 let value = line[1];
                 if (line.length > 1) {
+                    if (key.startsWith("active_mods[")) {
+
+                        value = value.replaceAll('"', "").split("|")[1];
+
+                        _profileInfo.active_mods_list.push(value)
+                    }
                     switch (key) {
                         case "face":
                             const face = Number(value);
@@ -235,8 +253,6 @@ class Profile extends ConfigManager {
                     }
                 }
             }
-            console.log("Info : ", _profileInfo)
-            console.log("Info Type: ",typeof _profileInfo)
             fs.writeFileSync(
                 this._profileGeneralInfoPath,
                 JSON.stringify(_profileInfo),
@@ -252,7 +268,7 @@ class Profile extends ConfigManager {
             console.error(error.message)
         } finally {
             if (this.result) {
-                console.log(`👥 ${this.className}.${this.method}`)
+                // console.log(`👥 ${this.className}.${this.method}`)
 
             } else {
                 console.log(`👥 ${this.className}.${this.method} Didn't work`)

@@ -308,6 +308,7 @@ class IpcServer {
                 console.log("Request to get all profiles: ", request)
                 const pM = new ProfileManager()
                 const getAllProfileData = pM.getAll()
+                console.log(getAllProfileData)
                 event.reply(command_title, getAllProfileData)
                 result = true
             } catch (error) {

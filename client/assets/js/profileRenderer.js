@@ -59,36 +59,35 @@ const CMD = IpcCommand.PROFILE
 ipcRenderer.send(CMD.LOAD, true);
 
 ipcRenderer.on(CMD.LOAD, (event, response) => {
-
     response.forEach((profile, index) => {
-        console.log(profile);
-        html = ` 
+        console.log(index, profile)
+        html = `
         <div class="col col-6">
             <div class="card text-start my-1 shadow shadow-lg ${index % 2 == 0 ? "" : "bg-dark text-white"}">
                 <div class="card-header d-flex pt-3">
                     <h5 class="card-title" id="profileNameValue">
-                        <i class="fa-solid fa-user mx-2"></i> ${profile._profileInfo.profile_name ? profile._profileInfo.profile_name : profile._id }
+                        <i class="fa-solid fa-user mx-2"></i> ${profile.info.profile_name ? profile.info.profile_name : profile._id }
                     </h5>
                 </div>
                 <div class="card-body mx-2">
                    <table class="table table-striped table-responsive ${index % 2 == 0 ? "" : "table-dark"}">
                         <tr>
-                            <th>Creation Time</th> <td>${profile._profileInfo.creation_time}</td>
+                            <th>Creation Time</th> <td>${profile.info.creation_time}</td>
                         </tr>
                    		<tr>
                    			<th>Company Name</th>
                    			<th>Truck Brand</th>
                    		</tr>
              			<tr  class="text-uppercase">
-            				<td class="ps-3"> ${profile._profileInfo.company_name} </td>
-                   			<td class="ps-3"> ${profile._profileInfo.brand.replaceAll("_", " ")} </td>
+            				<td class=""> ${profile.info.company_name} </td>
+                   			<td class=""> ${profile.info.brand.replaceAll("_", " ")} </td>
                    		</tr>
                    		 <tr>
                    		    <th>Active Mods</th>
                    		    <th>Actions</th>
                    		 </tr class="text-uppercase">
-                   		    <td class="ps-3"> ${profile._profileInfo.active_mods} </td>
-                   		    <td><a href="profileView.html?id=${profile._id}">View</a> </td>
+                   		    <td class="ps-3"> ${profile.info.active_mods} </td>
+                   		    <td><a href="profileView.html?id=${profile.id}">View</a> </td>
                    		 <tr>
                    </table>
                 </div>
@@ -96,5 +95,6 @@ ipcRenderer.on(CMD.LOAD, (event, response) => {
         </div>
 `;
         $("#profile-card-list").append(html)
+
     });
 });

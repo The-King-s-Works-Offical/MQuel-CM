@@ -56,17 +56,76 @@ ipcRenderer.on(IpcCommand.GET_LANG, (event, response) => {
 
 ipcRenderer.send(IpcCommand.PROFILE.GET_PROFILE, profileID)
 ipcRenderer.on(IpcCommand.PROFILE.GET_PROFILE, (event, response) => {
-    $('#profileView-value').html(response._profileInfo.profile_name)
-    for (const responseElement in response._profileInfo) {
-        console.log(responseElement, ": ", response._profileInfo[responseElement])
+    console.log(response)
+    const tableRenderer = (documenTagId, key, data) => {
+        html = `<tr>
+        <th class="text-dark text-uppercase">${key.replaceAll("_", " ")} :</th> 
+        <td class="text-dark text-uppercase">${data}</td>
+    </tr>`
+        //v-pills-profile-table > tbody
+        $(`#${documenTagId}`).append(html)
+    }
+    $('#profileView-value').html(response.info.profile_name)
+    for (const responseElement in response.info) {
         if (responseElement === "text" || responseElement === "face") {
             continue
         } else {
-            if (response._profileInfo[responseElement] !== undefined) {
-                html = `<tr>
-<th class="text-dark text-uppercase">${responseElement.replaceAll("_"," ")} :</th> <td class="text-dark text-uppercase">${response._profileInfo[responseElement]}</td>
-</tr>`
-                $("#v-pills-profile-table > tbody").append(html)
+            if (response.info[responseElement] !== undefined) {
+                console.log(responseElement, ": ", response.info[responseElement])
+                switch (responseElement) {
+                    case "active_mods":
+                        tableRenderer("v-pills-profile-table > tbody", responseElement, response.info[responseElement])
+                        break
+                    case "active_mods_list":
+                        if (response.info.active_mods_list.length > 0) {
+                            response.info.active_mods_list.forEach((mod, index) => {
+                                html = `<tr>
+                            <th class="text-dark text-uppercase">${index} :</th> 
+                            <td class="text-dark text-uppercase">${mod}</td>
+                            </tr>`
+                                $("#v-pills-mods-table > tbody").append(html)
+                            })
+                        } else {
+                            html = `<tr>
+                            <th class="text-dark text-uppercase">Status :</th> 
+                            <td class="text-dark text-uppercase">Active Mode Not Found!</td>
+                            </tr>`
+                            $("#v-pills-mods-table > tbody").append(html)
+                        }
+                        break
+                    case "brand":
+                        tableRenderer("v-pills-profile-table > tbody", responseElement, response.info[responseElement])
+                        break
+                    case "company_name":
+                        tableRenderer("v-pills-profile-table > tbody", responseElement, response.info[responseElement])
+                        break
+                    case "creation_time":
+                        tableRenderer("v-pills-profile-table > tbody", responseElement, response.info[responseElement])
+                        break
+                    case "save_time":
+                        tableRenderer("v-pills-profile-table > tbody", responseElement, response.info[responseElement])
+                        break
+                    case "online_user_name":
+                        if (response.info[responseElement] !== "") {
+                            html = `<tr>
+                            <th class="text-dark text-uppercase">Status :</th> 
+                            <td class="text-dark text-uppercase">
+                                <span class="badge p-3 text-bg-success" style="font-size: 15px"> Active </span>
+                            </td>
+                            </tr>`
+                            $("#v-pills-online-table > tbody").append(html)
+                        } else {
+                            html = `<tr>
+                            <th class="text-dark text-uppercase">Status :</th> 
+                            <td class="text-dark text-uppercase">
+                                <span class="badge p-3 text-bg-danger" style="font-size: 15px">Inactive</span>
+                            </td>
+                            </tr>`
+                            $("#v-pills-online-table > tbody").append(html)
+                        }
+
+                        break
+                }
             }
             else {
                 continue
@@ -75,6 +134,11 @@ ipcRenderer.on(IpcCommand.PROFILE.GET_PROFILE, (event, response) => {
         }
 
     }
-
+    /*
+    html = `<tr>
+        <th class="text-dark text-uppercase">${responseElement.replaceAll("_"," ")} :</th> <td class="text-dark text-uppercase">${response.info[responseElement]}</td>
+    </tr>`
+                $("#v-pills-profile-table > tbody").append(html)
+     */
 
 })
