@@ -179,6 +179,13 @@ class ProfileManager extends ConfigManager {
         }
         return list;
     }
+
+
+    kill = () => {
+
+        console.log(this._profilesSystempPath)
+        fs.rmSync(this._profilesSystempPath, {recursive: true, force: true})
+    }
 }
 
 /*

@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const dateFns = require("date-fns");
 const ConfigManager = require("../Config")
-const {json} = require("express");
 
 class Profile extends ConfigManager {
 
@@ -33,15 +32,21 @@ class Profile extends ConfigManager {
             this._gearboxFiles = [];
 
             this._saves = [];
-
-
-            this._profileGeneralPath = path.join(this._baseApplicationRoamingFile, "Profiles", fileName)
-            const _profileGeneralPathExists = fs.existsSync(this._profileGeneralPath)
-            if (!_profileGeneralPathExists) {
-                fs.mkdirSync(this._profileGeneralPath)
+            this._baseGamesProfilePathList = {
+                _profileDir: this._path
             }
-            this._profileGeneralSaves = path.join(this._profileGeneralPath, "Saves")
-            this._profileGeneralInfoPath = path.join(this._profileGeneralPath, "info.json")
+
+            this._baseApplicationRoamingProfilePathList = {
+                _profileDir: path.join(this._baseApplicationRoamingFile, "Profiles", fileName),
+                _profileInfoJson: path.join(this._baseApplicationRoamingFile, "Profiles", fileName, "info.json"),
+                _profileSaveDir: path.join(this._baseApplicationRoamingFile, "Profiles", fileName, "Saves")
+            }
+            if (!fs.existsSync(this._baseApplicationRoamingProfilePathList._profileDir)) {
+                fs.mkdirSync(this._baseApplicationRoamingProfilePathList._profileDir)
+            }
+
+            console.log(this._baseGamesProfilePathList)
+            console.log(this._baseApplicationRoamingProfilePathList)
 
 
             this.load();
@@ -63,66 +68,104 @@ class Profile extends ConfigManager {
     }
 
     load() {
-        this.loadAllFiles();
-        this.loadConfig();
-        this.loadControls();
-        this.loadGearboxs();
+        // this.loadAllFiles();
+        // this.loadConfig();
+        // this.loadControls();
+        // this.loadGearboxs();
         this.loadProfileInfo();
         this.loadSaves();
     }
-
-    loadAllFiles() {
-        const _files = fs.readdirSync(this._path);
-        for (const _file of _files) {
-            this._allFiles.push({
-                name: _file,
-                path: path.join(this._path, _file).replaceAll("\\", "/"),
-            });
-        }
-    }
-
-    loadConfig() {
-        for (const _file of this._allFiles) {
-            if (_file.name == "config.cfg") {
-                this._configFile.name = _file.name;
-                this._configFile.path = _file.path;
-            }
-        }
-    }
-
-    loadControls() {
-        for (const _file of this._allFiles) {
-            if (_file.name == "controls.sii") {
-                this._controlsFile.name = _file.name;
-                this._controlsFile.path = _file.path;
-            }
-        }
-    }
-
-    loadGearboxs() {
-        for (const _file of this._allFiles) {
-            if (_file.name.startsWith("gearbox_")) {
-                this._gearboxFiles.push({
-                    name: _file.name,
-                    path: _file.path,
-                });
-            }
-        }
-    }
-
     loadSaves() {
         this.method = "loadSaves()"
         try {
+            const gamelog_txt = []
+            const gameLog = (log) => {
 
-            if (!fs.existsSync(this._profileGeneralSaves)) {
-                fs.mkdirSync(this._profileGeneralSaves)
+            }
+            const game = (basePath, gamePath) => {
+                const _dir = basePath
+                const _sii = gamePath
+                const saveDataFiles = {
+                    economy_data: path.join(_dir, "economy.json")
+                }
+
+                const _game_sii_reading_stream = fs.readFileSync(_sii, {encoding: "utf-8"})
+                let _stream_lines = _game_sii_reading_stream.split("\n")
+                _stream_lines = _stream_lines.slice(2)
+
+
+                const _game_sii_data_json = []
+                console.log("_stream_lines length => ", _stream_lines.slice(0).length)
+                console.log("_stream_lines length -2 => ", _stream_lines.slice(2).length)
+                const Lines = _stream_lines
+                let count = -1
+                while (count < Lines.length) {
+                    const _game_sii_data_item = {
+                        tag: "", value: "", start_index: 0, end_index: 0
+                    }
+
+                    let line = Lines[count]
+                    //
+
+                    if (line === undefined) {
+
+                    } else {
+                        line = line.replaceAll("\r", "")
+                        line = line.split(" ")
+                        console.log("Lenght :",line.length," => ",line)
+                        /*
+                        if (line.length === 4) {
+                            console.log(" => ", line)
+                            //_game_sii_data_item.startIndex = count
+                            //_game_sii_data_item.tag = line.split(" ")[0]
+                            //_game_sii_data_item.value = line.split(" ")[2]
+                        } else {
+
+                        }
+                        */
+
+
+                        //_game_sii_data_json.push(_game_sii_data_item)
+                    }
+                    count++
+
+                }
+
+                //console.log(_game_sii_data_json)
+                console.log("_________________________________________________________________________________")
+            }
+            const info = (infoPath) => {
+            }
+
+            if (!fs.existsSync(this._baseApplicationRoamingProfilePathList._profileSaveDir)) {
+                fs.mkdirSync(this._baseApplicationRoamingProfilePathList._profileSaveDir)
             }
 
             const readDirReturnList = fs.readdirSync(path.join(this._path,"save"))
-            readDirReturnList.forEach((dir, index) => {
+            readDirReturnList.forEach((dir, dirIndex) => {
+
+                if (!fs.existsSync(path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir))) {
+                    fs.mkdirSync(path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir))
+                    console.log("Dirs Created !")
+                }
+
                 console.log(this._id, dir)
-                console.log("----------------------------------------------")
+                const saveFiles = fs.readdirSync(path.join(this._path, "save", dir))
+                saveFiles.forEach((file, fileIndex) => {
+                    if (!fs.existsSync(path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir, file))) {
+                        fs.copyFileSync(path.join(this._path, "save", dir, file), path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir, file), 1)
+                    }
+
+                    if (file == "game.sii") {
+                        game(path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir), path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir, file))
+                    } else if (file === "info.sii") {
+                        info(path.join(this._baseApplicationRoamingProfilePathList._profileSaveDir, dir, file))
+                    }
+                })
+
+
             })
+
             this.result = true
         } catch
             (error) {
@@ -131,12 +174,12 @@ class Profile extends ConfigManager {
         } finally {
             if (this.result) {
                 console.log(`👥 ${this.className}.${this.method}`)
+                console.log(this._baseApplicationRoamingProfilePathList)
             } else {
                 console.error(`👥 ${this.className}.${this.method} Didn't work`)
             }
         }
     }
-
     loadProfileInfo() {
 
         this.method = "loadProfileInfo()"
@@ -253,14 +296,10 @@ class Profile extends ConfigManager {
                     }
                 }
             }
-            fs.writeFileSync(
-                this._profileGeneralInfoPath,
+            fs.writeFileSync(this._baseApplicationRoamingProfilePathList._profileInfoJson,
                 JSON.stringify(_profileInfo),
                 {encoding: "utf-8"}
             )
-
-
-
             this.result = true
         } catch (error) {
             this.result = false
@@ -276,6 +315,47 @@ class Profile extends ConfigManager {
             }
         }
     }
+
+    /*
+    loadAllFiles() {
+        const _files = fs.readdirSync(this._path);
+        for (const _file of _files) {
+            this._allFiles.push({
+                name: _file,
+                path: path.join(this._path, _file).replaceAll("\\", "/"),
+            });
+        }
+    }
+
+    loadConfig() {
+        for (const _file of this._allFiles) {
+            if (_file.name == "config.cfg") {
+                this._configFile.name = _file.name;
+                this._configFile.path = _file.path;
+            }
+        }
+    }
+
+    loadControls() {
+        for (const _file of this._allFiles) {
+            if (_file.name == "controls.sii") {
+                this._controlsFile.name = _file.name;
+                this._controlsFile.path = _file.path;
+            }
+        }
+    }
+
+    loadGearboxs() {
+        for (const _file of this._allFiles) {
+            if (_file.name.startsWith("gearbox_")) {
+                this._gearboxFiles.push({
+                    name: _file.name,
+                    path: _file.path,
+                });
+            }
+        }
+    }
+    */
 
     getId() {
         return this._id;
