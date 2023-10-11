@@ -6,9 +6,10 @@ const ConfigManager = require("./server/Config")
 const RadioManager = require("./server/Radio")
 const GamesConfigManager = require("./server/Games")
 const ProfileManager = require("./server/Profile")
+const fs = require("fs");
 
 class ProcessManager {
-    loaded() {
+    loaded = () => {
         const cM = new ConfigManager()
         cM.init()
         const rM = new RadioManager()
@@ -19,6 +20,13 @@ class ProcessManager {
         const pM = new ProfileManager()
         pM.init()
 
+        console.log("Process Loaded ")
+    }
+
+    killed = () => {
+        const pM = new ProfileManager()
+        pM.kill()
+        console.log("Process Killed !")
     }
 }
 
