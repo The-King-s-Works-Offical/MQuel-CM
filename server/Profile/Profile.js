@@ -78,62 +78,90 @@ class Profile extends ConfigManager {
     loadSaves() {
         this.method = "loadSaves()"
         try {
-            const gamelog_txt = []
-            const gameLog = (log) => {
 
-            }
             const game = (basePath, gamePath) => {
                 const _dir = basePath
                 const _sii = gamePath
-                const saveDataFiles = {
-                    economy_data: path.join(_dir, "economy.json")
+                const gamelog_txt = []
+                const saveDataFiles = []
+
+
+                const gameLog = (log) => {
+
+                    if (typeof log === "object") {
+                        log = JSON.stringify(log)
+                    }
+                    gamelog_txt.push(log)
                 }
+                const gameLogSave = (fileName) => {
+                    let gameLog = gamelog_txt.join("\n")
+                    fs.writeFileSync(path.join(_dir, fileName), gameLog, {encoding: "utf-8"})
+                }
+
 
                 const _game_sii_reading_stream = fs.readFileSync(_sii, {encoding: "utf-8"})
                 let _stream_lines = _game_sii_reading_stream.split("\n")
-                _stream_lines = _stream_lines.slice(2)
 
 
-                const _game_sii_data_json = []
-                console.log("_stream_lines length => ", _stream_lines.slice(0).length)
-                console.log("_stream_lines length -2 => ", _stream_lines.slice(2).length)
-                const Lines = _stream_lines
-                let count = -1
-                while (count < Lines.length) {
-                    const _game_sii_data_item = {
-                        tag: "", value: "", start_index: 0, end_index: 0
-                    }
+                _stream_lines.forEach((_stream_line, index) => {
 
-                    let line = Lines[count]
-                    //
-
-                    if (line === undefined) {
-
-                    } else {
-                        line = line.replaceAll("\r", "")
-                        line = line.split(" ")
-                        console.log("Lenght :",line.length," => ",line)
-                        /*
-                        if (line.length === 4) {
-                            console.log(" => ", line)
-                            //_game_sii_data_item.startIndex = count
-                            //_game_sii_data_item.tag = line.split(" ")[0]
-                            //_game_sii_data_item.value = line.split(" ")[2]
-                        } else {
+                    _stream_line = _stream_line.replaceAll("\r", "")
+                    _stream_line = _stream_line.split(" ")
+                    let saveDataItem = {}
+                    if (_stream_line.length === 4) {
+                        if (_stream_line[0].length !== 0) {
+                            //gameLog("Index : " + index + " - " + _stream_line.length + "=> " + _stream_line + " -> Yes")
+                            saveDataItem.tag = _stream_line[0], saveDataItem.value = _stream_line[2], saveDataItem.start_line_index = index, saveDataItem.dirPath = path.join(_dir, "game", _stream_line[0]), saveDataItem.filePath = path.join(_dir, "game", _stream_line[0], _stream_line[2] + ".json")
 
                         }
-                        */
-
-
-                        //_game_sii_data_json.push(_game_sii_data_item)
                     }
+                    if (_stream_line.length === 1) {
+                        if (_stream_line[0] !== "") {
+                            saveDataItem.end_line_index = index
+                        }
+                    }
+                    if (JSON.stringify(saveDataItem).split(",").length > 1) {
+                        saveDataFiles.push(saveDataItem)
+                    }
+
+
+                })
+
+
+                saveDataFiles.forEach((saveData, index) => {
+                    const _save_data_base_path = saveData.dirPath
+                    const _save_data_path = saveData.filePath
+                    if (!fs.existsSync(_save_data_base_path)) fs.mkdirSync(_save_data_base_path, {recursive: true})
+                })
+
+                let count = 0
+                while (count < saveDataFiles.length - 1) {
+                    gameLog("Start : "+count)
+                    gameLog("End : "+(count + 1))
+
+                    const startIndex = saveDataFiles[count].start_line_index + 1
+                    const endIndex = saveDataFiles[count + 1].start_line_index - 1
+                    const _lines = _stream_lines.slice(startIndex,endIndex)
+
+                    _lines.forEach((line,index) => {
+                        line = line.replaceAll("\r","")
+                        gameLog(line)
+                    })
+                    gameLog("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+                    gameLog("Count : "+count)
                     count++
 
                 }
 
-                //console.log(_game_sii_data_json)
-                console.log("_________________________________________________________________________________")
+
+
+                gameLog("saveDataFiles Count : "+saveDataFiles.length)
+
+                gameLogSave("gameLog.txt")
+
             }
+
+
             const info = (infoPath) => {
             }
 
